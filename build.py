@@ -13,7 +13,14 @@ def img_exists(rel):
 
 # ---------- Chrome ----------
 
-def head(title, desc=None):
+def rel(href, base):
+    """Convert a leading-slash path to a depth-aware relative path.
+    Leaves external (http/mailto/tel/#) and already-relative paths alone."""
+    if not href or href[0] != "/":
+        return href
+    return base + href[1:]
+
+def head(title, desc=None, base=""):
     desc = desc or "Iconic restaurant dishes, in your building. Chef-made. Flash-frozen at peak. Finished in your kitchen."
     return f"""<!doctype html>
 <html lang="en">
@@ -22,14 +29,14 @@ def head(title, desc=None):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)} — BestDish</title>
 <meta name="description" content="{e(desc)}">
-<link rel="icon" href="/assets/logos/favicon.png">
+<link rel="icon" href="{base}assets/logos/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Nunito+Sans:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/tokens.css">
-<link rel="stylesheet" href="/css/base.css">
-<link rel="stylesheet" href="/css/components.css">
-<link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="{base}css/tokens.css">
+<link rel="stylesheet" href="{base}css/base.css">
+<link rel="stylesheet" href="{base}css/components.css">
+<link rel="stylesheet" href="{base}css/site.css">
 </head>
 <body class="bd-site">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -37,22 +44,22 @@ def head(title, desc=None):
 </svg>
 """
 
-def nav():
-    links = "".join(f'<a href="{u}">{e(t)}</a>' for t, u in NAV)
+def nav(base=""):
+    links = "".join(f'<a href="{rel(u, base)}">{e(t)}</a>' for t, u in NAV)
     return f"""<nav class="bd-nav">
-  <a class="bd-nav__brand" href="/">
-    <img src="/assets/logos/bd-orange.png" alt="BestDish">
+  <a class="bd-nav__brand" href="{base or './'}">
+    <img src="{base}assets/logos/bd-orange.png" alt="BestDish">
     <span class="bd-nav__brand-name">BestDish</span>
   </a>
   <div class="bd-nav__links">
     {links}
-    <a class="bd-btn bd-btn--primary" href="/buildings.html">Find a building</a>
+    <a class="bd-btn bd-btn--primary" href="{base}buildings.html">Find a building</a>
   </div>
 </nav>
 """
 
-def footer():
-    nav_links = "".join(f'<li><a href="{u}">{e(t)}</a></li>' for t, u in FOOTER_NAV)
+def footer(base=""):
+    nav_links = "".join(f'<li><a href="{rel(u, base)}">{e(t)}</a></li>' for t, u in FOOTER_NAV)
     return f"""<footer class="bd-footer">
   <div class="bd-footer__top">
     <div>
@@ -61,9 +68,9 @@ def footer():
     </div>
     <div class="bd-footer__col"><h4>Eat</h4><ul>{nav_links}</ul></div>
     <div class="bd-footer__col"><h4>Partner</h4><ul>
-      <li><a href="/for-properties.html">For properties</a></li>
-      <li><a href="/for-restaurants.html">For restaurants</a></li>
-      <li><a href="/farms.html">Farms</a></li>
+      <li><a href="{base}for-properties.html">For properties</a></li>
+      <li><a href="{base}for-restaurants.html">For restaurants</a></li>
+      <li><a href="{base}farms.html">Farms</a></li>
     </ul></div>
     <div class="bd-footer__col"><h4>Visit</h4><ul>
       <li>507 King St E<br>Toronto, ON, M5A 1M3</li>
@@ -76,25 +83,25 @@ def footer():
     <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
   </div>
 </footer>
-<script src="/js/site.js" defer></script>
+<script src="{base}js/site.js" defer></script>
 </body></html>"""
 
-def page(title, body, desc=None):
-    return head(title, desc) + nav() + body + footer()
+def page(title, body, desc=None, base=""):
+    return head(title, desc, base) + nav(base) + body + footer(base)
 
 # ---------- Page parts ----------
 
-def dish_card(d, big=False):
+def dish_card(d, base="", big=False):
     r = RESTAURANTS[d["restaurant"]]
-    img_path = f"/assets/images/{d['image']}"
-    has_img = img_exists(img_path.lstrip("/"))
+    img_rel = f"assets/images/{d['image']}"
+    has_img = img_exists(img_rel)
     if has_img:
-        img_html = f'<img src="{img_path}" alt="{e(d["name"])} by {e(r["name"])}" class="bd-dish-card__img" loading="lazy">'
+        img_html = f'<img src="{base}{img_rel}" alt="{e(d["name"])} by {e(r["name"])}" class="bd-dish-card__img" loading="lazy">'
         card_cls = "bd-dish-card bd-reveal"
     else:
         img_html = f'<div class="bd-dish-card__img" style="background:linear-gradient(135deg,var(--bd-cherry),var(--bd-gravy)); display:grid; place-items:center;"><div style="font-family:var(--bd-font-display); font-size:clamp(40px,4vw,72px); font-weight:900; color:var(--bd-orange); text-transform:uppercase; opacity:.4; text-align:center; padding:1rem;">{e(d["name"].split()[0])}</div></div>'
         card_cls = "bd-dish-card bd-dish-card--placeholder bd-reveal"
-    return f"""<a class="{card_cls}" href="/meals/{d['slug']}.html">
+    return f"""<a class="{card_cls}" href="{base}meals/{d['slug']}.html">
   {img_html}
   <div class="bd-dish-card__overlay">
     <p class="bd-dish-card__restaurant">{e(r['name'])}</p>
@@ -105,7 +112,8 @@ def dish_card(d, big=False):
 # ---------- Home ----------
 
 def home():
-    dishes = "".join(dish_card(d) for d in DISHES)
+    base = ""
+    dishes = "".join(dish_card(d, base=base) for d in DISHES)
     marquee_items = "".join(f"<span>{e(r['name'])}</span>" for r in RESTAURANTS.values())
     return page("Restaurant meals. In your building", f"""
 <header class="bd-hero-wrap">
@@ -121,8 +129,8 @@ def home():
       <span>24/7 in your building</span>
     </div>
     <div style="display:flex; gap: var(--bd-space-3); flex-wrap: wrap; margin-top: var(--bd-space-7);" class="bd-reveal">
-      <a class="bd-btn bd-btn--primary" href="/meals.html">Browse the menu</a>
-      <a class="bd-btn bd-btn--secondary" href="/how-it-works.html">How it works</a>
+      <a class="bd-btn bd-btn--primary" href="meals.html">Browse the menu</a>
+      <a class="bd-btn bd-btn--secondary" href="how-it-works.html">How it works</a>
     </div>
   </div>
 </header>
@@ -134,7 +142,7 @@ def home():
     <p class="bd-eyebrow bd-reveal">The menu</p>
     <div style="display:flex; align-items:end; justify-content:space-between; gap: var(--bd-space-5); flex-wrap: wrap;">
       <h2 class="bd-headline bd-reveal" style="margin:0; max-width:18ch;">Toronto's iconic restaurants.</h2>
-      <a class="bd-btn bd-btn--ghost bd-reveal" href="/meals.html">All meals →</a>
+      <a class="bd-btn bd-btn--ghost bd-reveal" href="meals.html">All meals →</a>
     </div>
     <div class="bd-reel" style="margin-top: var(--bd-space-7);">{dishes}</div>
   </div>
@@ -173,19 +181,19 @@ def home():
     <p class="bd-eyebrow bd-reveal">For everyone in the chain</p>
     <h2 class="bd-headline bd-reveal" style="max-width:22ch; margin-bottom: var(--bd-space-7);">Whichever side of the door you're on.</h2>
     <div class="bd-fork">
-      <a class="bd-fork__card bd-reveal" href="/buildings.html">
+      <a class="bd-fork__card bd-reveal" href="buildings.html">
         <p class="bd-fork__eyebrow">For residents</p>
         <h3 class="bd-fork__title">Find your building.</h3>
         <p class="bd-fork__body">See if BestDish is on your floor. If it's not yet, we'll add it to the waitlist.</p>
         <span class="bd-fork__cta">Find a building →</span>
       </a>
-      <a class="bd-fork__card bd-reveal" href="/for-properties.html">
+      <a class="bd-fork__card bd-reveal" href="for-properties.html">
         <p class="bd-fork__eyebrow">For properties</p>
         <h3 class="bd-fork__title">Add a freezer. Earn 5%.</h3>
         <p class="bd-fork__body">A premium amenity for your residents. 5% of sales returned to the building. No staff. No admin.</p>
         <span class="bd-fork__cta">Talk to us →</span>
       </a>
-      <a class="bd-fork__card bd-reveal" href="/for-restaurants.html">
+      <a class="bd-fork__card bd-reveal" href="for-restaurants.html">
         <p class="bd-fork__eyebrow">For chefs &amp; restaurants</p>
         <h3 class="bd-fork__title">Monetize your kitchen.</h3>
         <p class="bd-fork__body">New revenue from the kitchen hours you already have. Royalties + execution fees. Transparent economics.</p>
@@ -208,6 +216,7 @@ def home():
 # ---------- Browse meals ----------
 
 def meals_page():
+    base = ""
     savoury = [d for d in DISHES if d["category"] == "Savoury"]
     sweet   = [d for d in DISHES if d["category"] == "Sweet"]
     return page("Browse meals", f"""
@@ -222,14 +231,14 @@ def meals_page():
 <section class="bd-section" style="padding-top:0;">
   <div class="bd-container">
     <h2 class="bd-headline bd-reveal" style="margin-bottom: var(--bd-space-6);">Savoury</h2>
-    <div class="bd-reel">{"".join(dish_card(d) for d in savoury)}</div>
+    <div class="bd-reel">{"".join(dish_card(d, base=base) for d in savoury)}</div>
   </div>
 </section>
 
 <section class="bd-section">
   <div class="bd-container">
     <h2 class="bd-headline bd-reveal" style="margin-bottom: var(--bd-space-6);">Sweet</h2>
-    <div class="bd-reel">{"".join(dish_card(d) for d in sweet)}</div>
+    <div class="bd-reel">{"".join(dish_card(d, base=base) for d in sweet)}</div>
   </div>
 </section>
 """)
@@ -237,17 +246,18 @@ def meals_page():
 # ---------- Dish detail ----------
 
 def dish_page(d):
+    base = "../"
     r = RESTAURANTS[d["restaurant"]]
-    img_path = f"/assets/images/{d['image']}"
-    has_img = img_exists(img_path.lstrip("/"))
-    photo = (f'<img class="bd-dish-hero__photo" src="{img_path}" alt="{e(d["name"])} by {e(r["name"])}">' if has_img
+    img_rel = f"assets/images/{d['image']}"
+    has_img = img_exists(img_rel)
+    photo = (f'<img class="bd-dish-hero__photo" src="{base}{img_rel}" alt="{e(d["name"])} by {e(r["name"])}">' if has_img
              else f'<div class="bd-dish-hero__photo" style="display:grid;place-items:center;font-family:var(--bd-font-display);font-weight:900;color:var(--bd-orange);font-size:clamp(40px,4vw,72px);text-transform:uppercase;padding:2rem;text-align:center;opacity:.5;">{e(d["name"])}</div>')
 
     nutrition_rows = "".join(
         f'<div class="bd-nutri__row"><span>{e(k)}</span><span>{e(v)}</span></div>'
         for k, v in d["nutrition"].items() if k != "Calories")
 
-    return page(f"{d['name']} — {r['name']}", f"""
+    return page(f"{d['name']} — {r['name']}", base=base, body=f"""
 <section class="bd-section" style="padding-top: var(--bd-space-7); padding-bottom: 0;">
   <div class="bd-container">
     <div class="bd-dish-hero">
@@ -256,7 +266,7 @@ def dish_page(d):
       </div>
       <div class="bd-reveal">
         <p class="bd-dish-hero__category">{e(d["category"])}</p>
-        <a class="bd-dish-hero__restaurant" href="/chefs.html#{d['restaurant']}">{e(r["name"])}</a>
+        <a class="bd-dish-hero__restaurant" href="{base}chefs.html#{d['restaurant']}">{e(r["name"])}</a>
         <h1 class="bd-dish-hero__name">{e(d["name"])}</h1>
         <p class="bd-dish-hero__tagline">{e(d["tagline"])}</p>
         <div class="bd-dish-meta">
@@ -335,7 +345,7 @@ def dish_page(d):
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">More from the menu</p>
     <div class="bd-reel" style="margin-top: var(--bd-space-6);">
-      {"".join(dish_card(other) for other in DISHES if other["slug"] != d["slug"])}
+      {"".join(dish_card(other, base=base) for other in DISHES if other["slug"] != d["slug"])}
     </div>
   </div>
 </section>
@@ -405,7 +415,7 @@ def chefs_page():
         chef = r["chef"]
         photo_file = CHEF_PHOTOS.get(chef)
         if photo_file and (ROOT/"assets/chefs"/photo_file).exists():
-            photo = f'<img class="bd-person__photo" src="/assets/chefs/{photo_file}" alt="Portrait of Chef {e(chef)}">'
+            photo = f'<img class="bd-person__photo" src="assets/chefs/{photo_file}" alt="Portrait of Chef {e(chef)}">'
         else:
             initials = "".join(w[0] for w in chef.replace("&", "and").split() if w[0].isalpha())[:2]
             photo = f'<div class="bd-person__photo bd-person__photo--placeholder">{e(initials)}</div>'
@@ -447,7 +457,7 @@ def farms_page():
           <p style="font-size:var(--bd-size-xs); opacity:.7;">Supplies: {e(f["supplies"])}</p>
         </article>""")
     has_hero = (ROOT/FARM_HERO).exists()
-    hero_img = (f'<img src="/{FARM_HERO}" alt="From the farm" style="width:100%; aspect-ratio:21/9; object-fit:cover; border-radius: var(--bd-radius-lg); margin-bottom: var(--bd-space-7);">' if has_hero else '')
+    hero_img = (f'<img src="{FARM_HERO}" alt="From the farm" style="width:100%; aspect-ratio:21/9; object-fit:cover; border-radius: var(--bd-radius-lg); margin-bottom: var(--bd-space-7);">' if has_hero else '')
     return page("Farms", f"""
 <header class="bd-section">
   <div class="bd-container">
