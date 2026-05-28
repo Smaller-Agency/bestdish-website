@@ -1,0 +1,374 @@
+/* ============================================================
+   BestDish website — extends the design system
+   Depends on tokens.css, base.css, components.css
+   ============================================================ */
+
+/* ---------- Page chrome ---------- */
+.bd-site { min-height: 100vh; }
+
+.bd-nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; gap: var(--bd-space-6);
+  padding: var(--bd-space-3) var(--bd-space-6);
+  background: color-mix(in srgb, var(--bd-cherry) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid color-mix(in srgb, var(--bd-cream) 12%, transparent);
+}
+.bd-nav__brand { display: flex; align-items: center; gap: var(--bd-space-3); text-decoration: none; color: inherit; }
+.bd-nav__brand img { width: 44px; height: 44px; }
+.bd-nav__brand-name {
+  font-family: var(--bd-font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: var(--bd-track-tight);
+  font-size: var(--bd-size-md);
+}
+.bd-nav__links { display: flex; gap: var(--bd-space-5); margin-left: auto; align-items: center; }
+.bd-nav__links a {
+  text-decoration: none;
+  font-family: var(--bd-font-body);
+  font-weight: 500;
+  font-size: var(--bd-size-sm);
+  letter-spacing: var(--bd-track-wide);
+  text-transform: uppercase;
+  color: var(--bd-cream);
+  opacity: 0.85;
+  transition: opacity var(--bd-dur-fast) var(--bd-ease-out);
+}
+.bd-nav__links a:hover { opacity: 1; }
+.bd-nav__links a.bd-btn { opacity: 1; }
+@media (max-width: 768px) {
+  .bd-nav__links a:not(.bd-btn) { display: none; }
+}
+
+.bd-footer {
+  background: var(--bd-gravy);
+  color: var(--bd-cream);
+  padding: var(--bd-space-9) var(--bd-space-6) var(--bd-space-6);
+  margin-top: var(--bd-space-10);
+}
+.bd-footer__top { display: grid; gap: var(--bd-space-7); grid-template-columns: 1fr; max-width: 1200px; margin: 0 auto; }
+@media (min-width: 768px) { .bd-footer__top { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+.bd-footer__brand-line { font-family: var(--bd-font-display); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-tight); font-size: var(--bd-size-2xl); line-height: var(--bd-lh-tight); }
+.bd-footer__col h4 { font-family: var(--bd-font-body); font-weight: 900; font-size: var(--bd-size-xs); text-transform: uppercase; letter-spacing: var(--bd-track-wider); color: var(--bd-orange); margin: 0 0 var(--bd-space-3); }
+.bd-footer__col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--bd-space-2); }
+.bd-footer__col a { color: var(--bd-cream); text-decoration: none; opacity: 0.85; }
+.bd-footer__col a:hover { opacity: 1; }
+.bd-footer__bottom { max-width: 1200px; margin: var(--bd-space-7) auto 0; padding-top: var(--bd-space-5); border-top: 1px solid color-mix(in srgb, var(--bd-cream) 12%, transparent); display: flex; justify-content: space-between; gap: var(--bd-space-4); flex-wrap: wrap; font-size: var(--bd-size-xs); opacity: 0.7; }
+
+/* ---------- Hero ---------- */
+.bd-hero-wrap { position: relative; overflow: hidden; padding: var(--bd-space-9) 0 var(--bd-space-10); }
+.bd-hero-headline {
+  font-family: var(--bd-font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: var(--bd-track-tight);
+  line-height: 0.92;
+  font-size: clamp(48px, 9vw, 144px);
+  margin: 0 0 var(--bd-space-5);
+}
+.bd-hero-headline em { font-style: normal; color: var(--bd-orange); }
+.bd-hero-lede { max-width: 60ch; font-size: clamp(var(--bd-size-md), 2vw, var(--bd-size-lg)); font-weight: 300; line-height: var(--bd-lh-relaxed); margin: 0 0 var(--bd-space-6); }
+
+/* ---------- Sections ---------- */
+.bd-section { padding: var(--bd-space-9) 0; position: relative; }
+.bd-section--alt { background: var(--bd-gravy); }
+.bd-section--cream { background: var(--bd-cream); color: var(--bd-cherry); }
+.bd-section--cream .bd-eyebrow { color: var(--bd-orange); }
+
+/* ---------- Dish reel (the home page meal carousel) ---------- */
+.bd-reel { display: grid; gap: var(--bd-space-6); grid-template-columns: 1fr; }
+@media (min-width: 768px) { .bd-reel { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .bd-reel { grid-template-columns: repeat(3, 1fr); } }
+
+.bd-dish-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--bd-radius-lg);
+  background: var(--bd-gravy);
+  aspect-ratio: 4/5;
+  display: block;
+  text-decoration: none;
+  color: var(--bd-cream);
+  transition: transform var(--bd-dur-normal) var(--bd-ease-out);
+}
+.bd-dish-card:hover { transform: translateY(-4px); }
+.bd-dish-card__img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform var(--bd-dur-slow) var(--bd-ease-out), filter var(--bd-dur-normal) var(--bd-ease-out);
+}
+.bd-dish-card:hover .bd-dish-card__img { transform: scale(1.05); }
+.bd-dish-card__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 0%, transparent 50%, rgba(32,4,0,0.85) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--bd-space-6);
+}
+.bd-dish-card__restaurant {
+  font-family: var(--bd-font-body);
+  font-weight: 900;
+  font-size: var(--bd-size-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--bd-track-wider);
+  color: var(--bd-orange);
+  margin: 0 0 var(--bd-space-2);
+}
+.bd-dish-card__name {
+  font-family: var(--bd-font-display);
+  font-weight: 700;
+  font-size: var(--bd-size-2xl);
+  text-transform: uppercase;
+  letter-spacing: var(--bd-track-tight);
+  line-height: var(--bd-lh-snug);
+  margin: 0;
+}
+.bd-dish-card--placeholder { background: var(--bd-cherry); display: grid; place-items: center; padding: var(--bd-space-6); }
+.bd-dish-card--placeholder .bd-dish-card__overlay { background: none; position: static; padding: 0; }
+
+/* ---------- Dish detail page ---------- */
+.bd-dish-hero {
+  display: grid;
+  gap: var(--bd-space-7);
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding: var(--bd-space-8) 0;
+}
+@media (min-width: 1024px) { .bd-dish-hero { grid-template-columns: 1fr 1fr; } }
+.bd-dish-hero__photo {
+  width: 100%; aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--bd-radius-lg);
+  background: var(--bd-gravy);
+}
+.bd-dish-hero__category {
+  font-family: var(--bd-font-body); font-weight: 900;
+  font-size: var(--bd-size-xs);
+  text-transform: uppercase; letter-spacing: var(--bd-track-wider);
+  color: var(--bd-orange);
+}
+.bd-dish-hero__restaurant {
+  font-family: var(--bd-font-display); font-weight: 700;
+  font-size: var(--bd-size-lg);
+  text-transform: uppercase; letter-spacing: var(--bd-track-tight);
+  color: var(--bd-cream);
+  display: inline-block;
+  margin: var(--bd-space-2) 0 var(--bd-space-5);
+  text-decoration: none;
+  border-bottom: 2px solid var(--bd-orange);
+  padding-bottom: 2px;
+}
+.bd-dish-hero__name {
+  font-family: var(--bd-font-display); font-weight: 900;
+  font-size: clamp(40px, 7vw, 96px);
+  text-transform: uppercase;
+  letter-spacing: var(--bd-track-tight);
+  line-height: var(--bd-lh-tight);
+  margin: 0 0 var(--bd-space-5);
+}
+.bd-dish-hero__tagline { font-size: var(--bd-size-lg); font-weight: 300; line-height: var(--bd-lh-relaxed); max-width: 50ch; margin: 0 0 var(--bd-space-6); }
+
+.bd-dish-meta { display: grid; gap: var(--bd-space-5); grid-template-columns: repeat(2, 1fr); margin-top: var(--bd-space-7); }
+.bd-dish-meta__cell { padding-top: var(--bd-space-3); border-top: 2px solid var(--bd-orange); }
+.bd-dish-meta__label { font-size: var(--bd-size-xs); text-transform: uppercase; letter-spacing: var(--bd-track-wider); color: var(--bd-orange); font-weight: 900; margin: 0 0 var(--bd-space-1); }
+.bd-dish-meta__value { font-family: var(--bd-font-display); font-size: var(--bd-size-lg); font-weight: 700; text-transform: uppercase; letter-spacing: var(--bd-track-tight); margin: 0; }
+
+.bd-info-grid { display: grid; gap: var(--bd-space-6); grid-template-columns: 1fr; }
+@media (min-width: 768px) { .bd-info-grid { grid-template-columns: 1fr 1fr; } }
+
+.bd-panel {
+  background: color-mix(in srgb, var(--bd-cream) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bd-cream) 14%, transparent);
+  border-radius: var(--bd-radius-lg);
+  padding: var(--bd-space-6);
+}
+.bd-panel h3 {
+  font-family: var(--bd-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--bd-track-tight);
+  font-size: var(--bd-size-xl);
+  margin: 0 0 var(--bd-space-4);
+}
+.bd-panel--cream { background: var(--bd-cream); color: var(--bd-cherry); border-color: var(--bd-honeydew); }
+
+/* Nutrition facts panel — modeled on the FDA label */
+.bd-nutri {
+  background: var(--bd-cream);
+  color: var(--bd-cherry);
+  border: 2px solid var(--bd-cherry);
+  border-radius: var(--bd-radius-md);
+  padding: var(--bd-space-4);
+  font-family: var(--bd-font-body);
+}
+.bd-nutri__title { font-family: var(--bd-font-display); font-size: var(--bd-size-xl); text-transform: uppercase; margin: 0 0 var(--bd-space-1); }
+.bd-nutri__serving { font-size: var(--bd-size-xs); margin: 0 0 var(--bd-space-3); border-bottom: 6px solid var(--bd-cherry); padding-bottom: var(--bd-space-2); }
+.bd-nutri__row { display: flex; justify-content: space-between; padding: var(--bd-space-1) 0; border-top: 1px solid var(--bd-cherry); font-size: var(--bd-size-sm); }
+.bd-nutri__row span:first-child { font-weight: 500; }
+.bd-nutri__cal { display: flex; justify-content: space-between; align-items: baseline; padding: var(--bd-space-2) 0; border-top: 4px solid var(--bd-cherry); }
+.bd-nutri__cal-label { font-weight: 900; font-size: var(--bd-size-md); }
+.bd-nutri__cal-value { font-weight: 900; font-size: var(--bd-size-2xl); font-family: var(--bd-font-display); }
+
+.bd-heat-cols { display: grid; gap: var(--bd-space-4); grid-template-columns: 1fr; margin-top: var(--bd-space-4); }
+@media (min-width: 640px) { .bd-heat-cols { grid-template-columns: 1fr 1fr; } }
+.bd-heat__method { font-family: var(--bd-font-display); font-weight: 900; text-transform: uppercase; font-size: var(--bd-size-md); color: var(--bd-orange); letter-spacing: var(--bd-track-tight); margin: 0 0 var(--bd-space-2); }
+.bd-heat__steps { font-size: var(--bd-size-sm); line-height: var(--bd-lh-relaxed); }
+
+/* ---------- People grid (chefs, farms) ---------- */
+.bd-people { display: grid; gap: var(--bd-space-6); grid-template-columns: 1fr; }
+@media (min-width: 640px) { .bd-people { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .bd-people { grid-template-columns: repeat(3, 1fr); } }
+.bd-person { display: grid; gap: var(--bd-space-3); }
+.bd-person__photo { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--bd-radius-lg); background: var(--bd-gravy); }
+.bd-person__photo--placeholder { display: grid; place-items: center; font-family: var(--bd-font-display); font-weight: 900; text-transform: uppercase; font-size: var(--bd-size-3xl); color: var(--bd-orange); background: var(--bd-gravy); }
+.bd-person__name { font-family: var(--bd-font-display); font-weight: 700; text-transform: uppercase; letter-spacing: var(--bd-track-tight); font-size: var(--bd-size-xl); margin: 0; }
+.bd-person__role { font-family: var(--bd-font-body); font-weight: 900; font-size: var(--bd-size-xs); text-transform: uppercase; letter-spacing: var(--bd-track-wider); color: var(--bd-orange); margin: 0 0 var(--bd-space-2); }
+.bd-person__bio { font-size: var(--bd-size-sm); line-height: var(--bd-lh-relaxed); margin: 0; opacity: 0.9; }
+
+/* ---------- Building list ---------- */
+.bd-buildings { display: grid; gap: var(--bd-space-3); }
+.bd-building-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: var(--bd-space-5);
+  align-items: baseline;
+  padding: var(--bd-space-5) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--bd-cream) 18%, transparent);
+}
+.bd-building-row__num { font-family: var(--bd-font-mono); color: var(--bd-orange); font-size: var(--bd-size-sm); }
+.bd-building-row__name { font-family: var(--bd-font-display); font-weight: 700; text-transform: uppercase; font-size: var(--bd-size-xl); letter-spacing: var(--bd-track-tight); margin: 0; }
+.bd-building-row__address { display: block; font-family: var(--bd-font-body); font-weight: 400; font-size: var(--bd-size-sm); margin-top: var(--bd-space-1); opacity: 0.75; text-transform: none; letter-spacing: 0; }
+.bd-building-row__type { font-size: var(--bd-size-xs); text-transform: uppercase; letter-spacing: var(--bd-track-wider); opacity: 0.7; }
+.bd-building-row__status { font-size: var(--bd-size-xs); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-wider); color: var(--bd-orange); padding: var(--bd-space-1) var(--bd-space-3); border: 2px solid var(--bd-orange); border-radius: var(--bd-radius-pill); }
+.bd-building-row__status--live { color: var(--bd-cherry); background: var(--bd-orange); }
+
+/* ---------- 3-way CTA at end of home ---------- */
+.bd-fork { display: grid; gap: var(--bd-space-6); grid-template-columns: 1fr; }
+@media (min-width: 768px) { .bd-fork { grid-template-columns: repeat(3, 1fr); } }
+.bd-fork__card {
+  background: color-mix(in srgb, var(--bd-cream) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bd-cream) 14%, transparent);
+  border-radius: var(--bd-radius-lg);
+  padding: var(--bd-space-6);
+  display: flex; flex-direction: column;
+  text-decoration: none; color: var(--bd-cream);
+  transition: background var(--bd-dur-normal) var(--bd-ease-out), transform var(--bd-dur-normal) var(--bd-ease-out);
+}
+.bd-fork__card:hover { background: color-mix(in srgb, var(--bd-orange) 16%, transparent); transform: translateY(-4px); }
+.bd-fork__eyebrow { font-size: var(--bd-size-xs); text-transform: uppercase; letter-spacing: var(--bd-track-wider); color: var(--bd-orange); margin: 0 0 var(--bd-space-3); font-weight: 900; }
+.bd-fork__title { font-family: var(--bd-font-display); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-tight); font-size: var(--bd-size-2xl); line-height: var(--bd-lh-tight); margin: 0 0 var(--bd-space-4); }
+.bd-fork__body { flex: 1; margin: 0 0 var(--bd-space-5); }
+.bd-fork__cta { font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-sm); color: var(--bd-orange); }
+
+/* ---------- Marquee (for restaurant logos + scrolling lines) ---------- */
+.bd-marquee {
+  overflow: hidden;
+  position: relative;
+  padding: var(--bd-space-5) 0;
+  border-block: 2px solid color-mix(in srgb, var(--bd-cream) 14%, transparent);
+}
+.bd-marquee__track {
+  display: flex; gap: var(--bd-space-9);
+  white-space: nowrap;
+  animation: bd-marquee 38s linear infinite;
+  font-family: var(--bd-font-display);
+  font-weight: 900;
+  font-size: var(--bd-size-2xl);
+  text-transform: uppercase;
+  letter-spacing: var(--bd-track-tight);
+  color: var(--bd-cream);
+}
+.bd-marquee__track > span { display: inline-flex; align-items: center; gap: var(--bd-space-5); }
+.bd-marquee__track > span::after { content: "●"; color: var(--bd-orange); font-size: 0.6em; }
+@keyframes bd-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ---------- Step blocks ---------- */
+.bd-steps-grid { display: grid; gap: var(--bd-space-7); grid-template-columns: 1fr; }
+@media (min-width: 768px) { .bd-steps-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1280px) { .bd-steps-grid { grid-template-columns: repeat(4, 1fr); } }
+.bd-step-big { display: grid; gap: var(--bd-space-3); }
+.bd-step-big__num { font-family: var(--bd-font-mono); font-size: var(--bd-size-md); letter-spacing: var(--bd-track-wider); color: var(--bd-orange); border-top: 4px solid var(--bd-orange); padding-top: var(--bd-space-3); }
+.bd-step-big__title { font-family: var(--bd-font-display); font-weight: 900; text-transform: uppercase; font-size: var(--bd-size-2xl); letter-spacing: var(--bd-track-tight); line-height: var(--bd-lh-tight); margin: 0; }
+.bd-step-big__body { margin: 0; line-height: var(--bd-lh-relaxed); }
+
+/* ---------- Comparison table (vs delivery / vs grocery / vs vending) ---------- */
+.bd-compare { display: grid; gap: var(--bd-space-3); }
+.bd-compare__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--bd-space-3);
+  padding: var(--bd-space-5);
+  border-radius: var(--bd-radius-lg);
+  background: color-mix(in srgb, var(--bd-cream) 6%, transparent);
+}
+@media (min-width: 768px) { .bd-compare__row { grid-template-columns: 1fr 1fr 1fr 1fr; align-items: center; } }
+.bd-compare__row--win { background: var(--bd-orange); color: var(--bd-cream); }
+.bd-compare__cell { font-size: var(--bd-size-sm); }
+.bd-compare__cell strong { font-family: var(--bd-font-display); font-weight: 700; text-transform: uppercase; letter-spacing: var(--bd-track-tight); font-size: var(--bd-size-md); display: block; margin-bottom: var(--bd-space-1); }
+
+/* ---------- Floating splash decorations ---------- */
+.bd-splash-fixed {
+  position: absolute;
+  pointer-events: none;
+  background: var(--bd-orange);
+  border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  filter: url(#bd-grit);
+  opacity: 0.85;
+  z-index: 0;
+}
+.bd-section > .bd-container { position: relative; z-index: 1; }
+
+/* ---------- Scroll reveal ----------
+   Default state is VISIBLE. JS adds .js-reveal-ready to <html> the moment
+   it runs; that class is the only thing that makes .bd-reveal start hidden.
+   This means no-JS, SEO, print, and screenshot environments see real content. */
+.bd-reveal { transition: opacity 700ms var(--bd-ease-out), transform 700ms var(--bd-ease-out); }
+html.js-reveal-ready .bd-reveal:not(.is-in) { opacity: 0; transform: translateY(24px); }
+html.js-reveal-ready .bd-reveal.is-in { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { html.js-reveal-ready .bd-reveal:not(.is-in) { opacity: 1; transform: none; } .bd-marquee__track, .bd-dish-card__img { animation: none !important; transition: none !important; } }
+
+/* ---------- Hero strapline ticker ---------- */
+.bd-strapline { display: flex; gap: var(--bd-space-5); flex-wrap: wrap; font-family: var(--bd-font-body); font-weight: 900; font-size: var(--bd-size-xs); text-transform: uppercase; letter-spacing: var(--bd-track-wider); }
+.bd-strapline > * { display: inline-flex; align-items: center; }
+.bd-strapline > *::before { content: ""; width: 4px; height: 14px; background: var(--bd-orange); margin-right: var(--bd-space-3); border-radius: 2px; }
+
+/* ---------- Lead-in oversize quote ---------- */
+.bd-pullquote {
+  font-family: var(--bd-font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--bd-track-tight);
+  font-size: clamp(var(--bd-size-2xl), 4vw, var(--bd-size-4xl));
+  line-height: var(--bd-lh-snug);
+  max-width: 22ch;
+}
+.bd-pullquote__attr {
+  display: block;
+  font-family: var(--bd-font-body);
+  font-weight: 900;
+  font-size: var(--bd-size-xs);
+  letter-spacing: var(--bd-track-wider);
+  color: var(--bd-orange);
+  margin-top: var(--bd-space-4);
+}
+
+/* ---------- B2B forms ---------- */
+.bd-form { display: grid; gap: var(--bd-space-4); max-width: 560px; }
+.bd-field { display: grid; gap: var(--bd-space-2); }
+.bd-field label { font-size: var(--bd-size-xs); text-transform: uppercase; letter-spacing: var(--bd-track-wider); font-weight: 900; color: var(--bd-orange); }
+.bd-field input, .bd-field textarea, .bd-field select {
+  background: transparent;
+  border: 0; border-bottom: 2px solid var(--bd-cream);
+  color: var(--bd-cream);
+  font-family: var(--bd-font-body);
+  font-size: var(--bd-size-md);
+  padding: var(--bd-space-2) 0;
+}
+.bd-field input:focus, .bd-field textarea:focus, .bd-field select:focus { outline: none; border-bottom-color: var(--bd-orange); }
+.bd-field textarea { min-height: 120px; resize: vertical; }

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For restaurants — BestDish</title>
+<meta name="description" content="Iconic restaurant dishes, in your building. Chef-made. Flash-frozen at peak. Finished in your kitchen.">
+<link rel="icon" href="/assets/logos/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Nunito+Sans:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="bd-site">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="bd-grit"><feTurbulence baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.1"/><feComposite in="SourceGraphic" operator="in"/></filter>
+</svg>
+<nav class="bd-nav">
+  <a class="bd-nav__brand" href="/">
+    <img src="/assets/logos/bd-orange.png" alt="BestDish">
+    <span class="bd-nav__brand-name">BestDish</span>
+  </a>
+  <div class="bd-nav__links">
+    <a href="/meals.html">Browse meals</a><a href="/how-it-works.html">How it works</a><a href="/chefs.html">Chefs</a><a href="/farms.html">Farms</a>
+    <a class="bd-btn bd-btn--primary" href="/buildings.html">Find a building</a>
+  </div>
+</nav>
+
+<header class="bd-section">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">For chefs and restaurants</p>
+    <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">Monetize<br>the kitchen<br>you already have.</h1>
+    <p class="bd-hero-lede bd-reveal">Royalties + execution fees on iconic dishes from your kitchen. No new storefront. No new staff. Your name on every package.</p>
+    <a class="bd-btn bd-btn--primary bd-reveal" href="#apply">Apply</a>
+  </div>
+</header>
+
+<section class="bd-section bd-section--alt">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">Why it works</p>
+    <div class="bd-steps-grid">
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">01</div><h3 class="bd-step-big__title">Idle hours,<br>real revenue.</h3><p class="bd-step-big__body">Your kitchen sits empty for most of the day. We use those hours to produce one dish, in batches, on a schedule that doesn't disturb service.</p></div>
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">02</div><h3 class="bd-step-big__title">Royalties +<br>execution fees.</h3><p class="bd-step-big__body">You earn on every unit sold — royalty for the IP, execution fee for the prep. Transparent unit economics. Monthly statements.</p></div>
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">03</div><h3 class="bd-step-big__title">Your brand,<br>in premium buildings.</h3><p class="bd-step-big__body">Every package carries your name, your chef, your story. Buildings become a new top-of-funnel for the dining room.</p></div>
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">04</div><h3 class="bd-step-big__title">No delivery apps.<br>No grocery.</h3><p class="bd-step-big__body">Your dishes are exclusive to BestDish. They don't appear on Uber Eats. They don't appear in Loblaws. The integrity of your dining room is protected.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="bd-section bd-section--cream" id="apply">
+  <div class="bd-container">
+    <div class="bd-info-grid">
+      <div class="bd-reveal">
+        <p class="bd-eyebrow">Apply</p>
+        <h2 class="bd-headline" style="font-size: var(--bd-size-3xl);">Tell us your dish.</h2>
+        <p style="max-width: 42ch;">Take five minutes. Tell us which dish would translate. We'll come visit your kitchen, taste it, and propose unit economics within two weeks.</p>
+      </div>
+      <form class="bd-form bd-reveal" style="color: var(--bd-cherry);">
+        <div class="bd-field"><label for="r-rest">Restaurant</label><input id="r-rest" type="text" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></div>
+        <div class="bd-field"><label for="r-chef">Chef</label><input id="r-chef" type="text" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></div>
+        <div class="bd-field"><label for="r-dish">The dish</label><input id="r-dish" type="text" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></div>
+        <div class="bd-field"><label for="r-why">Why this dish</label><textarea id="r-why" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></textarea></div>
+        <div class="bd-field"><label for="r-email">Email</label><input id="r-email" type="email" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></div>
+        <button class="bd-btn bd-btn--primary" type="button">Send application</button>
+      </form>
+    </div>
+  </div>
+</section>
+<footer class="bd-footer">
+  <div class="bd-footer__top">
+    <div>
+      <p class="bd-footer__brand-line">From farm,<br>to chef,<br>to <em style="color:var(--bd-orange); font-style: normal;">you</em>.</p>
+      <p style="opacity:.7; max-width: 28ch; margin-top: var(--bd-space-4);">BestDish Foods Inc. Toronto, Ontario.</p>
+    </div>
+    <div class="bd-footer__col"><h4>Eat</h4><ul><li><a href="/meals.html">Browse meals</a></li><li><a href="/how-it-works.html">How it works</a></li><li><a href="/chefs.html">Chefs</a></li><li><a href="/farms.html">Farms</a></li><li><a href="/buildings.html">Buildings</a></li><li><a href="/for-properties.html">For properties</a></li><li><a href="/for-restaurants.html">For restaurants</a></li><li><a href="/faq.html">FAQ</a></li></ul></div>
+    <div class="bd-footer__col"><h4>Partner</h4><ul>
+      <li><a href="/for-properties.html">For properties</a></li>
+      <li><a href="/for-restaurants.html">For restaurants</a></li>
+      <li><a href="/farms.html">Farms</a></li>
+    </ul></div>
+    <div class="bd-footer__col"><h4>Visit</h4><ul>
+      <li>507 King St E<br>Toronto, ON, M5A 1M3</li>
+      <li><a href="mailto:hello@bestdish.ca">hello@bestdish.ca</a></li>
+      <li><a href="tel:+14168246626">(416) 824-6626</a></li>
+    </ul></div>
+  </div>
+  <div class="bd-footer__bottom">
+    <span>© 2026 BestDish Foods Inc.</span>
+    <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
+  </div>
+</footer>
+<script src="/js/site.js" defer></script>
+</body></html>

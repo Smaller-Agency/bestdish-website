@@ -1,0 +1,118 @@
+/* ============================================================
+   BestDish — Design Tokens (CSS Custom Properties)
+   Source of truth for colour, type, space, radius, shadow,
+   motion. Import this first in any HTML/web output.
+   Generated from /design-system/tokens/design-tokens.json.
+   ============================================================ */
+
+:root {
+  /* ---------- Palette (named after foods) ---------- */
+  --bd-cherry:     #500008;
+  --bd-orange:     #E43C00;
+  --bd-blueberry:  #A4C4FC;
+  --bd-honeydew:   #D0CCA0;
+  --bd-pistachios: #BCAC0C;
+  --bd-shrimp:     #F4BCC4;
+  --bd-kale:       #2F5D34;   /* TBD — pending confirmation */
+  --bd-cream:      #FCFCF4;
+  --bd-gravy:      #200400;
+
+  /* ---------- Semantic roles (prefer these) ---------- */
+  --bd-bg:          var(--bd-cherry);
+  --bd-bg-alt:      var(--bd-gravy);
+  --bd-bg-light:    var(--bd-cream);
+  --bd-fg:          var(--bd-cream);
+  --bd-fg-on-light: var(--bd-cherry);
+  --bd-accent:      var(--bd-orange);
+  --bd-accent-soft: var(--bd-blueberry);
+  --bd-muted:       var(--bd-honeydew);
+  --bd-warning:     var(--bd-pistachios);
+  --bd-soft:        var(--bd-shrimp);
+
+  /* ---------- Typography ---------- */
+  --bd-font-display: "Special Gothic Expanded", "Special Gothic Expanded One", "Druk Wide", "Arial Black", sans-serif;
+  --bd-font-body:    "Avenir Next", Avenir, "Nunito Sans", "Helvetica Neue", Arial, sans-serif;
+  --bd-font-mono:    "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  --bd-weight-light:  300;
+  --bd-weight-book:   400;
+  --bd-weight-medium: 500;
+  --bd-weight-bold:   700;
+  --bd-weight-black:  900;
+
+  --bd-size-xs:   12px;
+  --bd-size-sm:   14px;
+  --bd-size-base: 16px;
+  --bd-size-md:   18px;
+  --bd-size-lg:   22px;
+  --bd-size-xl:   28px;
+  --bd-size-2xl:  36px;
+  --bd-size-3xl:  48px;
+  --bd-size-4xl:  64px;
+  --bd-size-5xl:  84px;
+  --bd-size-6xl:  112px;
+
+  --bd-lh-tight:   0.95;
+  --bd-lh-snug:    1.10;
+  --bd-lh-normal:  1.35;
+  --bd-lh-relaxed: 1.60;
+
+  --bd-track-tight:  -0.02em;
+  --bd-track-normal: 0;
+  --bd-track-wide:   0.06em;
+  --bd-track-wider:  0.14em;
+
+  /* ---------- Space (4-px base) ---------- */
+  --bd-space-1:  4px;
+  --bd-space-2:  8px;
+  --bd-space-3:  12px;
+  --bd-space-4:  16px;
+  --bd-space-5:  24px;
+  --bd-space-6:  32px;
+  --bd-space-7:  48px;
+  --bd-space-8:  64px;
+  --bd-space-9:  96px;
+  --bd-space-10: 128px;
+
+  /* ---------- Radius ---------- */
+  --bd-radius-sm:     4px;
+  --bd-radius-md:     8px;
+  --bd-radius-lg:     16px;
+  --bd-radius-pill:   9999px;
+  --bd-radius-circle: 50%;
+
+  /* ---------- Shadow ---------- */
+  --bd-shadow-soft: 0 2px 8px rgba(32, 4, 0, 0.18);
+  --bd-shadow-lift: 0 12px 32px rgba(32, 4, 0, 0.28);
+
+  /* ---------- Border ---------- */
+  --bd-border-thin:   1px;
+  --bd-border-medium: 2px;
+  --bd-border-thick:  4px;
+
+  /* ---------- Breakpoints (informational; use in media queries) ---------- */
+  --bd-bp-sm:  640px;
+  --bd-bp-md:  768px;
+  --bd-bp-lg:  1024px;
+  --bd-bp-xl:  1280px;
+  --bd-bp-2xl: 1536px;
+
+  /* ---------- Motion ---------- */
+  --bd-dur-fast:   120ms;
+  --bd-dur-normal: 200ms;
+  --bd-dur-slow:   400ms;
+  --bd-ease-out:   cubic-bezier(0.2, 0.8, 0.2, 1);
+  --bd-ease-inOut: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---------- Layout ---------- */
+  --bd-container:    1200px;
+  --bd-container-sm: 720px;
+  --bd-gutter:       var(--bd-space-5);
+}
+
+/* Inverted theme — when content sits on a light surface */
+.bd-on-light {
+  --bd-bg: var(--bd-cream);
+  --bd-fg: var(--bd-cherry);
+  --bd-accent: var(--bd-orange);
+}

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For properties — BestDish</title>
+<meta name="description" content="Iconic restaurant dishes, in your building. Chef-made. Flash-frozen at peak. Finished in your kitchen.">
+<link rel="icon" href="/assets/logos/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Nunito+Sans:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="bd-site">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="bd-grit"><feTurbulence baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.1"/><feComposite in="SourceGraphic" operator="in"/></filter>
+</svg>
+<nav class="bd-nav">
+  <a class="bd-nav__brand" href="/">
+    <img src="/assets/logos/bd-orange.png" alt="BestDish">
+    <span class="bd-nav__brand-name">BestDish</span>
+  </a>
+  <div class="bd-nav__links">
+    <a href="/meals.html">Browse meals</a><a href="/how-it-works.html">How it works</a><a href="/chefs.html">Chefs</a><a href="/farms.html">Farms</a>
+    <a class="bd-btn bd-btn--primary" href="/buildings.html">Find a building</a>
+  </div>
+</nav>
+
+<header class="bd-section">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">For property managers, asset managers, condo boards</p>
+    <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">A premium<br>food amenity.<br>No kitchen.</h1>
+    <p class="bd-hero-lede bd-reveal">Restaurant meals on your floor, 24/7. We install, we operate, you earn. No capital cost. No staff lift. No admin.</p>
+    <a class="bd-btn bd-btn--primary bd-reveal" href="#talk">Talk to us</a>
+  </div>
+</header>
+
+<section class="bd-section bd-section--alt">
+  <div class="bd-container">
+    <div class="bd-info-grid">
+      <div class="bd-reveal">
+        <p class="bd-eyebrow">What you get</p>
+        <h2 class="bd-headline" style="font-size: var(--bd-size-3xl); max-width: 22ch;">An amenity that reflects your brand.</h2>
+      </div>
+      <div class="bd-reveal">
+        <ul style="list-style:none; padding:0; margin:0; display: grid; gap: var(--bd-space-4); font-size: var(--bd-size-md);">
+          <li>· One smart freezer placed in a high-traffic area, with your approval.</li>
+          <li>· Stocked with iconic dishes from Toronto's best restaurants.</li>
+          <li>· Tap-to-pay, simple resident experience.</li>
+          <li>· Restocked within 48 hours of any stock-out.</li>
+          <li>· Full telemetry — uptime, inventory, sales, all visible to you.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bd-section">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">The economics</p>
+    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">5% of sales,<br>returned to the property.</h2>
+    <div class="bd-steps-grid" style="margin-top: var(--bd-space-7);">
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">5%</div><h3 class="bd-step-big__title">Revenue share.</h3><p class="bd-step-big__body">Of every dollar a resident spends, 5% goes to the property. Monthly statements. Transparent reconciliation.</p></div>
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">$0</div><h3 class="bd-step-big__title">Capital cost.</h3><p class="bd-step-big__body">We supply the freezer, install it, and run it. No procurement, no maintenance contract, no facilities lift.</p></div>
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">≤2h/mo</div><h3 class="bd-step-big__title">Staff time.</h3><p class="bd-step-big__body">Just unlock the door for our restocking team. Everything else — inventory, payments, support — sits with us.</p></div>
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">12mo</div><h3 class="bd-step-big__title">Pilot exclusivity.</h3><p class="bd-step-big__body">Twelve-month launch term with auto-renew when KPIs are met. If it underperforms, we fix it. If we can't, we remove it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="bd-section bd-section--cream" id="talk">
+  <div class="bd-container">
+    <div class="bd-info-grid">
+      <div class="bd-reveal">
+        <p class="bd-eyebrow">Book a pilot</p>
+        <h2 class="bd-headline" style="font-size: var(--bd-size-3xl);">Let's launch with you.</h2>
+        <p style="max-width: 42ch;">Fifteen-minute call. We walk through the placement, the install timeline, and the resident comms plan. No pressure, no contract until you've seen it work.</p>
+      </div>
+      <form class="bd-form bd-reveal" style="color: var(--bd-cherry);">
+        <div class="bd-field"><label for="p-bldg">Building name</label><input id="p-bldg" type="text" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></div>
+        <div class="bd-field"><label for="p-units">Number of units</label><input id="p-units" type="number" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></div>
+        <div class="bd-field"><label for="p-role">Your role</label><input id="p-role" type="text" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></div>
+        <div class="bd-field"><label for="p-email">Email</label><input id="p-email" type="email" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></div>
+        <button class="bd-btn bd-btn--primary" type="button">Book a 15-minute call</button>
+      </form>
+    </div>
+  </div>
+</section>
+<footer class="bd-footer">
+  <div class="bd-footer__top">
+    <div>
+      <p class="bd-footer__brand-line">From farm,<br>to chef,<br>to <em style="color:var(--bd-orange); font-style: normal;">you</em>.</p>
+      <p style="opacity:.7; max-width: 28ch; margin-top: var(--bd-space-4);">BestDish Foods Inc. Toronto, Ontario.</p>
+    </div>
+    <div class="bd-footer__col"><h4>Eat</h4><ul><li><a href="/meals.html">Browse meals</a></li><li><a href="/how-it-works.html">How it works</a></li><li><a href="/chefs.html">Chefs</a></li><li><a href="/farms.html">Farms</a></li><li><a href="/buildings.html">Buildings</a></li><li><a href="/for-properties.html">For properties</a></li><li><a href="/for-restaurants.html">For restaurants</a></li><li><a href="/faq.html">FAQ</a></li></ul></div>
+    <div class="bd-footer__col"><h4>Partner</h4><ul>
+      <li><a href="/for-properties.html">For properties</a></li>
+      <li><a href="/for-restaurants.html">For restaurants</a></li>
+      <li><a href="/farms.html">Farms</a></li>
+    </ul></div>
+    <div class="bd-footer__col"><h4>Visit</h4><ul>
+      <li>507 King St E<br>Toronto, ON, M5A 1M3</li>
+      <li><a href="mailto:hello@bestdish.ca">hello@bestdish.ca</a></li>
+      <li><a href="tel:+14168246626">(416) 824-6626</a></li>
+    </ul></div>
+  </div>
+  <div class="bd-footer__bottom">
+    <span>© 2026 BestDish Foods Inc.</span>
+    <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
+  </div>
+</footer>
+<script src="/js/site.js" defer></script>
+</body></html>

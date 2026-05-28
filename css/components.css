@@ -1,0 +1,213 @@
+/* ============================================================
+   BestDish — Component primitives
+   Buttons, badges, cards, splash decoration, step markers,
+   restaurant tags. Depends on tokens.css + base.css.
+   ============================================================ */
+
+/* ---------- Button ---------- */
+.bd-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bd-space-2);
+  padding: var(--bd-space-3) var(--bd-space-5);
+  font-family: var(--bd-font-body);
+  font-weight: var(--bd-weight-black);
+  font-size: var(--bd-size-sm);
+  letter-spacing: var(--bd-track-wider);
+  text-transform: uppercase;
+  text-decoration: none;
+  border: var(--bd-border-medium) solid transparent;
+  border-radius: var(--bd-radius-pill);
+  transition: background var(--bd-dur-normal) var(--bd-ease-out),
+              color var(--bd-dur-normal) var(--bd-ease-out),
+              border-color var(--bd-dur-normal) var(--bd-ease-out),
+              transform var(--bd-dur-fast) var(--bd-ease-out);
+}
+.bd-btn:hover { transform: translateY(-1px); }
+.bd-btn:active { transform: translateY(0); }
+
+.bd-btn--primary {
+  background: var(--bd-accent);
+  color: var(--bd-cream);
+  border-color: var(--bd-accent);
+}
+.bd-btn--primary:hover { background: color-mix(in srgb, var(--bd-accent) 88%, var(--bd-cream)); }
+
+.bd-btn--secondary {
+  background: transparent;
+  color: var(--bd-fg);
+  border-color: var(--bd-fg);
+}
+.bd-btn--secondary:hover { background: var(--bd-fg); color: var(--bd-bg); }
+
+.bd-btn--ghost {
+  background: transparent;
+  color: var(--bd-accent);
+  border-color: transparent;
+  padding-inline: var(--bd-space-3);
+}
+
+/* ---------- Badge / chip ---------- */
+.bd-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--bd-space-1) var(--bd-space-3);
+  font-family: var(--bd-font-body);
+  font-weight: var(--bd-weight-black);
+  font-size: var(--bd-size-xs);
+  letter-spacing: var(--bd-track-wider);
+  text-transform: uppercase;
+  background: var(--bd-accent);
+  color: var(--bd-cream);
+  border-radius: var(--bd-radius-pill);
+}
+.bd-badge--soft { background: var(--bd-accent-soft); color: var(--bd-cherry); }
+.bd-badge--muted { background: var(--bd-muted); color: var(--bd-cherry); }
+
+/* ---------- Logo badge (the circular BEST DISH mark) ---------- */
+.bd-logo-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 96px;
+  aspect-ratio: 1;
+  background: var(--bd-accent);
+  color: var(--bd-cherry);
+  border-radius: var(--bd-radius-circle);
+  font-family: var(--bd-font-display);
+  font-weight: var(--bd-weight-black);
+  text-transform: uppercase;
+  font-size: var(--bd-size-md);
+  letter-spacing: var(--bd-track-wide);
+  line-height: 1;
+  text-align: center;
+}
+
+/* ---------- Card ---------- */
+.bd-card {
+  background: color-mix(in srgb, var(--bd-cream) 6%, transparent);
+  border: var(--bd-border-thin) solid color-mix(in srgb, var(--bd-fg) 14%, transparent);
+  border-radius: var(--bd-radius-lg);
+  padding: var(--bd-space-6);
+  box-shadow: var(--bd-shadow-soft);
+}
+.bd-card--solid {
+  background: var(--bd-cream);
+  color: var(--bd-fg-on-light);
+}
+.bd-card--accent {
+  background: var(--bd-accent);
+  color: var(--bd-cream);
+  border-color: transparent;
+}
+
+/* ---------- Step block (the numbered 01/02/03 pattern from the deck) ---------- */
+.bd-step {
+  display: grid;
+  gap: var(--bd-space-3);
+}
+.bd-step__num {
+  font-family: var(--bd-font-mono);
+  font-size: var(--bd-size-sm);
+  letter-spacing: var(--bd-track-wider);
+  color: var(--bd-accent);
+  background: color-mix(in srgb, var(--bd-accent) 14%, transparent);
+  padding: var(--bd-space-1) var(--bd-space-2);
+  border-radius: var(--bd-radius-sm);
+  justify-self: start;
+}
+.bd-step__title {
+  font-family: var(--bd-font-display);
+  font-weight: var(--bd-weight-bold);
+  font-size: var(--bd-size-xl);
+  text-transform: uppercase;
+  letter-spacing: var(--bd-track-tight);
+  line-height: var(--bd-lh-snug);
+  margin: 0;
+}
+
+/* ---------- Restaurant tag (chef + dish lockup used on menu cards) ---------- */
+.bd-dish {
+  display: grid;
+  gap: var(--bd-space-2);
+}
+.bd-dish__restaurant {
+  font-family: var(--bd-font-body);
+  font-weight: var(--bd-weight-black);
+  font-size: var(--bd-size-xs);
+  letter-spacing: var(--bd-track-wider);
+  text-transform: uppercase;
+  color: var(--bd-accent);
+}
+.bd-dish__name {
+  font-family: var(--bd-font-display);
+  font-weight: var(--bd-weight-bold);
+  font-size: var(--bd-size-lg);
+  letter-spacing: var(--bd-track-tight);
+  text-transform: uppercase;
+  line-height: var(--bd-lh-snug);
+}
+
+/* ---------- Splash (the organic orange shape that anchors marketing layouts) ---------- */
+.bd-splash {
+  position: absolute;
+  inset: auto auto auto auto;
+  width: clamp(220px, 28vw, 420px);
+  aspect-ratio: 1;
+  background: var(--bd-accent);
+  border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+  filter: url(#bd-grit);
+  opacity: 0.95;
+  pointer-events: none;
+}
+.bd-splash--corner-tr { top: -8%; right: -6%; }
+.bd-splash--corner-bl { bottom: -8%; left: -6%; }
+
+/* SVG filter for grit/grain texture (drop this into your HTML once) */
+/* <svg width="0" height="0" style="position:absolute"><filter id="bd-grit"><feTurbulence baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.1"/><feComposite in="SourceGraphic" operator="in"/></filter></svg> */
+
+/* ---------- Pill rule / divider ---------- */
+.bd-rule {
+  width: var(--bd-space-1);
+  height: var(--bd-size-base);
+  background: var(--bd-accent);
+  border-radius: var(--bd-radius-sm);
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: var(--bd-space-3);
+}
+
+/* ---------- Footnote strip (the "IT'S NOT DELIVERY | NO TAX | …" row) ---------- */
+.bd-bullets {
+  display: flex;
+  gap: var(--bd-space-5);
+  flex-wrap: wrap;
+  font-family: var(--bd-font-body);
+  font-weight: var(--bd-weight-black);
+  text-transform: uppercase;
+  font-size: var(--bd-size-xs);
+  letter-spacing: var(--bd-track-wider);
+}
+.bd-bullets > * {
+  display: flex;
+  align-items: flex-start;
+}
+.bd-bullets > *::before {
+  content: "";
+  width: var(--bd-border-thick);
+  height: 1.4em;
+  background: var(--bd-accent);
+  margin-right: var(--bd-space-3);
+  border-radius: var(--bd-radius-sm);
+  flex: 0 0 auto;
+}
+
+/* ---------- Grid helpers ---------- */
+.bd-grid-2 { display: grid; gap: var(--bd-space-6); grid-template-columns: 1fr; }
+.bd-grid-3 { display: grid; gap: var(--bd-space-6); grid-template-columns: 1fr; }
+.bd-grid-4 { display: grid; gap: var(--bd-space-5); grid-template-columns: 1fr 1fr; }
+
+@media (min-width: 768px) {
+  .bd-grid-2 { grid-template-columns: 1fr 1fr; }
+  .bd-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .bd-grid-4 { grid-template-columns: repeat(4, 1fr); }
+}

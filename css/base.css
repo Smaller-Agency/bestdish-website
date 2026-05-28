@@ -1,0 +1,121 @@
+/* ============================================================
+   BestDish — Base styles
+   Typography, reset, and default surface treatment.
+   Depends on tokens.css.
+   ============================================================ */
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+img, svg, video { max-width: 100%; display: block; }
+button { font: inherit; cursor: pointer; }
+a { color: inherit; }
+
+/* ---------- Surface ---------- */
+html {
+  background: var(--bd-bg);
+  color: var(--bd-fg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body {
+  font-family: var(--bd-font-body);
+  font-weight: var(--bd-weight-book);
+  font-size: var(--bd-size-base);
+  line-height: var(--bd-lh-relaxed);
+  min-height: 100vh;
+}
+
+/* ---------- Type presets ---------- */
+.bd-hero, .bd-headline, .bd-title, h1, h2, h3 {
+  font-family: var(--bd-font-display);
+  font-weight: var(--bd-weight-black);
+  letter-spacing: var(--bd-track-tight);
+  line-height: var(--bd-lh-tight);
+  text-transform: uppercase;
+  margin: 0 0 var(--bd-space-4);
+}
+
+.bd-hero,
+h1 {
+  font-size: clamp(var(--bd-size-4xl), 8vw, var(--bd-size-6xl));
+}
+
+.bd-headline,
+h2 {
+  font-size: clamp(var(--bd-size-2xl), 5vw, var(--bd-size-4xl));
+}
+
+.bd-title,
+h3 {
+  font-size: clamp(var(--bd-size-xl), 3.5vw, var(--bd-size-2xl));
+  font-weight: var(--bd-weight-bold);
+  line-height: var(--bd-lh-snug);
+}
+
+.bd-eyebrow {
+  font-family: var(--bd-font-body);
+  font-weight: var(--bd-weight-black);
+  font-size: var(--bd-size-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--bd-track-wider);
+  color: var(--bd-accent);
+  margin: 0 0 var(--bd-space-3);
+}
+
+.bd-lede {
+  font-family: var(--bd-font-body);
+  font-weight: var(--bd-weight-light);
+  font-size: var(--bd-size-lg);
+  line-height: var(--bd-lh-relaxed);
+  margin: 0 0 var(--bd-space-5);
+  max-width: 56ch;
+}
+
+p {
+  margin: 0 0 var(--bd-space-4);
+  max-width: 70ch;
+}
+
+.bd-caption {
+  font-size: var(--bd-size-sm);
+  line-height: var(--bd-lh-normal);
+  opacity: 0.85;
+}
+
+.bd-step-numeral {
+  font-family: var(--bd-font-mono);
+  font-weight: var(--bd-weight-medium);
+  font-size: var(--bd-size-sm);
+  letter-spacing: var(--bd-track-wider);
+  color: var(--bd-accent);
+}
+
+/* ---------- Layout helpers ---------- */
+.bd-container {
+  width: min(100% - (var(--bd-gutter) * 2), var(--bd-container));
+  margin-inline: auto;
+}
+.bd-container-sm {
+  width: min(100% - (var(--bd-gutter) * 2), var(--bd-container-sm));
+  margin-inline: auto;
+}
+
+.bd-stack > * + * { margin-top: var(--bd-space-4); }
+.bd-stack-lg > * + * { margin-top: var(--bd-space-7); }
+
+/* ---------- Links ---------- */
+a {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--bd-accent) 70%, transparent);
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color var(--bd-dur-fast) var(--bd-ease-out);
+}
+a:hover { text-decoration-color: var(--bd-accent); }
+
+/* ---------- Focus ---------- */
+:focus-visible {
+  outline: var(--bd-border-medium) solid var(--bd-accent);
+  outline-offset: 2px;
+  border-radius: var(--bd-radius-sm);
+}
