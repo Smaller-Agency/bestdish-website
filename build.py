@@ -507,7 +507,7 @@ CHEF_PHOTOS = {
     "Derek Valleau & Dinesh Butola": "dinesh-butola.webp",
     "Victor Barry":          "victor-barry.webp",
     "Michael Angeloni":      "michael-angeloni.jpg",
-    "Craig Harding":         None,
+    "Craig Harding":         "craig-harding.jpg",
     "Andrew Carter":         None,
     "Anna Olson":            None,
     "Andrea Mastrandrea":    None,
