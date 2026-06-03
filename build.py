@@ -20,7 +20,6 @@ DISH_ACCENT = {
     "cheeseburger-pot-pie":  "orange",
     "le-grand-fromage":      "pistachios",
     "pitmaster-platter":     "orange",
-    "smoked-ribs":           "shrimp",
     "nutella-tiramisu":      "honeydew",
     "butter-tarts":          "pistachios",
     "chocolate-chip-cookies":"blueberry",
