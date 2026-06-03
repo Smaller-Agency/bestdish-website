@@ -62,7 +62,7 @@ RESTAURANTS = {
         "city": "Toronto, ON",
         "postal": "M5G 1H1",
         "blurb": "A British-style pub turning out elevated comfort food. Pies, roasts, classics done carefully.",
-        "chef": "Andrew Carter",
+        "chef": "Duncan Simpson",
         "logo": "QueenBeaver.png",
     },
     "le-gourmand": {
@@ -227,7 +227,7 @@ DISHES = [
         "restaurant": "queen-and-beaver",
         "tagline": "Burger, rebuilt inside a pastry shell. Structured. Composed. Unmistakably a Queen & Beaver pie.",
         "chef_note": "We took the cheeseburger apart and put it back together as a pie. Same flavours, better structure.",
-        "chef_signature": "Andrew Carter",
+        "chef_signature": "Duncan Simpson",
         "image": "cheeseburger-pot-pie.jpg",
         "weight": "510 g",
         "serving": "1 pie (300 g)",

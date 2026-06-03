@@ -508,7 +508,7 @@ CHEF_PHOTOS = {
     "Victor Barry":          "victor-barry.webp",
     "Michael Angeloni":      "michael-angeloni.jpg",
     "Craig Harding":         "craig-harding.jpg",
-    "Andrew Carter":         None,
+    "Duncan Simpson":        "duncan-simpson.jpg",
     "Anna Olson":            None,
     "Andrea Mastrandrea":    None,
 }
