@@ -327,28 +327,19 @@ def home():
 
 <section class="bd-section">
   <div class="bd-container">
-    <p class="bd-eyebrow bd-reveal">For everyone in the chain</p>
-    <h2 class="bd-headline bd-reveal" style="max-width:22ch; margin-bottom: var(--bd-space-7);">Whichever side of the door you're on.</h2>
-    <div class="bd-fork">
-      <a class="bd-fork__card bd-reveal" href="buildings.html">
-        <p class="bd-fork__eyebrow">For residents</p>
-        <h3 class="bd-fork__title">Find your building.</h3>
-        <p class="bd-fork__body">See if BestDish is in your building. If it's not yet, we'll add it to the waitlist.</p>
-        <span class="bd-fork__cta">Find a building →</span>
-      </a>
-      <a class="bd-fork__card bd-reveal" href="for-properties.html">
-        <p class="bd-fork__eyebrow">For properties</p>
-        <h3 class="bd-fork__title">Add a freezer. Earn 5%.</h3>
-        <p class="bd-fork__body">A premium amenity for your residents. 5% of sales returned to the building. No staff. No admin.</p>
-        <span class="bd-fork__cta">Talk to us →</span>
-      </a>
-      <a class="bd-fork__card bd-reveal" href="for-restaurants.html">
-        <p class="bd-fork__eyebrow">For chefs &amp; restaurants</p>
-        <h3 class="bd-fork__title">Monetize your kitchen.</h3>
-        <p class="bd-fork__body">New revenue from the kitchen hours you already have. Royalties + execution fees. Transparent economics.</p>
-        <span class="bd-fork__cta">Apply →</span>
-      </a>
+    <div class="bd-finalcta bd-reveal">
+      <p class="bd-eyebrow">Dinner is already here</p>
+      <h2 class="bd-finalcta__head">Is BestDish in your building yet?</h2>
+      <p class="bd-lede bd-finalcta__lede">Find your building to see what's waiting in the freezer downstairs. Not there yet? We'll add it to the list — the more residents ask, the faster we install.</p>
+      <div class="bd-finalcta__actions">
+        <a class="bd-btn bd-btn--primary" href="buildings.html">Find a building</a>
+        <a class="bd-btn bd-btn--secondary" href="meals.html">Browse the menu</a>
+      </div>
     </div>
+    <p class="bd-finalcta__partners bd-reveal">Manage a building or run a restaurant?
+      <a href="for-properties.html">Add a freezer →</a>
+      <a href="for-restaurants.html">Partner your kitchen →</a>
+    </p>
   </div>
 </section>
 
