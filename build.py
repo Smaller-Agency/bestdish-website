@@ -1,12 +1,22 @@
 """BestDish site generator.
 Builds the static site from data.py into the current directory."""
-import os, sys, html, shutil
+import os, sys, html, shutil, json
 from pathlib import Path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from data import RESTAURANTS, DISHES, FARMS, BUILDINGS, NAV, FOOTER_NAV
 
 ROOT = Path(__file__).parent
 e = html.escape
+
+def _asset_v(rel):
+    """Short content hash for cache-busting (changes when the file changes)."""
+    import hashlib
+    p = ROOT / rel
+    if not p.exists():
+        return "0"
+    return hashlib.md5(p.read_bytes()).hexdigest()[:8]
+CSS_V = _asset_v("css/site.css")
+JS_V = _asset_v("js/site.js")
 
 def img_exists(rel):
     return (ROOT / rel).exists()
@@ -106,7 +116,7 @@ def rel(href, base):
         return href
     return base + href[1:]
 
-def head(title, desc=None, base=""):
+def head(title, desc=None, base="", extra_head=""):
     desc = desc or "Iconic restaurant dishes, in your building. Chef-made. Flash-frozen at peak. Finished in your kitchen."
     return f"""<!doctype html>
 <html lang="en">
@@ -122,8 +132,8 @@ def head(title, desc=None, base=""):
 <link rel="stylesheet" href="{base}css/tokens.css">
 <link rel="stylesheet" href="{base}css/base.css">
 <link rel="stylesheet" href="{base}css/components.css">
-<link rel="stylesheet" href="{base}css/site.css">
-</head>
+<link rel="stylesheet" href="{base}css/site.css?v={CSS_V}">
+{extra_head}</head>
 <body class="bd-site">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="bd-grit"><feTurbulence baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.1"/><feComposite in="SourceGraphic" operator="in"/></filter>
@@ -169,11 +179,63 @@ def footer(base=""):
     <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
   </div>
 </footer>
-<script src="{base}js/site.js" defer></script>
+<script src="{base}js/site.js?v={JS_V}" defer></script>
 </body></html>"""
 
-def page(title, body, desc=None, base=""):
-    return head(title, desc, base) + nav(base) + body + footer(base)
+def page(title, body, desc=None, base="", extra_head=""):
+    return head(title, desc, base, extra_head) + nav(base) + body + footer(base)
+
+# Logo filenames don't all match slugs (Carbon Snack Bar reuses Carbon Bar's
+# logo; Carbon Bar is a webp). Resolve to the actual file in assets/logos/.
+LOGO_FILE = {"carbon-bar": "carbon-bar.webp", "carbon-snack-bar": "carbon-bar.webp"}
+def logo_file(slug):
+    return LOGO_FILE.get(slug, f"{slug}.png")
+
+# restaurant slug -> the dish it makes (first match in DISHES)
+REST_DISH = {}
+for _d in DISHES:
+    REST_DISH.setdefault(_d["restaurant"], _d)
+
+# Leaflet assets — only injected on pages that show the map.
+MAP_HEAD = (
+    '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">\n'
+    '<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>\n'
+)
+
+def restaurants_section(base=""):
+    """Shares the restaurants/chefs/meals: an interactive map of every featured
+    kitchen (logo pins) plus a grid tying each restaurant to its chef and dish."""
+    cards, pins = [], []
+    for slug, r in RESTAURANTS.items():
+        d = REST_DISH.get(slug)
+        logo = f"{base}assets/logos/{logo_file(slug)}"
+        href = f"{base}meals/{d['slug']}.html" if d else f"{base}chefs.html#{slug}"
+        dish_label = d["name"] if d else "Meet the chef"
+        cards.append(f"""<a class="bd-rest-card bd-reveal" href="{href}">
+      <span class="bd-rest-card__logo"><img src="{logo}" alt="{e(r['name'])} logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">{e(r['name'])}</h3>
+      <p class="bd-rest-card__meta">{e(r['hood'])} · {e(r['chef'])}</p>
+      <span class="bd-rest-card__dish">{e(dish_label)} →</span>
+    </a>""")
+        pins.append({"name": r["name"], "lat": r["lat"], "lng": r["lng"],
+                     "logo": logo, "hood": r["hood"], "dish": dish_label, "url": href})
+    data_json = json.dumps(pins).replace("</", "<\\/")
+    return f"""
+<section class="bd-section" id="restaurants">
+  <div class="bd-container">
+    <div class="bd-sec-head">
+      <div>
+        <p class="bd-eyebrow bd-reveal">The restaurants</p>
+        <h2 class="bd-headline bd-reveal" style="max-width:18ch;">Eleven Toronto icons.<br>One freezer.</h2>
+      </div>
+      <a class="bd-btn bd-btn--ghost bd-reveal" href="{base}chefs.html">Meet the chefs →</a>
+    </div>
+    <p class="bd-lede bd-reveal" style="max-width:60ch; margin-bottom: var(--bd-space-7);">The kitchens behind the menu — and where to find the originals around the city. Tap a pin to see who's cooking.</p>
+    <script type="application/json" id="bd-map-data">{data_json}</script>
+    <div class="bd-restmap" id="bd-map" role="img" aria-label="Map of featured Toronto restaurants"></div>
+    <div class="bd-restgrid">{"".join(cards)}</div>
+  </div>
+</section>"""
 
 # ---------- Page parts ----------
 
@@ -208,9 +270,7 @@ def home():
     marquee_items = "".join(f"<span>{e(r['name'])}</span>" for r in RESTAURANTS.values())
     by_slug = {d["slug"]: d for d in DISHES}
     hero_dish = by_slug["butter-chicken"]
-    show = [by_slug[s] for s in ("100-layer-lasagna", "pitmaster-platter", "nutella-tiramisu")]
-    showcase = "".join(pack_panel(d, base=base, bg="var(--bd-gravy)") for d in show)
-    return page("Toronto's best meals — in your lobby", f"""
+    return page("Toronto's best meals — in your lobby", extra_head=MAP_HEAD, body=f"""
 <header class="bd-hero-wrap bd-hero--split bd-hero--textured">
   <div class="bd-container">
     <div>
@@ -294,21 +354,7 @@ def home():
   </div>
 </section>
 
-<section class="bd-section">
-  <div class="bd-container">
-    <div class="bd-sec-head">
-      <div>
-        <p class="bd-eyebrow bd-reveal">The packaging</p>
-        <h2 class="bd-headline bd-reveal" style="max-width: 16ch;">Every dish carries its story.</h2>
-      </div>
-      <a class="bd-btn bd-btn--secondary bd-reveal" href="farms.html">Meet the farms →</a>
-    </div>
-    <p class="bd-lede bd-reveal" style="max-width: 60ch; margin-bottom: var(--bd-space-8);">The restaurant. The chef. The farm. Heating instructions in the chef's own words, batch-tracked and CFIA-labelled. From farm, to chef, to you — printed on the box.</p>
-    <div class="bd-grid-3 bd-reveal">
-      {showcase}
-    </div>
-  </div>
-</section>
+{restaurants_section(base)}
 
 <section class="bd-section bd-section--alt">
   <div class="bd-container">

@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/site.css?v=97ee85b6">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body class="bd-site">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -210,40 +212,75 @@
   </div>
 </section>
 
-<section class="bd-section">
+
+<section class="bd-section" id="restaurants">
   <div class="bd-container">
     <div class="bd-sec-head">
       <div>
-        <p class="bd-eyebrow bd-reveal">The packaging</p>
-        <h2 class="bd-headline bd-reveal" style="max-width: 16ch;">Every dish carries its story.</h2>
+        <p class="bd-eyebrow bd-reveal">The restaurants</p>
+        <h2 class="bd-headline bd-reveal" style="max-width:18ch;">Eleven Toronto icons.<br>One freezer.</h2>
       </div>
-      <a class="bd-btn bd-btn--secondary bd-reveal" href="farms.html">Meet the farms →</a>
+      <a class="bd-btn bd-btn--ghost bd-reveal" href="chefs.html">Meet the chefs →</a>
     </div>
-    <p class="bd-lede bd-reveal" style="max-width: 60ch; margin-bottom: var(--bd-space-8);">The restaurant. The chef. The farm. Heating instructions in the chef's own words, batch-tracked and CFIA-labelled. From farm, to chef, to you — printed on the box.</p>
-    <div class="bd-grid-3 bd-reveal">
-      <div class="bd-pack" style="--pat:url(assets/patterns/damask-blueberry.svg); --pack-bg:color-mix(in srgb, var(--bd-blueberry) 13%, var(--bd-gravy));">
-  <img class="bd-pack__badge" src="assets/logos/bd-orange.png" alt="BestDish">
-  <div class="bd-ribbon"><span>From farm</span><span>to chef</span><span>to you</span></div>
-  <p class="bd-pack__rest">La Palma</p>
-  <h3 class="bd-pack__name">100 Layer Lasagna</h3>
-  <span class="bd-pack__rule"></span>
-  <p class="bd-pack__meta">CHEF-MADE&nbsp;· FLASH-FROZEN&nbsp;· 503&nbsp;G</p>
-</div><div class="bd-pack" style="--pat:url(assets/patterns/damask-orange.svg); --pack-bg:color-mix(in srgb, var(--bd-orange) 13%, var(--bd-gravy));">
-  <img class="bd-pack__badge" src="assets/logos/bd-orange.png" alt="BestDish">
-  <div class="bd-ribbon"><span>From farm</span><span>to chef</span><span>to you</span></div>
-  <p class="bd-pack__rest">The Carbon Bar</p>
-  <h3 class="bd-pack__name">Pitmaster Platter</h3>
-  <span class="bd-pack__rule"></span>
-  <p class="bd-pack__meta">CHEF-MADE&nbsp;· FLASH-FROZEN&nbsp;· 598&nbsp;G</p>
-</div><div class="bd-pack" style="--pat:url(assets/patterns/damask-honeydew.svg); --pack-bg:color-mix(in srgb, var(--bd-honeydew) 13%, var(--bd-gravy));">
-  <img class="bd-pack__badge" src="assets/logos/bd-orange.png" alt="BestDish">
-  <div class="bd-ribbon"><span>From farm</span><span>to chef</span><span>to you</span></div>
-  <p class="bd-pack__rest">Piano Piano</p>
-  <h3 class="bd-pack__name">Nutella Tiramisu</h3>
-  <span class="bd-pack__rule"></span>
-  <p class="bd-pack__meta">CHEF-MADE&nbsp;· FLASH-FROZEN&nbsp;· 240&nbsp;G</p>
-</div>
-    </div>
+    <p class="bd-lede bd-reveal" style="max-width:60ch; margin-bottom: var(--bd-space-7);">The kitchens behind the menu — and where to find the originals around the city. Tap a pin to see who's cooking.</p>
+    <script type="application/json" id="bd-map-data">[{"name": "La Palma", "lat": 43.651347, "lng": -79.410118, "logo": "assets/logos/la-palma.png", "hood": "Trinity Bellwoods", "dish": "100 Layer Lasagna", "url": "meals/100-layer-lasagna.html"}, {"name": "Lucie", "lat": 43.649704, "lng": -79.37853, "logo": "assets/logos/lucie.png", "hood": "Financial District", "dish": "Beef Bourguignon", "url": "meals/beef-bourguignon.html"}, {"name": "Pukka", "lat": 43.681135, "lng": -79.429227, "logo": "assets/logos/pukka.png", "hood": "Wychwood", "dish": "Butter Chicken Curry", "url": "meals/butter-chicken.html"}, {"name": "The Carbon Bar", "lat": 43.653271, "lng": -79.374863, "logo": "assets/logos/carbon-bar.webp", "hood": "Moss Park", "dish": "Pitmaster Platter", "url": "meals/pitmaster-platter.html"}, {"name": "Carbon Snack Bar", "lat": 43.653271, "lng": -79.3738, "logo": "assets/logos/carbon-bar.webp", "hood": "Moss Park", "dish": "Butter Tarts", "url": "meals/butter-tarts.html"}, {"name": "Cheese Boutique", "lat": 43.63854, "lng": -79.475088, "logo": "assets/logos/cheese-boutique.png", "hood": "Swansea", "dish": "Cheesemaster Mac", "url": "meals/cheesemaster-mac.html"}, {"name": "The Queen & Beaver", "lat": 43.657345, "lng": -79.383358, "logo": "assets/logos/queen-and-beaver.png", "hood": "Yonge & Dundas", "dish": "Cheeseburger Pot Pie", "url": "meals/cheeseburger-pot-pie.html"}, {"name": "Le Gourmand", "lat": 43.648251, "lng": -79.396455, "logo": "assets/logos/le-gourmand.png", "hood": "Fashion District", "dish": "Chocolate Chip Cookies", "url": "meals/chocolate-chip-cookies.html"}, {"name": "Slowhand", "lat": 43.661785, "lng": -79.337644, "logo": "assets/logos/slowhand.png", "hood": "Leslieville", "dish": "Le Grand Fromage Pizza", "url": "meals/le-grand-fromage.html"}, {"name": "Piano Piano", "lat": 43.649041, "lng": -79.37465, "logo": "assets/logos/piano-piano.png", "hood": "St. Lawrence", "dish": "Nutella Tiramisu", "url": "meals/nutella-tiramisu.html"}, {"name": "Forno Cultura", "lat": 43.644225, "lng": -79.400595, "logo": "assets/logos/forno-cultura.png", "hood": "King West", "dish": "Meet the chef", "url": "chefs.html#forno-cultura"}]</script>
+    <div class="bd-restmap" id="bd-map" role="img" aria-label="Map of featured Toronto restaurants"></div>
+    <div class="bd-restgrid"><a class="bd-rest-card bd-reveal" href="meals/100-layer-lasagna.html">
+      <span class="bd-rest-card__logo"><img src="assets/logos/la-palma.png" alt="La Palma logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">La Palma</h3>
+      <p class="bd-rest-card__meta">Trinity Bellwoods · Craig Harding</p>
+      <span class="bd-rest-card__dish">100 Layer Lasagna →</span>
+    </a><a class="bd-rest-card bd-reveal" href="meals/beef-bourguignon.html">
+      <span class="bd-rest-card__logo"><img src="assets/logos/lucie.png" alt="Lucie logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">Lucie</h3>
+      <p class="bd-rest-card__meta">Financial District · Michael Angeloni</p>
+      <span class="bd-rest-card__dish">Beef Bourguignon →</span>
+    </a><a class="bd-rest-card bd-reveal" href="meals/butter-chicken.html">
+      <span class="bd-rest-card__logo"><img src="assets/logos/pukka.png" alt="Pukka logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">Pukka</h3>
+      <p class="bd-rest-card__meta">Wychwood · Derek Valleau &amp; Dinesh Butola</p>
+      <span class="bd-rest-card__dish">Butter Chicken Curry →</span>
+    </a><a class="bd-rest-card bd-reveal" href="meals/pitmaster-platter.html">
+      <span class="bd-rest-card__logo"><img src="assets/logos/carbon-bar.webp" alt="The Carbon Bar logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">The Carbon Bar</h3>
+      <p class="bd-rest-card__meta">Moss Park · Taylor Well</p>
+      <span class="bd-rest-card__dish">Pitmaster Platter →</span>
+    </a><a class="bd-rest-card bd-reveal" href="meals/butter-tarts.html">
+      <span class="bd-rest-card__logo"><img src="assets/logos/carbon-bar.webp" alt="Carbon Snack Bar logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">Carbon Snack Bar</h3>
+      <p class="bd-rest-card__meta">Moss Park · Taylor Well</p>
+      <span class="bd-rest-card__dish">Butter Tarts →</span>
+    </a><a class="bd-rest-card bd-reveal" href="meals/cheesemaster-mac.html">
+      <span class="bd-rest-card__logo"><img src="assets/logos/cheese-boutique.png" alt="Cheese Boutique logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">Cheese Boutique</h3>
+      <p class="bd-rest-card__meta">Swansea · Afrim Pristine</p>
+      <span class="bd-rest-card__dish">Cheesemaster Mac →</span>
+    </a><a class="bd-rest-card bd-reveal" href="meals/cheeseburger-pot-pie.html">
+      <span class="bd-rest-card__logo"><img src="assets/logos/queen-and-beaver.png" alt="The Queen &amp; Beaver logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">The Queen &amp; Beaver</h3>
+      <p class="bd-rest-card__meta">Yonge &amp; Dundas · Duncan Simpson</p>
+      <span class="bd-rest-card__dish">Cheeseburger Pot Pie →</span>
+    </a><a class="bd-rest-card bd-reveal" href="meals/chocolate-chip-cookies.html">
+      <span class="bd-rest-card__logo"><img src="assets/logos/le-gourmand.png" alt="Le Gourmand logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">Le Gourmand</h3>
+      <p class="bd-rest-card__meta">Fashion District · The Nunes Family</p>
+      <span class="bd-rest-card__dish">Chocolate Chip Cookies →</span>
+    </a><a class="bd-rest-card bd-reveal" href="meals/le-grand-fromage.html">
+      <span class="bd-rest-card__logo"><img src="assets/logos/slowhand.png" alt="Slowhand logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">Slowhand</h3>
+      <p class="bd-rest-card__meta">Leslieville · Brett Feeley</p>
+      <span class="bd-rest-card__dish">Le Grand Fromage Pizza →</span>
+    </a><a class="bd-rest-card bd-reveal" href="meals/nutella-tiramisu.html">
+      <span class="bd-rest-card__logo"><img src="assets/logos/piano-piano.png" alt="Piano Piano logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">Piano Piano</h3>
+      <p class="bd-rest-card__meta">St. Lawrence · Victor Barry</p>
+      <span class="bd-rest-card__dish">Nutella Tiramisu →</span>
+    </a><a class="bd-rest-card bd-reveal" href="chefs.html#forno-cultura">
+      <span class="bd-rest-card__logo"><img src="assets/logos/forno-cultura.png" alt="Forno Cultura logo" loading="lazy"></span>
+      <h3 class="bd-rest-card__name">Forno Cultura</h3>
+      <p class="bd-rest-card__meta">King West · Andrea Mastrandrea</p>
+      <span class="bd-rest-card__dish">Meet the chef →</span>
+    </a></div>
   </div>
 </section>
 
@@ -311,5 +348,5 @@
     <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
   </div>
 </footer>
-<script src="js/site.js" defer></script>
+<script src="js/site.js?v=892c63a2" defer></script>
 </body></html>

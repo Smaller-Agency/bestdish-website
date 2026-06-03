@@ -35,6 +35,37 @@
     });
   });
 
+  // Restaurant map (Leaflet) — renders only where the map container exists
+  // and the library loaded. Logo pins, branded popups, scroll-zoom disabled.
+  const mapEl = document.getElementById('bd-map');
+  const mapData = document.getElementById('bd-map-data');
+  if (mapEl && mapData && window.L) {
+    try {
+      const rests = JSON.parse(mapData.textContent);
+      const map = L.map(mapEl, { scrollWheelZoom: false, zoomControl: true });
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd', maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+      }).addTo(map);
+      const markers = rests.map((r) => {
+        const icon = L.divIcon({
+          className: 'bd-pin',
+          html: '<span class="bd-pin__tile"><img src="' + r.logo + '" alt=""></span><span class="bd-pin__point"></span>',
+          iconSize: [52, 64], iconAnchor: [26, 64], popupAnchor: [0, -60]
+        });
+        return L.marker([r.lat, r.lng], { icon, title: r.name })
+          .bindPopup(
+            '<strong>' + r.name + '</strong>' +
+            '<span class="bd-popup__meta">' + r.hood + ' &middot; ' + r.dish + '</span>' +
+            '<a class="bd-popup__link" href="' + r.url + '">View &rarr;</a>',
+            { className: 'bd-popup', closeButton: false }
+          );
+      });
+      const group = L.featureGroup(markers).addTo(map);
+      map.fitBounds(group.getBounds().pad(0.15));
+    } catch (err) { /* leave the container empty on any failure */ }
+  }
+
   // Splash parallax (light)
   const splashes = document.querySelectorAll('.bd-splash-fixed');
   if (splashes.length) {

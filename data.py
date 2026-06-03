@@ -103,6 +103,24 @@ RESTAURANTS = {
     },
 }
 
+# Map coordinates (geocoded from the verified addresses) + neighbourhood.
+# Carbon Snack Bar shares Carbon Bar's address; its pin is nudged so both show.
+_RESTAURANT_GEO = {
+    "la-palma":         {"lat": 43.651347, "lng": -79.410118, "hood": "Trinity Bellwoods"},
+    "lucie":            {"lat": 43.649704, "lng": -79.378530, "hood": "Financial District"},
+    "pukka":            {"lat": 43.681135, "lng": -79.429227, "hood": "Wychwood"},
+    "carbon-bar":       {"lat": 43.653271, "lng": -79.374863, "hood": "Moss Park"},
+    "carbon-snack-bar": {"lat": 43.653271, "lng": -79.373800, "hood": "Moss Park"},
+    "cheese-boutique":  {"lat": 43.638540, "lng": -79.475088, "hood": "Swansea"},
+    "queen-and-beaver": {"lat": 43.657345, "lng": -79.383358, "hood": "Yonge & Dundas"},
+    "le-gourmand":      {"lat": 43.648251, "lng": -79.396455, "hood": "Fashion District"},
+    "slowhand":         {"lat": 43.661785, "lng": -79.337644, "hood": "Leslieville"},
+    "piano-piano":      {"lat": 43.649041, "lng": -79.374650, "hood": "St. Lawrence"},
+    "forno-cultura":    {"lat": 43.644225, "lng": -79.400595, "hood": "King West"},
+}
+for _slug, _geo in _RESTAURANT_GEO.items():
+    RESTAURANTS[_slug].update(_geo)
+
 DISHES = [
     {
         "slug": "100-layer-lasagna",
