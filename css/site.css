@@ -521,3 +521,31 @@ html.js-reveal-ready .bd-reveal.is-in { opacity: 1; transform: translateY(0); }
 /* ---------- Reduced-motion / mobile pack rotation reset ---------- */
 @media (max-width: 999px) { .bd-hero__art .bd-pack { transform: none; } }
 @media (prefers-reduced-motion: reduce) { .bd-hero__art .bd-pack { transform: none; } }
+
+/* ---------- Textured hero (brand orange-blob graphic behind the hero) ---------- */
+.bd-hero--textured {
+  background-image:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--bd-cherry) 70%, transparent) 0%,
+      transparent 20%, transparent 68%,
+      var(--bd-cherry) 100%),
+    linear-gradient(100deg,
+      var(--bd-cherry) 34%,
+      color-mix(in srgb, var(--bd-cherry) 74%, transparent) 58%,
+      color-mix(in srgb, var(--bd-cherry) 50%, transparent) 100%),
+    url("../assets/textures/hero-texture.jpg");
+  background-size: cover;
+  background-position: center, center, right center;
+  background-repeat: no-repeat;
+}
+@media (max-width: 999px) {
+  /* On stacked mobile the pack sits below copy — keep texture as a top band, fade to cherry for legibility */
+  .bd-hero--textured {
+    background-image:
+      linear-gradient(180deg,
+        color-mix(in srgb, var(--bd-cherry) 55%, transparent) 0%,
+        var(--bd-cherry) 46%),
+      url("../assets/textures/hero-texture.jpg");
+    background-position: center top;
+  }
+}

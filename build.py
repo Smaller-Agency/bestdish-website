@@ -164,9 +164,7 @@ def home():
     show = [by_slug[s] for s in ("100-layer-lasagna", "pitmaster-platter", "nutella-tiramisu")]
     showcase = "".join(pack_panel(d, base=base, bg="var(--bd-gravy)") for d in show)
     return page("Toronto's best meals — in your lobby", f"""
-<header class="bd-hero-wrap bd-hero--split">
-  <div class="bd-splash-fixed" style="top:-16%; right:-10%; width:380px; height:380px; opacity:.65;" data-speed="0.04"></div>
-  <div class="bd-splash-fixed" style="bottom:-26%; left:-12%; width:260px; height:260px; opacity:.4;" data-speed="0.07"></div>
+<header class="bd-hero-wrap bd-hero--split bd-hero--textured">
   <div class="bd-container">
     <div>
       <span class="bd-loc bd-reveal">Toronto · live in your building</span>
