@@ -509,7 +509,7 @@ CHEF_PHOTOS = {
     "Michael Angeloni":      "michael-angeloni.jpg",
     "Craig Harding":         "craig-harding.jpg",
     "Duncan Simpson":        "duncan-simpson.jpg",
-    "Anna Olson":            None,
+    "The Nunes Family":      "the-nunes-family.jpg",
     "Andrea Mastrandrea":    None,
 }
 

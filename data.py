@@ -71,7 +71,7 @@ RESTAURANTS = {
         "city": "Toronto, ON",
         "postal": "M5V 2L1",
         "blurb": "A neighbourhood bakery known across the city for the perfect chocolate chip cookie.",
-        "chef": "Anna Olson",
+        "chef": "The Nunes Family",
         "logo": "LeGourmand.png",
     },
     "slowhand": {
@@ -372,7 +372,7 @@ DISHES = [
         "restaurant": "le-gourmand",
         "tagline": "A raw cookie designed to be baked fresh — soft centre, crisp edges.",
         "chef_note": "Bake them from frozen. The contrast between the centre and the edge only happens when the dough is cold going in.",
-        "chef_signature": "Anna Olson",
+        "chef_signature": "The Nunes Family",
         "image": "chocolate-chip-cookies-dish.jpg",
         "weight": "330 g (6 cookies)",
         "serving": "1 cookie (55 g)",
