@@ -372,3 +372,152 @@ html.js-reveal-ready .bd-reveal.is-in { opacity: 1; transform: translateY(0); }
 }
 .bd-field input:focus, .bd-field textarea:focus, .bd-field select:focus { outline: none; border-bottom-color: var(--bd-orange); }
 .bd-field textarea { min-height: 120px; resize: vertical; }
+
+/* ============================================================
+   v2 — packaging-led upgrades (damask, package panels, lobby)
+   ============================================================ */
+
+/* ---------- Damask pattern layer (from the sleeves) ----------
+   Set --pat to a colourway SVG; the SVG carries its own opacity. */
+.bd-pattern { background-image: var(--pat); background-size: 220px; background-repeat: repeat; }
+.bd-pattern-band {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: var(--pat); background-size: 220px;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+          mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+}
+
+/* ---------- Farm → chef → you ribbon (from packaging) ---------- */
+.bd-ribbon {
+  display: inline-flex; align-items: center; gap: var(--bd-space-2);
+  font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase;
+  letter-spacing: var(--bd-track-wide); font-size: 10px; line-height: 1; white-space: nowrap;
+  background: var(--bd-orange); color: var(--bd-cream);
+  padding: var(--bd-space-2) var(--bd-space-3); border-radius: var(--bd-radius-pill);
+  max-width: 100%;
+}
+.bd-ribbon span { display: inline-flex; align-items: center; gap: var(--bd-space-2); }
+.bd-ribbon span::after { content: "→"; opacity: .8; }
+.bd-ribbon span:last-child::after { content: none; }
+
+/* ---------- Faux package front panel (the signature object) ---------- */
+.bd-pack {
+  position: relative; isolation: isolate; overflow: hidden;
+  border-radius: var(--bd-radius-lg);
+  background: var(--pack-bg, var(--bd-cherry));
+  color: var(--pack-fg, var(--bd-cream));
+  border: var(--bd-border-medium) solid color-mix(in srgb, var(--pack-fg, var(--bd-cream)) 26%, transparent);
+  padding: clamp(28px, 4vw, 48px) clamp(18px, 2.2vw, 30px);
+  display: grid; gap: var(--bd-space-5); justify-items: center; text-align: center;
+  box-shadow: var(--bd-shadow-lift);
+}
+.bd-pack::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background-image: var(--pat); background-size: 190px;
+}
+.bd-pack__badge { width: 84px; height: 84px; }
+.bd-pack__rest {
+  font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase;
+  letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-xs);
+  color: var(--pack-fg, var(--bd-cream)); opacity: .85; margin: 0;
+}
+.bd-pack__name {
+  font-family: var(--bd-font-display); font-weight: 900; text-transform: uppercase;
+  letter-spacing: var(--bd-track-tight); line-height: 0.92;
+  font-size: clamp(26px, 3.2vw, 40px); margin: 0; max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.bd-pack__rule { width: 64px; height: var(--bd-border-thick); background: var(--bd-orange); border-radius: 2px; }
+.bd-pack__meta {
+  font-family: var(--bd-font-mono); font-size: var(--bd-size-xs);
+  letter-spacing: var(--bd-track-wide); opacity: .75; margin: 0;
+}
+
+/* ---------- Hero (split: copy + package art) ---------- */
+.bd-hero--split { padding-top: var(--bd-space-9); padding-bottom: var(--bd-space-9); }
+.bd-hero--split .bd-container {
+  display: grid; gap: var(--bd-space-8); grid-template-columns: 1fr; align-items: center;
+}
+@media (min-width: 1000px) { .bd-hero--split .bd-container { grid-template-columns: 1.08fr 0.92fr; } }
+.bd-hero__art { position: relative; display: flex; justify-content: center; }
+.bd-hero__art .bd-pack { transform: rotate(-2.5deg); max-width: 380px; width: 100%; }
+.bd-loc {
+  display: inline-flex; align-items: center; gap: var(--bd-space-2);
+  font-family: var(--bd-font-body); font-weight: 900; font-size: var(--bd-size-xs);
+  text-transform: uppercase; letter-spacing: var(--bd-track-wider);
+  color: var(--bd-cream); border: 2px solid color-mix(in srgb, var(--bd-cream) 30%, transparent);
+  padding: var(--bd-space-1) var(--bd-space-3); border-radius: var(--bd-radius-pill);
+}
+.bd-loc::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--bd-orange); }
+
+/* ---------- Stat band ---------- */
+.bd-statband { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--bd-space-6) var(--bd-space-5); }
+@media (min-width: 880px) { .bd-statband { grid-template-columns: repeat(4, 1fr); } }
+.bd-stat { border-top: var(--bd-border-thick) solid var(--bd-orange); padding-top: var(--bd-space-3); }
+.bd-stat__n {
+  font-family: var(--bd-font-display); font-weight: 900; line-height: 0.9;
+  font-size: clamp(40px, 5.5vw, 76px); color: var(--bd-orange); margin: 0;
+  letter-spacing: var(--bd-track-tight);
+}
+.bd-stat__l { font-size: var(--bd-size-sm); line-height: var(--bd-lh-snug); margin: var(--bd-space-3) 0 0; opacity: .9; max-width: 22ch; }
+
+/* ---------- Lobby / freezer feature ---------- */
+.bd-lobby { display: grid; gap: var(--bd-space-7); grid-template-columns: 1fr; align-items: center; }
+@media (min-width: 900px) { .bd-lobby { grid-template-columns: 1fr 1fr; } .bd-lobby--flip > :first-child { order: 2; } }
+.bd-lobby__media { position: relative; }
+.bd-lobby__img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center; border-radius: var(--bd-radius-lg); background: var(--bd-cream); display: block; }
+.bd-lobby__tag {
+  position: absolute; bottom: var(--bd-space-4); left: var(--bd-space-4);
+  background: var(--bd-orange); color: var(--bd-cream);
+  font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase;
+  letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-xs);
+  padding: var(--bd-space-2) var(--bd-space-4); border-radius: var(--bd-radius-pill);
+}
+
+/* ---------- Dish card v2 (marketing-sample style) ---------- */
+.bd-dish-card__tab {
+  position: absolute; top: var(--bd-space-3); left: var(--bd-space-3); z-index: 2;
+  background: var(--bd-orange); color: var(--bd-cream);
+  font-family: var(--bd-font-body); font-weight: 900; font-size: var(--bd-size-xs);
+  text-transform: uppercase; letter-spacing: var(--bd-track-wide);
+  padding: var(--bd-space-1) var(--bd-space-3); border-radius: var(--bd-radius-pill);
+  max-width: calc(100% - var(--bd-space-6)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.bd-dish-card__chip {
+  position: absolute; top: var(--bd-space-3); right: var(--bd-space-3); z-index: 2;
+  background: color-mix(in srgb, var(--bd-gravy) 70%, transparent);
+  color: var(--bd-cream); font-family: var(--bd-font-body); font-weight: 900;
+  font-size: 10px; text-transform: uppercase; letter-spacing: var(--bd-track-wider);
+  padding: var(--bd-space-1) var(--bd-space-2); border-radius: var(--bd-radius-pill);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+}
+.bd-dish-card__fill {
+  position: absolute; inset: 0; display: grid; place-items: center; align-content: center;
+  gap: var(--bd-space-4);
+  background: var(--pack-bg, var(--bd-gravy)); background-image: var(--pat); background-size: 150px;
+}
+.bd-dish-card__badge { width: clamp(72px, 22%, 104px); height: auto; filter: drop-shadow(0 4px 14px rgba(32,4,0,.4)); }
+.bd-dish-card__frozen {
+  font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase;
+  letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-xs); color: var(--bd-cream);
+  opacity: .82;
+}
+.bd-dish-card__cta {
+  display: inline-flex; align-items: center; gap: var(--bd-space-2);
+  font-family: var(--bd-font-body); font-weight: 900; font-size: var(--bd-size-xs);
+  text-transform: uppercase; letter-spacing: var(--bd-track-wider); color: var(--bd-orange);
+  margin-top: var(--bd-space-3); opacity: 0; transform: translateY(6px);
+  transition: opacity var(--bd-dur-normal) var(--bd-ease-out), transform var(--bd-dur-normal) var(--bd-ease-out);
+}
+.bd-dish-card:hover .bd-dish-card__cta { opacity: 1; transform: translateY(0); }
+
+/* ---------- Section headers with kicker + splash anchor ---------- */
+.bd-sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--bd-space-5); flex-wrap: wrap; margin-bottom: var(--bd-space-7); }
+.bd-sec-head h2 { margin: 0; max-width: 20ch; }
+
+/* ---------- Cream-section eyebrow/quote tweaks ---------- */
+.bd-section--cream .bd-stat__l, .bd-section--cream .bd-pack__meta { opacity: .8; }
+
+/* ---------- Reduced-motion / mobile pack rotation reset ---------- */
+@media (max-width: 999px) { .bd-hero__art .bd-pack { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .bd-hero__art .bd-pack { transform: none; } }

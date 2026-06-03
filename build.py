@@ -11,6 +11,46 @@ e = html.escape
 def img_exists(rel):
     return (ROOT / rel).exists()
 
+# ---------- Dish colourways (drawn from the packaging sleeves) ----------
+DISH_ACCENT = {
+    "100-layer-lasagna":     "blueberry",
+    "beef-bourguignon":      "shrimp",
+    "butter-chicken":        "pistachios",
+    "cheesemaster-mac":      "honeydew",
+    "cheeseburger-pot-pie":  "orange",
+    "le-grand-fromage":      "pistachios",
+    "pitmaster-platter":     "orange",
+    "smoked-ribs":           "shrimp",
+    "nutella-tiramisu":      "honeydew",
+    "butter-tarts":          "pistachios",
+    "chocolate-chip-cookies":"blueberry",
+}
+
+def accent(slug):
+    return DISH_ACCENT.get(slug, "orange")
+
+def pat(colorway, base=""):
+    """Inline style var pointing at a damask colourway tile."""
+    return f"--pat:url({base}assets/patterns/damask-{colorway}.svg)"
+
+def ribbon():
+    return ('<div class="bd-ribbon"><span>From farm</span>'
+            '<span>to chef</span><span>to you</span></div>')
+
+def pack_panel(d, base="", bg="var(--bd-cherry)"):
+    """Faux packaging front panel — the signature object from the sleeves."""
+    r = RESTAURANTS[d["restaurant"]]
+    cw = accent(d["slug"])
+    ground = f"color-mix(in srgb, var(--bd-{cw}) 13%, {bg})"
+    return f"""<div class="bd-pack" style="{pat(cw, base)}; --pack-bg:{ground};">
+  <img class="bd-pack__badge" src="{base}assets/logos/bd-orange.png" alt="BestDish">
+  {ribbon()}
+  <p class="bd-pack__rest">{e(r['name'])}</p>
+  <h3 class="bd-pack__name">{e(d['name'])}</h3>
+  <span class="bd-pack__rule"></span>
+  <p class="bd-pack__meta">CHEF-MADE&nbsp;· FLASH-FROZEN&nbsp;· {e(d['weight']).upper().replace(' ', '&nbsp;')}</p>
+</div>"""
+
 # ---------- Chrome ----------
 
 def rel(href, base):
@@ -95,17 +135,22 @@ def dish_card(d, base="", big=False):
     r = RESTAURANTS[d["restaurant"]]
     img_rel = f"assets/images/{d['image']}"
     has_img = img_exists(img_rel)
+    cw = accent(d["slug"])
     if has_img:
-        img_html = f'<img src="{base}{img_rel}" alt="{e(d["name"])} by {e(r["name"])}" class="bd-dish-card__img" loading="lazy">'
-        card_cls = "bd-dish-card bd-reveal"
+        media = f'<img src="{base}{img_rel}" alt="{e(d["name"])} by {e(r["name"])}" class="bd-dish-card__img" loading="lazy">'
     else:
-        img_html = f'<div class="bd-dish-card__img" style="background:linear-gradient(135deg,var(--bd-cherry),var(--bd-gravy)); display:grid; place-items:center;"><div style="font-family:var(--bd-font-display); font-size:clamp(40px,4vw,72px); font-weight:900; color:var(--bd-orange); text-transform:uppercase; opacity:.4; text-align:center; padding:1rem;">{e(d["name"].split()[0])}</div></div>'
-        card_cls = "bd-dish-card bd-dish-card--placeholder bd-reveal"
-    return f"""<a class="{card_cls}" href="{base}meals/{d['slug']}.html">
-  {img_html}
+        # No photo yet — render the dish as its wrapped package (colourway + damask + badge).
+        media = (f'<div class="bd-dish-card__fill" style="{pat(cw, base)}; '
+                 f'--pack-bg:color-mix(in srgb, var(--bd-{cw}) 17%, var(--bd-gravy));">'
+                 f'<img class="bd-dish-card__badge" src="{base}assets/logos/bd-orange.png" alt="">'
+                 f'<span class="bd-dish-card__frozen">Flash-frozen</span></div>')
+    return f"""<a class="bd-dish-card bd-reveal" href="{base}meals/{d['slug']}.html">
+  {media}
+  <span class="bd-dish-card__tab">{e(r['name'])}</span>
+  <span class="bd-dish-card__chip">{e(d['category'])}</span>
   <div class="bd-dish-card__overlay">
-    <p class="bd-dish-card__restaurant">{e(r['name'])}</p>
     <h3 class="bd-dish-card__name">{e(d['name'])}</h3>
+    <span class="bd-dish-card__cta">View dish →</span>
   </div>
 </a>"""
 
@@ -115,36 +160,80 @@ def home():
     base = ""
     dishes = "".join(dish_card(d, base=base) for d in DISHES)
     marquee_items = "".join(f"<span>{e(r['name'])}</span>" for r in RESTAURANTS.values())
-    return page("Restaurant meals. In your building", f"""
-<header class="bd-hero-wrap">
-  <div class="bd-splash-fixed" style="top:-18%; right:-14%; width:340px; height:340px; opacity:.75;" data-speed="0.04"></div>
-  <div class="bd-splash-fixed" style="bottom:-28%; left:-14%; width:240px; height:240px; opacity:.45;" data-speed="0.07"></div>
+    by_slug = {d["slug"]: d for d in DISHES}
+    hero_dish = by_slug["butter-chicken"]
+    show = [by_slug[s] for s in ("100-layer-lasagna", "pitmaster-platter", "nutella-tiramisu")]
+    showcase = "".join(pack_panel(d, base=base, bg="var(--bd-gravy)") for d in show)
+    return page("Toronto's best meals — in your lobby", f"""
+<header class="bd-hero-wrap bd-hero--split">
+  <div class="bd-splash-fixed" style="top:-16%; right:-10%; width:380px; height:380px; opacity:.65;" data-speed="0.04"></div>
+  <div class="bd-splash-fixed" style="bottom:-26%; left:-12%; width:260px; height:260px; opacity:.4;" data-speed="0.07"></div>
   <div class="bd-container">
-    <p class="bd-eyebrow bd-reveal">Toronto · 2026</p>
-    <h1 class="bd-hero-headline bd-reveal">Iconic restaurant<br>dishes,<br><em>in your building.</em></h1>
-    <p class="bd-hero-lede bd-reveal">Chef-made. Flash-frozen at peak quality. Finished in your kitchen in minutes. No delivery. No tipping. No tax.</p>
-    <div class="bd-strapline bd-reveal">
-      <span>Made in local restaurants</span>
-      <span>By chefs you love</span>
-      <span>24/7 in your building</span>
+    <div>
+      <span class="bd-loc bd-reveal">Toronto · live in your building</span>
+      <h1 class="bd-hero-headline bd-reveal" style="margin-top: var(--bd-space-5);">Toronto's<br>best meals.<br><em>In your lobby.</em></h1>
+      <p class="bd-hero-lede bd-reveal">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer on your floor. Heat. Eat. No delivery, no tip, no tax.</p>
+      <div class="bd-strapline bd-reveal">
+        <span>Made in real restaurants</span>
+        <span>By the chefs you love</span>
+        <span>Ready 24/7 downstairs</span>
+      </div>
+      <div style="display:flex; gap: var(--bd-space-3); flex-wrap: wrap; margin-top: var(--bd-space-7);" class="bd-reveal">
+        <a class="bd-btn bd-btn--primary" href="meals.html">Browse the menu</a>
+        <a class="bd-btn bd-btn--secondary" href="buildings.html">Is it in my building?</a>
+      </div>
     </div>
-    <div style="display:flex; gap: var(--bd-space-3); flex-wrap: wrap; margin-top: var(--bd-space-7);" class="bd-reveal">
-      <a class="bd-btn bd-btn--primary" href="meals.html">Browse the menu</a>
-      <a class="bd-btn bd-btn--secondary" href="how-it-works.html">How it works</a>
+    <div class="bd-hero__art bd-reveal">
+      {pack_panel(hero_dish, base=base, bg="var(--bd-cherry)")}
     </div>
   </div>
 </header>
 
 <div class="bd-marquee"><div class="bd-marquee__track">{marquee_items}{marquee_items}</div></div>
 
-<section class="bd-section">
+<section class="bd-section" style="padding-block: var(--bd-space-8);">
   <div class="bd-container">
-    <p class="bd-eyebrow bd-reveal">The menu</p>
-    <div style="display:flex; align-items:end; justify-content:space-between; gap: var(--bd-space-5); flex-wrap: wrap;">
-      <h2 class="bd-headline bd-reveal" style="margin:0; max-width:18ch;">Toronto's iconic restaurants.</h2>
+    <div class="bd-statband">
+      <div class="bd-stat bd-reveal"><p class="bd-stat__n">11</p><p class="bd-stat__l">Iconic Toronto restaurants on the menu.</p></div>
+      <div class="bd-stat bd-reveal"><p class="bd-stat__n">24/7</p><p class="bd-stat__l">On your floor. No hours, no waiting.</p></div>
+      <div class="bd-stat bd-reveal"><p class="bd-stat__n">$0</p><p class="bd-stat__l">Delivery fees, tips, or tax. Ever.</p></div>
+      <div class="bd-stat bd-reveal"><p class="bd-stat__n">~10<span style="font-size:.5em;">min</span></p><p class="bd-stat__l">From the freezer to your plate.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="bd-section bd-section--alt">
+  <div class="bd-container">
+    <div class="bd-sec-head">
+      <div>
+        <p class="bd-eyebrow bd-reveal">The menu</p>
+        <h2 class="bd-headline bd-reveal">The city's best,<br>on your floor.</h2>
+      </div>
       <a class="bd-btn bd-btn--ghost bd-reveal" href="meals.html">All meals →</a>
     </div>
-    <div class="bd-reel" style="margin-top: var(--bd-space-7);">{dishes}</div>
+    <div class="bd-reel">{dishes}</div>
+  </div>
+</section>
+
+<section class="bd-section">
+  <div class="bd-container">
+    <div class="bd-lobby">
+      <div class="bd-lobby__media bd-reveal">
+        <img class="bd-lobby__img" src="assets/marketing/freezer-mockup.jpg" alt="A BestDish freezer in a residential lobby">
+        <span class="bd-lobby__tag">The freezer on your floor</span>
+      </div>
+      <div class="bd-reveal">
+        <p class="bd-eyebrow">Dinner is downstairs</p>
+        <h2 class="bd-headline" style="max-width: 16ch;">Skip the wait. Take the elevator.</h2>
+        <p class="bd-lede" style="margin-top: var(--bd-space-5);">A curated BestDish freezer sits in your building — stocked with real restaurant dishes, ready when you are.</p>
+        <div class="bd-bullets" style="margin-top: var(--bd-space-6);">
+          <span>Tap your card</span>
+          <span>Pick your dish</span>
+          <span>Heat &amp; eat upstairs</span>
+        </div>
+        <a class="bd-btn bd-btn--primary" style="margin-top: var(--bd-space-7);" href="buildings.html">Find a building</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -152,31 +241,47 @@ def home():
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">How it works</p>
     <h2 class="bd-headline bd-reveal" style="max-width:22ch;">From the restaurant. To the freezer. To you.</h2>
-    <div class="bd-steps-grid bd-stack" style="margin-top: var(--bd-space-7);">
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">01 · Made by chefs</div><h3 class="bd-step-big__title">Real dishes,<br>real kitchens.</h3><p class="bd-step-big__body">Cooked by the chefs who made them famous. Same techniques. Same ingredients. Same standards as service.</p></div>
+    <div class="bd-steps-grid" style="margin-top: var(--bd-space-7);">
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">01 · Made by chefs</div><h3 class="bd-step-big__title">Real dishes,<br>real kitchens.</h3><p class="bd-step-big__body">Cooked by the chefs who made them famous. Same techniques, same ingredients, same standards as service.</p></div>
       <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">02 · Flash frozen</div><h3 class="bd-step-big__title">Locked in<br>at peak.</h3><p class="bd-step-big__body">Frozen the moment they leave the kitchen. Flavour, texture, and nutrients stay intact.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">03 · In your building</div><h3 class="bd-step-big__title">Always<br>available.</h3><p class="bd-step-big__body">A curated freezer of chef meals on your floor. Tap your card. Pick your dish. Done.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">04 · Finished by you</div><h3 class="bd-step-big__title">Restaurant-fresh,<br>at home.</h3><p class="bd-step-big__body">Cooked fresh in your own oven in minutes. The way the chef designed it.</p></div>
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">03 · In your building</div><h3 class="bd-step-big__title">Always<br>downstairs.</h3><p class="bd-step-big__body">A curated freezer of chef meals on your floor. Tap your card, pick your dish, done.</p></div>
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">04 · Finished by you</div><h3 class="bd-step-big__title">Restaurant-fresh,<br>at home.</h3><p class="bd-step-big__body">Cooked fresh in your own oven in minutes — the way the chef designed it.</p></div>
     </div>
   </div>
 </section>
 
 <section class="bd-section">
   <div class="bd-container">
-    <p class="bd-eyebrow bd-reveal">Why BestDish is different</p>
-    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">This isn't a vending machine.</h2>
-    <div class="bd-compare" style="margin-top: var(--bd-space-7);">
-      <div class="bd-compare__row">
-        <div class="bd-compare__cell"><strong>Delivery</strong>Restaurant, but travelled. 30–60 min later. Often compromised.</div>
-        <div class="bd-compare__cell"><strong>Frozen grocery</strong>Mass-produced. No chef. No story. Inconsistent.</div>
-        <div class="bd-compare__cell"><strong>Typical vending</strong>Packaged snacks. Convenience only. No quality.</div>
-        <div class="bd-compare__cell" style="background:var(--bd-orange); color:var(--bd-cream); padding: var(--bd-space-4); border-radius: var(--bd-radius-md); margin: calc(var(--bd-space-4) * -1); margin-left: 0;"><strong>BestDish</strong>Chef-prepared, small batch. In your building. Finished fresh at home.</div>
+    <div class="bd-sec-head">
+      <div>
+        <p class="bd-eyebrow bd-reveal">The packaging</p>
+        <h2 class="bd-headline bd-reveal" style="max-width: 16ch;">Every dish carries its story.</h2>
       </div>
+      <a class="bd-btn bd-btn--secondary bd-reveal" href="farms.html">Meet the farms →</a>
+    </div>
+    <p class="bd-lede bd-reveal" style="max-width: 60ch; margin-bottom: var(--bd-space-8);">The restaurant. The chef. The farm. Heating instructions in the chef's own words, batch-tracked and CFIA-labelled. From farm, to chef, to you — printed on the box.</p>
+    <div class="bd-grid-3 bd-reveal">
+      {showcase}
     </div>
   </div>
 </section>
 
 <section class="bd-section bd-section--alt">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">Why BestDish is different</p>
+    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">This isn't a vending machine.</h2>
+    <div class="bd-compare" style="margin-top: var(--bd-space-7);">
+      <div class="bd-compare__row">
+        <div class="bd-compare__cell"><strong>Delivery apps</strong>Restaurant, but travelled. 30–60 min later, often compromised — plus fees, tip, and tax.</div>
+        <div class="bd-compare__cell"><strong>Frozen grocery</strong>Mass-produced. No chef, no story, no consistency.</div>
+        <div class="bd-compare__cell"><strong>Typical vending</strong>Packaged snacks. Convenience only, no quality.</div>
+        <div class="bd-compare__cell" style="background:var(--bd-orange); color:var(--bd-cream); padding: var(--bd-space-5); border-radius: var(--bd-radius-md);"><strong>BestDish</strong>Chef-prepared, small batch. In your building. Finished fresh at home.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bd-section">
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">For everyone in the chain</p>
     <h2 class="bd-headline bd-reveal" style="max-width:22ch; margin-bottom: var(--bd-space-7);">Whichever side of the door you're on.</h2>
@@ -251,7 +356,7 @@ def dish_page(d):
     img_rel = f"assets/images/{d['image']}"
     has_img = img_exists(img_rel)
     photo = (f'<img class="bd-dish-hero__photo" src="{base}{img_rel}" alt="{e(d["name"])} by {e(r["name"])}">' if has_img
-             else f'<div class="bd-dish-hero__photo" style="display:grid;place-items:center;font-family:var(--bd-font-display);font-weight:900;color:var(--bd-orange);font-size:clamp(40px,4vw,72px);text-transform:uppercase;padding:2rem;text-align:center;opacity:.5;">{e(d["name"])}</div>')
+             else pack_panel(d, base=base, bg="var(--bd-cherry)"))
 
     nutrition_rows = "".join(
         f'<div class="bd-nutri__row"><span>{e(k)}</span><span>{e(v)}</span></div>'
@@ -402,8 +507,8 @@ CHEF_PHOTOS = {
     "Brett Feeley":          "brett-feeley.jpeg",
     "Derek Valleau & Dinesh Butola": "dinesh-butola.webp",
     "Victor Barry":          "victor-barry.webp",
+    "Michael Angeloni":      "michael-angeloni.jpg",
     "Craig Harding":         None,
-    "Mathieu Paré":          None,
     "Andrew Carter":         None,
     "Anna Olson":            None,
     "Andrea Mastrandrea":    None,
