@@ -216,7 +216,7 @@ def home():
     <div>
       <span class="bd-loc bd-reveal">Toronto · live in your building</span>
       <h1 class="bd-hero-headline bd-reveal" style="margin-top: var(--bd-space-5);">Toronto's<br>best meals.<br><em>In your lobby.</em></h1>
-      <p class="bd-hero-lede bd-reveal">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer on your floor. Heat. Eat. No delivery, no tip, no tax.</p>
+      <p class="bd-hero-lede bd-reveal">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer in your lobby. Heat. Eat. No delivery, no tip, no tax.</p>
       <div class="bd-strapline bd-reveal">
         <span>Made in real restaurants</span>
         <span>By the chefs you love</span>
@@ -239,7 +239,7 @@ def home():
   <div class="bd-container">
     <div class="bd-statband">
       <div class="bd-stat bd-reveal">{bd_icon('plate', 'bd-stat__icon')}<p class="bd-stat__n">11</p><p class="bd-stat__l">Iconic Toronto restaurants on the menu.</p></div>
-      <div class="bd-stat bd-reveal">{bd_icon('clock', 'bd-stat__icon')}<p class="bd-stat__n">24/7</p><p class="bd-stat__l">On your floor. No hours, no waiting.</p></div>
+      <div class="bd-stat bd-reveal">{bd_icon('clock', 'bd-stat__icon')}<p class="bd-stat__n">24/7</p><p class="bd-stat__l">In your lobby. No hours, no waiting.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('dollar', 'bd-stat__icon')}<p class="bd-stat__n">$0</p><p class="bd-stat__l">Delivery fees, tips, or tax. Ever.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('bolt', 'bd-stat__icon')}<p class="bd-stat__n">~10<span style="font-size:.5em;">min</span></p><p class="bd-stat__l">From the freezer to your plate.</p></div>
     </div>
@@ -251,7 +251,7 @@ def home():
     <div class="bd-sec-head">
       <div>
         <p class="bd-eyebrow bd-reveal">The menu</p>
-        <h2 class="bd-headline bd-reveal">The city's best,<br>on your floor.</h2>
+        <h2 class="bd-headline bd-reveal">The city's best,<br>in your lobby.</h2>
       </div>
       <a class="bd-btn bd-btn--ghost bd-reveal" href="meals.html">All meals →</a>
     </div>
@@ -264,7 +264,7 @@ def home():
     <div class="bd-lobby">
       <div class="bd-lobby__media bd-reveal">
         <img class="bd-lobby__img" src="assets/marketing/freezer-mockup.jpg" alt="A BestDish freezer in a residential lobby">
-        <span class="bd-lobby__tag">The freezer on your floor</span>
+        <span class="bd-lobby__tag">The freezer in your lobby</span>
       </div>
       <div class="bd-reveal">
         <p class="bd-eyebrow">Dinner is downstairs</p>
@@ -288,7 +288,7 @@ def home():
     {step_flow([
       ("Made by chefs", "Cooked by the chefs who made them famous — same techniques, same ingredients, same standards as service."),
       ("Flash frozen", "Locked in at peak the moment they leave the kitchen. Flavour, texture, and nutrients stay intact."),
-      ("In your building", "A curated freezer of chef meals on your floor. Tap your card, pick your dish, done."),
+      ("In your building", "A curated freezer of chef meals in your lobby. Tap your card, pick your dish, done."),
       ("Finished by you", "Cooked fresh in your own oven in minutes — exactly the way the chef designed it."),
     ])}
   </div>
@@ -333,7 +333,7 @@ def home():
       <a class="bd-fork__card bd-reveal" href="buildings.html">
         <p class="bd-fork__eyebrow">For residents</p>
         <h3 class="bd-fork__title">Find your building.</h3>
-        <p class="bd-fork__body">See if BestDish is on your floor. If it's not yet, we'll add it to the waitlist.</p>
+        <p class="bd-fork__body">See if BestDish is in your building. If it's not yet, we'll add it to the waitlist.</p>
         <span class="bd-fork__cta">Find a building →</span>
       </a>
       <a class="bd-fork__card bd-reveal" href="for-properties.html">
@@ -652,7 +652,7 @@ def buildings_page():
     <div style="display:grid; gap: var(--bd-space-7); grid-template-columns: 1fr; align-items: end;" class="bd-buildings-hero">
       <div>
         <p class="bd-eyebrow bd-reveal">Find a building</p>
-        <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">Is it on<br>your floor?</h1>
+        <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">Is it in<br>your building?</h1>
         <p class="bd-hero-lede bd-reveal">BestDish freezers are installed in premium residential buildings, co-working spaces, and members' clubs across Toronto. Find yours below — or ask your property manager to bring it in.</p>
       </div>
       <div class="bd-reveal" style="display:grid; gap: var(--bd-space-3); grid-template-columns: 1fr 1fr; padding-bottom: var(--bd-space-4);">
@@ -688,7 +688,7 @@ def for_properties_page():
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">For property managers, asset managers, condo boards</p>
     <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">A premium<br>food amenity.<br>No kitchen.</h1>
-    <p class="bd-hero-lede bd-reveal">Restaurant meals on your floor, 24/7. We install, we operate, you earn. No capital cost. No staff lift. No admin.</p>
+    <p class="bd-hero-lede bd-reveal">Restaurant meals in your lobby, 24/7. We install, we operate, you earn. No capital cost. No staff lift. No admin.</p>
     <a class="bd-btn bd-btn--primary bd-reveal" href="#talk">Talk to us</a>
   </div>
 </header>
