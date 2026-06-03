@@ -501,7 +501,7 @@ def how_it_works_page():
 # ---------- Chefs ----------
 
 CHEF_PHOTOS = {
-    "Adam Hynam-Smith":     "adam-hynam-smith.jpg",
+    "Taylor Well":          "taylor-well.jpg",
     "Afrim Pristine":        "afrim-pristine.jpg",
     "Brett Feeley":          "brett-feeley.jpeg",
     "Derek Valleau & Dinesh Butola": "dinesh-butola.webp",
