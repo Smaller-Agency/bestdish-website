@@ -549,3 +549,44 @@ html.js-reveal-ready .bd-reveal.is-in { opacity: 1; transform: translateY(0); }
     background-position: center top;
   }
 }
+
+/* ---------- Brand icons ---------- */
+.bd-icon { display: block; width: 100%; height: 100%; }
+
+/* ---------- Numbered step flow (how it works) ---------- */
+.bd-flow { list-style: none; margin: var(--bd-space-7) 0 0; padding: 0;
+  display: grid; gap: var(--bd-space-7); grid-template-columns: 1fr; }
+@media (min-width: 600px) { .bd-flow--c3, .bd-flow--c4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) {
+  .bd-flow--c3 { grid-template-columns: repeat(3, 1fr); }
+  .bd-flow--c4 { grid-template-columns: repeat(4, 1fr); }
+}
+.bd-flow__step { display: grid; gap: var(--bd-space-4); align-content: start; }
+.bd-flow__num {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  width: 84px; height: 84px; border-radius: 50%;
+  background: var(--bd-blueberry); color: var(--bd-cherry);
+  font-family: var(--bd-font-display); font-weight: 900;
+  font-size: 46px; line-height: 1; letter-spacing: var(--bd-track-tight);
+}
+.bd-flow__arrow { display: none; }
+@media (min-width: 1024px) {
+  .bd-flow__arrow {
+    display: block; position: absolute; left: calc(100% + 10px); top: 42px;
+    transform: translateY(-50%); width: 30px; height: 30px; color: var(--bd-pistachios);
+  }
+}
+.bd-flow__title { font-family: var(--bd-font-display); font-weight: 900;
+  text-transform: uppercase; font-size: var(--bd-size-xl);
+  letter-spacing: var(--bd-track-tight); line-height: var(--bd-lh-tight); margin: 0; }
+.bd-flow__body { margin: 0; line-height: var(--bd-lh-relaxed); opacity: .9; }
+
+/* ---------- Stat band icons ---------- */
+.bd-stat__icon { width: 30px; height: 30px; color: var(--bd-pistachios); margin-bottom: var(--bd-space-3); }
+
+/* ---------- Comparison icons ---------- */
+.bd-compare__icon { width: 38px; height: 38px; color: var(--bd-pistachios); margin-bottom: var(--bd-space-3); }
+.bd-compare__cell--win { background: var(--bd-orange); color: var(--bd-cream);
+  padding: var(--bd-space-5); border-radius: var(--bd-radius-md); }
+.bd-compare__badge { width: 44px; height: 44px; margin-bottom: var(--bd-space-3); display: block; }

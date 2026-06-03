@@ -36,6 +36,53 @@ def ribbon():
     return ('<div class="bd-ribbon"><span>From farm</span>'
             '<span>to chef</span><span>to you</span></div>')
 
+# ---------- Brand icon set (recreated from the Website graphics, as crisp
+# inline SVG so they recolour per surface) ----------
+ICONS = {
+    # ring + hands — "ready 24/7"
+    "clock": '<circle cx="50" cy="50" r="40"/><path d="M50 27 V51 H69" stroke-linecap="round" stroke-linejoin="round"/>',
+    # bold $ — "no tip, no tax"
+    "dollar": '<path d="M50 16 V84" stroke-linecap="round"/><path d="M65 31 C62 24 54 22 47 24 C33 27 33 45 50 49 C68 53 67 73 52 76 C44 77 37 74 34 67" stroke-linecap="round" stroke-linejoin="round"/>',
+    # 4-point concave star — "iconic / premium"
+    "spark": '<path d="M50 9 C53 34 66 47 91 50 C66 53 53 66 50 91 C47 66 34 53 9 50 C34 47 47 34 50 9 Z" stroke-linejoin="round"/>',
+    # lightning — "minutes to plate"
+    "bolt": '<path d="M56 10 L28 55 H49 L44 90 L74 43 H52 Z" stroke-linejoin="round"/>',
+    # two concentric rings — "a real dish / restaurant"
+    "plate": '<circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="24"/>',
+    # loop arrows — "restocked / repeat"
+    "repeat": '<path d="M24 38 H66" stroke-linecap="round"/><path d="M58 29 L69 38 L58 47" stroke-linecap="round" stroke-linejoin="round"/><path d="M76 62 H34" stroke-linecap="round"/><path d="M42 53 L31 62 L42 71" stroke-linecap="round" stroke-linejoin="round"/>',
+    # takeout bag — villain: delivery
+    "bag": '<path d="M30 40 H70 L66 86 H34 Z" stroke-linejoin="round"/><path d="M41 40 C41 27 59 27 59 40" stroke-linecap="round"/>',
+    # snowflake — villain: frozen grocery
+    "snow": '<path d="M50 14 V86 M21 31 L79 69 M79 31 L21 69" stroke-linecap="round"/>',
+    # shelved box — villain: typical vending
+    "box": '<rect x="22" y="18" width="56" height="64" rx="6"/><path d="M22 40 H78 M22 60 H78 M41 71 H59" stroke-linecap="round"/>',
+    # downward arrow — vertical flow connector
+    "arrow-down": '<path d="M50 18 V78" stroke-linecap="round"/><path d="M30 60 L50 80 L70 60" stroke-linecap="round" stroke-linejoin="round"/>',
+    # chevron — horizontal flow connector
+    "chevron": '<path d="M40 26 L66 50 L40 74" stroke-linecap="round" stroke-linejoin="round"/>',
+}
+
+def bd_icon(name, cls="bd-icon"):
+    return (f'<svg class="{cls}" viewBox="0 0 100 100" fill="none" stroke="currentColor" '
+            f'stroke-width="7" aria-hidden="true">{ICONS[name]}</svg>')
+
+def step_flow(steps, cols=4):
+    """Numbered-circle step flow — the brand's signature how-it-works graphic.
+    steps: list of (title_html, body) tuples. Renders blueberry numbered circles
+    with the cherry numeral, joined by gold chevrons within each row."""
+    out = []
+    n = len(steps)
+    for i, (title, body) in enumerate(steps):
+        end_of_row = (i % cols == cols - 1)
+        arrow = "" if (end_of_row or i == n - 1) else bd_icon("chevron", "bd-flow__arrow")
+        out.append(f"""<li class="bd-flow__step bd-reveal">
+      <span class="bd-flow__num">{i + 1}{arrow}</span>
+      <h3 class="bd-flow__title">{title}</h3>
+      <p class="bd-flow__body">{body}</p>
+    </li>""")
+    return f'<ol class="bd-flow bd-flow--c{cols}">{"".join(out)}</ol>'
+
 def pack_panel(d, base="", bg="var(--bd-cherry)"):
     """Faux packaging front panel — the signature object from the sleeves."""
     r = RESTAURANTS[d["restaurant"]]
@@ -191,10 +238,10 @@ def home():
 <section class="bd-section" style="padding-block: var(--bd-space-8);">
   <div class="bd-container">
     <div class="bd-statband">
-      <div class="bd-stat bd-reveal"><p class="bd-stat__n">11</p><p class="bd-stat__l">Iconic Toronto restaurants on the menu.</p></div>
-      <div class="bd-stat bd-reveal"><p class="bd-stat__n">24/7</p><p class="bd-stat__l">On your floor. No hours, no waiting.</p></div>
-      <div class="bd-stat bd-reveal"><p class="bd-stat__n">$0</p><p class="bd-stat__l">Delivery fees, tips, or tax. Ever.</p></div>
-      <div class="bd-stat bd-reveal"><p class="bd-stat__n">~10<span style="font-size:.5em;">min</span></p><p class="bd-stat__l">From the freezer to your plate.</p></div>
+      <div class="bd-stat bd-reveal">{bd_icon('plate', 'bd-stat__icon')}<p class="bd-stat__n">11</p><p class="bd-stat__l">Iconic Toronto restaurants on the menu.</p></div>
+      <div class="bd-stat bd-reveal">{bd_icon('clock', 'bd-stat__icon')}<p class="bd-stat__n">24/7</p><p class="bd-stat__l">On your floor. No hours, no waiting.</p></div>
+      <div class="bd-stat bd-reveal">{bd_icon('dollar', 'bd-stat__icon')}<p class="bd-stat__n">$0</p><p class="bd-stat__l">Delivery fees, tips, or tax. Ever.</p></div>
+      <div class="bd-stat bd-reveal">{bd_icon('bolt', 'bd-stat__icon')}<p class="bd-stat__n">~10<span style="font-size:.5em;">min</span></p><p class="bd-stat__l">From the freezer to your plate.</p></div>
     </div>
   </div>
 </section>
@@ -237,13 +284,13 @@ def home():
 <section class="bd-section bd-section--alt">
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">How it works</p>
-    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">From the restaurant. To the freezer. To you.</h2>
-    <div class="bd-steps-grid" style="margin-top: var(--bd-space-7);">
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">01 · Made by chefs</div><h3 class="bd-step-big__title">Real dishes,<br>real kitchens.</h3><p class="bd-step-big__body">Cooked by the chefs who made them famous. Same techniques, same ingredients, same standards as service.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">02 · Flash frozen</div><h3 class="bd-step-big__title">Locked in<br>at peak.</h3><p class="bd-step-big__body">Frozen the moment they leave the kitchen. Flavour, texture, and nutrients stay intact.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">03 · In your building</div><h3 class="bd-step-big__title">Always<br>downstairs.</h3><p class="bd-step-big__body">A curated freezer of chef meals on your floor. Tap your card, pick your dish, done.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">04 · Finished by you</div><h3 class="bd-step-big__title">Restaurant-fresh,<br>at home.</h3><p class="bd-step-big__body">Cooked fresh in your own oven in minutes — the way the chef designed it.</p></div>
-    </div>
+    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">Four steps. From the pass to your plate.</h2>
+    {step_flow([
+      ("Made by chefs", "Cooked by the chefs who made them famous — same techniques, same ingredients, same standards as service."),
+      ("Flash frozen", "Locked in at peak the moment they leave the kitchen. Flavour, texture, and nutrients stay intact."),
+      ("In your building", "A curated freezer of chef meals on your floor. Tap your card, pick your dish, done."),
+      ("Finished by you", "Cooked fresh in your own oven in minutes — exactly the way the chef designed it."),
+    ])}
   </div>
 </section>
 
@@ -269,10 +316,10 @@ def home():
     <h2 class="bd-headline bd-reveal" style="max-width:22ch;">This isn't a vending machine.</h2>
     <div class="bd-compare" style="margin-top: var(--bd-space-7);">
       <div class="bd-compare__row">
-        <div class="bd-compare__cell"><strong>Delivery apps</strong>Restaurant, but travelled. 30–60 min later, often compromised — plus fees, tip, and tax.</div>
-        <div class="bd-compare__cell"><strong>Frozen grocery</strong>Mass-produced. No chef, no story, no consistency.</div>
-        <div class="bd-compare__cell"><strong>Typical vending</strong>Packaged snacks. Convenience only, no quality.</div>
-        <div class="bd-compare__cell" style="background:var(--bd-orange); color:var(--bd-cream); padding: var(--bd-space-5); border-radius: var(--bd-radius-md);"><strong>BestDish</strong>Chef-prepared, small batch. In your building. Finished fresh at home.</div>
+        <div class="bd-compare__cell">{bd_icon('bag', 'bd-compare__icon')}<strong>Delivery apps</strong>Restaurant, but travelled. 30–60 min later, often compromised — plus fees, tip, and tax.</div>
+        <div class="bd-compare__cell">{bd_icon('snow', 'bd-compare__icon')}<strong>Frozen grocery</strong>Mass-produced. No chef, no story, no consistency.</div>
+        <div class="bd-compare__cell">{bd_icon('box', 'bd-compare__icon')}<strong>Typical vending</strong>Packaged snacks. Convenience only, no quality.</div>
+        <div class="bd-compare__cell bd-compare__cell--win"><img class="bd-compare__badge" src="assets/logos/bd-orange.png" alt="BestDish"><strong>BestDish</strong>Chef-prepared, small batch. In your building. Finished fresh at home.</div>
       </div>
     </div>
   </div>
@@ -456,7 +503,7 @@ def dish_page(d):
 # ---------- How it works ----------
 
 def how_it_works_page():
-    return page("How it works", """
+    return page("How it works", f"""
 <header class="bd-section">
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">How it works</p>
@@ -467,14 +514,14 @@ def how_it_works_page():
 
 <section class="bd-section">
   <div class="bd-container">
-    <div class="bd-steps-grid">
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">01 · In the restaurant</div><h3 class="bd-step-big__title">Cooked by the chefs<br>who made it famous.</h3><p class="bd-step-big__body">Every dish is made in the originating restaurant kitchen. Same techniques. Same ingredients. Same standards as service.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">02 · At peak</div><h3 class="bd-step-big__title">Flash frozen,<br>minutes from finish.</h3><p class="bd-step-big__body">Each meal is portioned and frozen at the moment it leaves the kitchen. The cold-chain begins at the pass.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">03 · Through the cold chain</div><h3 class="bd-step-big__title">Tracked, batched,<br>labelled.</h3><p class="bd-step-big__body">HACCP-compliant cold-chain. CFIA-labelled. Temperature logged from kitchen to freezer.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">04 · In your building</div><h3 class="bd-step-big__title">A curated freezer<br>on your floor.</h3><p class="bd-step-big__body">Smart freezer, premium installation. Tap your card. Pick your dish. Telemetry keeps inventory restocked within 48 hours.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">05 · In your hand</div><h3 class="bd-step-big__title">Take it upstairs.</h3><p class="bd-step-big__body">No delivery driver. No waiting. No tip. No tax. From the freezer to your kitchen in the time it takes to ride the elevator.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">06 · In your oven</div><h3 class="bd-step-big__title">Cooked fresh,<br>the way it was designed.</h3><p class="bd-step-big__body">Heating instructions on every package. Per dish. Per restaurant. The chef tells you how to finish their food.</p></div>
-    </div>
+    {step_flow([
+      ("In the restaurant", "Every dish is made in the originating restaurant kitchen. Same techniques, same ingredients, same standards as service."),
+      ("At peak", "Each meal is portioned and frozen the moment it leaves the kitchen. The cold-chain begins at the pass."),
+      ("Through the cold chain", "HACCP-compliant cold-chain. CFIA-labelled. Temperature logged from kitchen to freezer."),
+      ("In your building", "Smart freezer, premium installation. Tap your card, pick your dish. Telemetry keeps it restocked within 48 hours."),
+      ("In your hand", "No delivery driver. No waiting. No tip, no tax. Freezer to kitchen in the time it takes to ride the elevator."),
+      ("In your oven", "Heating instructions on every package — per dish, per restaurant. The chef tells you how to finish their food."),
+    ], cols=3)}
   </div>
 </section>
 
