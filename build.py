@@ -225,15 +225,38 @@ def restaurants_section(base=""):
   <div class="bd-container">
     <div class="bd-sec-head">
       <div>
-        <p class="bd-eyebrow bd-reveal">The restaurants</p>
-        <h2 class="bd-headline bd-reveal" style="max-width:18ch;">Eleven Toronto icons.<br>One freezer.</h2>
+        <p class="bd-eyebrow bd-reveal">In partnership with the best</p>
+        <h2 class="bd-headline bd-reveal" style="max-width:18ch;">The best tables in Toronto.<br>In your building.</h2>
       </div>
       <a class="bd-btn bd-btn--ghost bd-reveal" href="{base}chefs.html">Meet the chefs →</a>
     </div>
-    <p class="bd-lede bd-reveal" style="max-width:60ch; margin-bottom: var(--bd-space-7);">The kitchens behind the menu — and where to find the originals around the city. Tap a pin to see who's cooking.</p>
+    <p class="bd-lede bd-reveal" style="max-width:62ch; margin-bottom: var(--bd-space-7);">We didn't invent the food — we partnered with eleven of the city's most-loved restaurants and their chefs to bring their signature dishes, made exactly as they make them, to the freezer downstairs. Tap a pin to see who's cooking.</p>
     <script type="application/json" id="bd-map-data">{data_json}</script>
     <div class="bd-restmap" id="bd-map" role="img" aria-label="Map of featured Toronto restaurants"></div>
     <div class="bd-restgrid">{"".join(cards)}</div>
+  </div>
+</section>"""
+
+def feedback_section(base=""):
+    """Resident feedback — which restaurant to add next, how a dish landed.
+    Submits by opening a pre-filled email to feedback@bestdish.ca (no backend)."""
+    return f"""
+<section class="bd-section bd-section--cream" id="feedback">
+  <div class="bd-container">
+    <div class="bd-info-grid">
+      <div class="bd-reveal">
+        <p class="bd-eyebrow">Tell us</p>
+        <h2 class="bd-headline" style="font-size:var(--bd-size-3xl); max-width:18ch;">Which restaurant should we bring in next?</h2>
+        <p style="max-width:46ch; margin-top:var(--bd-space-4);">Tried a dish and loved it — or didn't? Want a restaurant added to the freezer in your building? Tell us. We read every note.</p>
+      </div>
+      <form class="bd-form bd-feedback-form bd-reveal" style="color:var(--bd-cherry);">
+        <div class="bd-field"><label for="fb-name">Your name <span style="opacity:.6;">(optional)</span></label><input id="fb-name" type="text" style="border-bottom-color:var(--bd-cherry); color:var(--bd-cherry);"></div>
+        <div class="bd-field"><label for="fb-email">Email <span style="opacity:.6;">(optional)</span></label><input id="fb-email" type="email" style="border-bottom-color:var(--bd-cherry); color:var(--bd-cherry);"></div>
+        <div class="bd-field"><label for="fb-msg">Your feedback</label><textarea id="fb-msg" placeholder="A restaurant to add, a dish you loved, anything." style="border-bottom-color:var(--bd-cherry); color:var(--bd-cherry);"></textarea></div>
+        <button class="bd-btn bd-btn--primary" type="submit">Send feedback</button>
+        <p style="font-size:var(--bd-size-xs); opacity:.7; margin:var(--bd-space-3) 0 0;">Opens your email to feedback@bestdish.ca</p>
+      </form>
+    </div>
   </div>
 </section>"""
 
@@ -267,7 +290,15 @@ def dish_card(d, base="", big=False):
 def home():
     base = ""
     dishes = "".join(dish_card(d, base=base) for d in DISHES)
-    marquee_items = "".join(f"<span>{e(r['name'])}</span>" for r in RESTAURANTS.values())
+    _seen = set()
+    logo_spans = []
+    for _slug, _r in RESTAURANTS.items():
+        _lf = logo_file(_slug)
+        if _lf in _seen:
+            continue
+        _seen.add(_lf)
+        logo_spans.append(f'<span><img src="{base}assets/logos/{_lf}" alt="{e(_r["name"])}" loading="lazy"></span>')
+    logo_marquee = "".join(logo_spans)
     by_slug = {d["slug"]: d for d in DISHES}
     hero_dish = by_slug["butter-chicken"]
     return page("Toronto's best meals — in your lobby", extra_head=MAP_HEAD, body=f"""
@@ -293,7 +324,10 @@ def home():
   </div>
 </header>
 
-<div class="bd-marquee"><div class="bd-marquee__track">{marquee_items}{marquee_items}</div></div>
+<section class="bd-logobar">
+  <p class="bd-logobar__label">In partnership with Toronto's best</p>
+  <div class="bd-marquee bd-marquee--logos"><div class="bd-marquee__track">{logo_marquee}{logo_marquee}</div></div>
+</section>
 
 <section class="bd-section" style="padding-block: var(--bd-space-8);">
   <div class="bd-container">
@@ -356,16 +390,19 @@ def home():
 
 {restaurants_section(base)}
 
+{feedback_section(base)}
+
 <section class="bd-section bd-section--alt">
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">Why BestDish is different</p>
-    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">This isn't a vending machine.</h2>
+    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">Skip the apps.</h2>
+    <p class="bd-lede bd-reveal" style="max-width:60ch; margin-top: var(--bd-space-4);">No Uber. No delivery fee, no tip, no tax. No 40-minute wait, and nothing shows up cold and soggy — just the restaurant's dish, finished hot in your own kitchen.</p>
     <div class="bd-compare" style="margin-top: var(--bd-space-7);">
       <div class="bd-compare__row">
-        <div class="bd-compare__cell">{bd_icon('bag', 'bd-compare__icon')}<strong>Delivery apps</strong>Restaurant, but travelled. 30–60 min later, often compromised — plus fees, tip, and tax.</div>
+        <div class="bd-compare__cell">{bd_icon('bag', 'bd-compare__icon')}<strong>Delivery apps</strong>Restaurant food that travelled. 40 minutes later it's lukewarm and soggy — and that's before the delivery fee, the tip, and the tax.</div>
         <div class="bd-compare__cell">{bd_icon('snow', 'bd-compare__icon')}<strong>Frozen grocery</strong>Mass-produced. No chef, no story, no consistency.</div>
         <div class="bd-compare__cell">{bd_icon('box', 'bd-compare__icon')}<strong>Typical vending</strong>Packaged snacks. Convenience only, no quality.</div>
-        <div class="bd-compare__cell bd-compare__cell--win"><img class="bd-compare__badge" src="assets/logos/bd-orange.png" alt="BestDish"><strong>BestDish</strong>Chef-prepared, small batch. In your building. Finished fresh at home.</div>
+        <div class="bd-compare__cell bd-compare__cell--win"><img class="bd-compare__badge" src="assets/logos/bd-orange.png" alt="BestDish"><strong>BestDish</strong>The chef's own dish, flash-frozen at peak, finished hot in your oven. No fee, no tip, no tax, no wait.</div>
       </div>
     </div>
   </div>

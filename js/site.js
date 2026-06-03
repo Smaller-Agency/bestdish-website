@@ -66,6 +66,20 @@
     } catch (err) { /* leave the container empty on any failure */ }
   }
 
+  // Feedback form — no backend, so compose a pre-filled email to feedback@bestdish.ca
+  const fbForm = document.querySelector('.bd-feedback-form');
+  if (fbForm) {
+    fbForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = (id) => { const el = fbForm.querySelector('#' + id); return el ? el.value.trim() : ''; };
+      const name = val('fb-name'), email = val('fb-email'), msg = val('fb-msg');
+      const subject = 'BestDish feedback' + (name ? ' from ' + name : '');
+      const body = (msg || '') + '\n\n— ' + (name || 'A visitor') + (email ? ' (' + email + ')' : '');
+      window.location.href = 'mailto:feedback@bestdish.ca?subject=' +
+        encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    });
+  }
+
   // Splash parallax (light)
   const splashes = document.querySelectorAll('.bd-splash-fixed');
   if (splashes.length) {
