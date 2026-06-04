@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/site.css?v=31bbb06d">
+<link rel="stylesheet" href="css/site.css?v=281bf586">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
-<body class="bd-site">
+<body class="bd-site bd-theme--cream">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="bd-grit"><feTurbulence baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.1"/><feComposite in="SourceGraphic" operator="in"/></filter>
 </svg>
@@ -48,18 +48,12 @@
       </div>
     </div>
     <div class="bd-hero__art bd-reveal">
-      <a class="bd-hero-dish" href="meals/butter-chicken.html">
-        <span class="bd-hero-dish__media">
-          <img src="assets/images/butter-chicken.jpg" alt="Butter Chicken Curry from Pukka">
-          <span class="bd-hero-dish__chip">Flash-frozen</span>
-          <span class="bd-hero-dish__cap">
-            <span class="bd-hero-dish__rest">Pukka</span>
-            <span class="bd-hero-dish__name">Butter Chicken Curry</span>
-            <span class="bd-hero-dish__cta">See the dish →</span>
-          </span>
-        </span>
-        <img class="bd-hero-dish__badge" src="assets/logos/bd-orange.png" alt="BestDish">
-      </a>
+      <div class="bd-hero-show" data-interval="3200">
+        <a class="bd-hero-show__slide is-active" href="meals/butter-chicken.html"><img src="assets/images/butter-chicken.jpg" alt="Butter Chicken Curry from Pukka"><span class="bd-hero-show__cap"><span class="bd-hero-show__rest">Pukka</span><span class="bd-hero-show__name">Butter Chicken Curry</span></span></a><a class="bd-hero-show__slide" href="meals/100-layer-lasagna.html"><img src="assets/images/100layer.jpg" alt="100 Layer Lasagna from La Palma" loading="lazy"><span class="bd-hero-show__cap"><span class="bd-hero-show__rest">La Palma</span><span class="bd-hero-show__name">100 Layer Lasagna</span></span></a><a class="bd-hero-show__slide" href="meals/pitmaster-platter.html"><img src="assets/images/pitmaster-platter.jpg" alt="Pitmaster Platter from The Carbon Bar" loading="lazy"><span class="bd-hero-show__cap"><span class="bd-hero-show__rest">The Carbon Bar</span><span class="bd-hero-show__name">Pitmaster Platter</span></span></a><a class="bd-hero-show__slide" href="meals/beef-bourguignon.html"><img src="assets/images/beef-bourguignon-dish.jpg" alt="Beef Bourguignon from Lucie" loading="lazy"><span class="bd-hero-show__cap"><span class="bd-hero-show__rest">Lucie</span><span class="bd-hero-show__name">Beef Bourguignon</span></span></a>
+        <img class="bd-hero-show__badge" src="assets/logos/bd-orange.png" alt="BestDish">
+        <span class="bd-hero-show__chip">Flash-frozen</span>
+        <div class="bd-hero-show__dots"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
+      </div>
     </div>
   </div>
 </header>
@@ -376,5 +370,5 @@
     <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
   </div>
 </footer>
-<script src="js/site.js?v=ef05d8c9" defer></script>
+<script src="js/site.js?v=f3b45c44" defer></script>
 </body></html>

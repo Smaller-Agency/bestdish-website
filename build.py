@@ -116,7 +116,7 @@ def rel(href, base):
         return href
     return base + href[1:]
 
-def head(title, desc=None, base="", extra_head=""):
+def head(title, desc=None, base="", extra_head="", body_class="bd-theme--cream"):
     desc = desc or "Iconic restaurant dishes, in your building. Chef-made. Flash-frozen at peak. Finished in your kitchen."
     return f"""<!doctype html>
 <html lang="en">
@@ -134,7 +134,7 @@ def head(title, desc=None, base="", extra_head=""):
 <link rel="stylesheet" href="{base}css/components.css">
 <link rel="stylesheet" href="{base}css/site.css?v={CSS_V}">
 {extra_head}</head>
-<body class="bd-site">
+<body class="bd-site {body_class}">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <filter id="bd-grit"><feTurbulence baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.1"/><feComposite in="SourceGraphic" operator="in"/></filter>
 </svg>
@@ -182,8 +182,8 @@ def footer(base=""):
 <script src="{base}js/site.js?v={JS_V}" defer></script>
 </body></html>"""
 
-def page(title, body, desc=None, base="", extra_head=""):
-    return head(title, desc, base, extra_head) + nav(base) + body + footer(base)
+def page(title, body, desc=None, base="", extra_head="", body_class="bd-theme--cream"):
+    return head(title, desc, base, extra_head, body_class) + nav(base) + body + footer(base)
 
 # Logo filenames don't all match slugs (Carbon Snack Bar reuses Carbon Bar's
 # logo; Carbon Bar is a webp). Resolve to the actual file in assets/logos/.
@@ -302,7 +302,20 @@ def home():
     by_slug = {d["slug"]: d for d in DISHES}
     hero_dish = by_slug["butter-chicken"]
     hero_rest = RESTAURANTS[hero_dish["restaurant"]]
-    return page("Toronto's best meals — in your lobby", extra_head=MAP_HEAD, body=f"""
+    # Rotating hero showcase — cycles the best dishes so the art actually moves.
+    hero_show_slugs = ["butter-chicken", "100-layer-lasagna", "pitmaster-platter", "beef-bourguignon"]
+    hero_slides, hero_dots = "", ""
+    for _i, _s in enumerate(hero_show_slugs):
+        _d = by_slug[_s]; _r = RESTAURANTS[_d["restaurant"]]
+        _on = " is-active" if _i == 0 else ""
+        _lazy = "" if _i == 0 else ' loading="lazy"'
+        hero_slides += (
+            f'<a class="bd-hero-show__slide{_on}" href="meals/{_s}.html">'
+            f'<img src="assets/images/{_d["image"]}" alt="{e(_d["name"])} from {e(_r["name"])}"{_lazy}>'
+            f'<span class="bd-hero-show__cap"><span class="bd-hero-show__rest">{e(_r["name"])}</span>'
+            f'<span class="bd-hero-show__name">{e(_d["name"])}</span></span></a>')
+        hero_dots += f'<span class="{"is-on" if _i == 0 else ""}"></span>'
+    return page("Toronto's best meals — in your lobby", extra_head=MAP_HEAD, body_class="bd-theme--cream", body=f"""
 <header class="bd-hero-wrap bd-hero--split bd-hero--textured">
   <div class="bd-container">
     <div>
@@ -320,18 +333,12 @@ def home():
       </div>
     </div>
     <div class="bd-hero__art bd-reveal">
-      <a class="bd-hero-dish" href="meals/{hero_dish['slug']}.html">
-        <span class="bd-hero-dish__media">
-          <img src="assets/images/{hero_dish['image']}" alt="{e(hero_dish['name'])} from {e(hero_rest['name'])}">
-          <span class="bd-hero-dish__chip">Flash-frozen</span>
-          <span class="bd-hero-dish__cap">
-            <span class="bd-hero-dish__rest">{e(hero_rest['name'])}</span>
-            <span class="bd-hero-dish__name">{e(hero_dish['name'])}</span>
-            <span class="bd-hero-dish__cta">See the dish →</span>
-          </span>
-        </span>
-        <img class="bd-hero-dish__badge" src="assets/logos/bd-orange.png" alt="BestDish">
-      </a>
+      <div class="bd-hero-show" data-interval="3200">
+        {hero_slides}
+        <img class="bd-hero-show__badge" src="assets/logos/bd-orange.png" alt="BestDish">
+        <span class="bd-hero-show__chip">Flash-frozen</span>
+        <div class="bd-hero-show__dots">{hero_dots}</div>
+      </div>
     </div>
   </div>
 </header>
@@ -570,8 +577,8 @@ def dish_page(d):
     <p class="bd-lede bd-reveal" style="max-width: 60ch;">{e(r["blurb"])}</p>
     <p style="margin-top: var(--bd-space-5); font-family: var(--bd-font-mono); font-size: var(--bd-size-sm); color: var(--bd-orange);" class="bd-reveal">
       Visit them at<br>
-      <span style="font-family: var(--bd-font-display); font-weight: 700; font-size: var(--bd-size-xl); color: var(--bd-cream); letter-spacing: var(--bd-track-tight); text-transform: uppercase;">{e(r["address"])}</span><br>
-      <span style="color: var(--bd-cream); font-family: var(--bd-font-body); font-size: var(--bd-size-sm); opacity: .8;">{e(r["city"])} · {e(r["postal"])}</span>
+      <span style="font-family: var(--bd-font-display); font-weight: 700; font-size: var(--bd-size-xl); color: var(--bd-cherry); letter-spacing: var(--bd-track-tight); text-transform: uppercase;">{e(r["address"])}</span><br>
+      <span style="color: var(--bd-gravy); font-family: var(--bd-font-body); font-size: var(--bd-size-sm); opacity: .7;">{e(r["city"])} · {e(r["postal"])}</span>
     </p>
   </div>
 </section>

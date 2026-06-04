@@ -735,3 +735,150 @@ html.js-reveal-ready .bd-reveal.is-in { opacity: 1; transform: translateY(0); }
   .bd-hero-dish { margin-inline: auto; }
   .bd-hero-dish__badge { width: 64px; height: 64px; top: -14px; left: -8px; }
 }
+
+/* ============================================================
+   CREAM THEME (experimental) — light surface variant.
+   Inert unless <body class="bd-theme--cream">. Flips the dark
+   cherry surface to cream so photography + logos carry the page.
+   ============================================================ */
+/* html carries the bg too, else its cherry default fills the canvas behind
+   the transparent sections (CSS background-propagation rule). */
+html:has(.bd-theme--cream) { background: var(--bd-cream); }
+.bd-theme--cream {
+  background: var(--bd-cream); color: var(--bd-gravy);
+  --c-tint: #F1ECDE;                                   /* gentle band */
+  --c-card: #FFFFFF;                                   /* cards on light */
+  --c-line: color-mix(in srgb, var(--bd-cherry) 14%, transparent);
+}
+/* global text intent */
+.bd-theme--cream .bd-headline,
+.bd-theme--cream .bd-hero-headline,
+.bd-theme--cream .bd-flow__title,
+.bd-theme--cream .bd-finalcta__head { color: var(--bd-cherry); }
+.bd-theme--cream .bd-hero-headline em { color: var(--bd-orange); }
+.bd-theme--cream .bd-lede,
+.bd-theme--cream .bd-hero-lede,
+.bd-theme--cream .bd-flow__body,
+.bd-theme--cream .bd-stat__l { color: var(--bd-gravy); }
+
+/* nav */
+.bd-theme--cream .bd-nav { background: color-mix(in srgb, var(--bd-cream) 88%, transparent); border-bottom-color: var(--c-line); }
+.bd-theme--cream .bd-nav__brand-name { color: var(--bd-cherry); }
+.bd-theme--cream .bd-nav__links a { color: var(--bd-gravy); }
+.bd-theme--cream .bd-nav__links a.bd-btn--primary { color: var(--bd-cream); }
+
+/* hero — plain cream, dark headline */
+.bd-theme--cream .bd-hero--textured { background: var(--bd-cream); }
+.bd-theme--cream .bd-loc { color: var(--bd-cherry); border-color: var(--c-line); }
+
+/* tinted bands replace the old dark sections */
+.bd-theme--cream .bd-section--alt,
+.bd-theme--cream .bd-section--cream { background: var(--c-tint); color: var(--bd-gravy); }
+.bd-theme--cream .bd-logobar { background: var(--c-tint); border-block: 1px solid var(--c-line); }
+
+/* restaurant grid cards */
+.bd-theme--cream .bd-rest-card { background: var(--c-card); border-color: var(--c-line); }
+.bd-theme--cream .bd-rest-card:hover { background: #fff; }
+.bd-theme--cream .bd-rest-card__name { color: var(--bd-cherry); }
+.bd-theme--cream .bd-rest-card__meta { color: var(--bd-gravy); opacity: .8; }
+
+/* comparison */
+.bd-theme--cream .bd-compare__row { background: var(--c-card); }
+.bd-theme--cream .bd-compare__cell { color: var(--bd-gravy); }
+.bd-theme--cream .bd-compare__cell strong { color: var(--bd-cherry); }
+.bd-theme--cream .bd-compare__cell--win,
+.bd-theme--cream .bd-compare__cell--win strong { color: var(--bd-cream); }
+
+/* final cta */
+.bd-theme--cream .bd-finalcta__partners { border-top-color: var(--c-line); }
+
+/* buttons: outline styles flip to dark-on-light */
+.bd-theme--cream .bd-btn--secondary { color: var(--bd-cherry); border-color: var(--bd-cherry); }
+.bd-theme--cream .bd-btn--secondary:hover { background: var(--bd-cherry); color: var(--bd-cream); }
+.bd-theme--cream .bd-btn--ghost { color: var(--bd-cherry); }
+
+/* --- cream theme refinements: deeper tint bands + cherry accent close --- */
+.bd-theme--cream { --c-tint: #EEE6D2; }
+/* the final CTA becomes a cherry accent block — rhythm + a strong climax */
+.bd-theme--cream .bd-section:has(.bd-finalcta) { background: var(--bd-cherry); color: var(--bd-cream); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__head { color: var(--bd-cream); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-lede { color: var(--bd-cream); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-eyebrow { color: var(--bd-orange); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__partners { color: var(--bd-cream); border-top-color: color-mix(in srgb, var(--bd-cream) 22%, transparent); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-btn--secondary { color: var(--bd-cream); border-color: var(--bd-cream); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-btn--secondary:hover { background: var(--bd-cream); color: var(--bd-cherry); }
+
+/* ---------- Hero rotating showcase ---------- */
+.bd-hero-show { position: relative; width: 100%; max-width: 440px; aspect-ratio: 4/5; }
+.bd-hero-show__slide {
+  position: absolute; inset: 0; border-radius: var(--bd-radius-lg); overflow: hidden;
+  opacity: 0; transition: opacity .8s var(--bd-ease-out);
+  text-decoration: none; color: var(--bd-cream); pointer-events: none;
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+}
+.bd-hero-show__slide.is-active { opacity: 1; pointer-events: auto; }
+.bd-hero-show__slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--bd-ease-out); }
+.bd-hero-show__slide.is-active:hover img { transform: scale(1.04); }
+.bd-hero-show__cap {
+  position: absolute; left: 0; right: 0; bottom: 0; display: grid; gap: 3px;
+  padding: var(--bd-space-8) var(--bd-space-5) var(--bd-space-5);
+  background: linear-gradient(180deg, transparent, rgba(32,4,0,.92));
+}
+.bd-hero-show__rest { font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-xs); color: var(--bd-orange); }
+.bd-hero-show__name { font-family: var(--bd-font-display); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-tight); line-height: var(--bd-lh-tight); font-size: var(--bd-size-2xl); }
+.bd-hero-show__badge { position: absolute; top: -20px; left: -20px; width: 86px; height: 86px; z-index: 5; filter: drop-shadow(0 6px 14px rgba(0,0,0,.45)); }
+.bd-hero-show__chip {
+  position: absolute; top: var(--bd-space-4); right: var(--bd-space-4); z-index: 5;
+  background: var(--bd-orange); color: var(--bd-cream); font-family: var(--bd-font-mono);
+  text-transform: uppercase; letter-spacing: var(--bd-track-wide); font-size: var(--bd-size-xs);
+  padding: 6px 12px; border-radius: var(--bd-radius-pill);
+}
+.bd-hero-show__dots { position: absolute; bottom: var(--bd-space-4); right: var(--bd-space-5); z-index: 5; display: flex; gap: 6px; }
+.bd-hero-show__dots span { width: 7px; height: 7px; border-radius: 50%; background: color-mix(in srgb, var(--bd-cream) 45%, transparent); transition: background .3s, width .3s; cursor: pointer; }
+.bd-hero-show__dots span.is-on { background: var(--bd-cream); width: 18px; border-radius: 4px; }
+@media (max-width: 999px) { .bd-hero-show { margin-inline: auto; } .bd-hero-show__badge { width: 64px; height: 64px; top: -14px; left: -8px; } }
+
+/* ---------- Cream theme: stat band becomes a cherry accent (rhythm) ---------- */
+.bd-theme--cream .bd-section:has(.bd-statband) { background: var(--bd-cherry); color: var(--bd-cream); }
+.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat__l { color: var(--bd-cream); opacity: .85; }
+
+/* brick/blob texture on the cherry accent bands (cream theme) */
+.bd-theme--cream .bd-section:has(.bd-statband),
+.bd-theme--cream .bd-section:has(.bd-finalcta) {
+  background-color: var(--bd-cherry);
+  background-image:
+    linear-gradient(0deg, color-mix(in srgb, var(--bd-cherry) 58%, transparent), color-mix(in srgb, var(--bd-cherry) 58%, transparent)),
+    url("../assets/textures/hero-texture.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* brighter base: drop the oat tint — bands go cream, structure via hairlines + cards */
+.bd-theme--cream .bd-section--alt,
+.bd-theme--cream .bd-section--cream { background: var(--bd-cream); border-top: 1px solid var(--c-line); }
+.bd-theme--cream .bd-logobar { background: var(--bd-cream); border-block: 1px solid var(--c-line); }
+.bd-theme--cream .bd-compare__row { border: 1px solid var(--c-line); }
+
+/* deepen the texture wash on accent bands so red/orange copy keeps contrast */
+.bd-theme--cream .bd-section:has(.bd-statband),
+.bd-theme--cream .bd-section:has(.bd-finalcta) {
+  background-image:
+    linear-gradient(0deg, color-mix(in srgb, var(--bd-cherry) 74%, transparent), color-mix(in srgb, var(--bd-cherry) 74%, transparent)),
+    url("../assets/textures/hero-texture.jpg");
+}
+
+/* partner links on the textured CTA: cream (orange got lost on the texture) */
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__partners a { color: var(--bd-cream); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__partners a:hover { color: var(--bd-orange); }
+
+/* ---------- Cream theme: inner-page components (site-wide rollout) ---------- */
+.bd-theme--cream .bd-dish-hero__restaurant { color: var(--bd-cherry); }
+.bd-theme--cream .bd-panel { background: #fff; border-color: var(--c-line); }
+.bd-theme--cream .bd-panel h3 { color: var(--bd-cherry); }
+.bd-theme--cream .bd-building-row { border-bottom-color: var(--c-line); }
+.bd-theme--cream .bd-field input,
+.bd-theme--cream .bd-field textarea,
+.bd-theme--cream .bd-field select { color: var(--bd-cherry); border-bottom-color: var(--bd-cherry); }
+.bd-theme--cream .bd-person__photo--placeholder { background: #fff; border: 1px solid var(--c-line); color: var(--bd-orange); }
+.bd-theme--cream .bd-fork__card { background: #fff; border: 1px solid var(--c-line); }

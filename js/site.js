@@ -4,6 +4,26 @@
   // Without this class, .bd-reveal stays visible (no-JS / search engines / screenshot tools).
   document.documentElement.classList.add('js-reveal-ready');
 
+  // Rotating hero showcase — crossfade through the featured dishes.
+  // Runs regardless of reduced-motion (it just won't auto-advance there).
+  document.querySelectorAll('.bd-hero-show').forEach((show) => {
+    const slides = [...show.querySelectorAll('.bd-hero-show__slide')];
+    const dots = [...show.querySelectorAll('.bd-hero-show__dots span')];
+    if (slides.length < 2) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let i = 0, timer = null;
+    const show_n = (n) => {
+      slides[i].classList.remove('is-active'); if (dots[i]) dots[i].classList.remove('is-on');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('is-active'); if (dots[i]) dots[i].classList.add('is-on');
+    };
+    const start = () => { if (reduce) return; clearInterval(timer); timer = setInterval(() => show_n(i + 1), parseInt(show.dataset.interval, 10) || 3500); };
+    dots.forEach((d, idx) => d.addEventListener('click', (e) => { e.preventDefault(); show_n(idx); start(); }));
+    show.addEventListener('mouseenter', () => clearInterval(timer));
+    show.addEventListener('mouseleave', start);
+    start();
+  });
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // Reduced motion — reveal everything immediately.
     document.querySelectorAll('.bd-reveal').forEach((el) => el.classList.add('is-in'));
