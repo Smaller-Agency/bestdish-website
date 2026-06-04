@@ -316,30 +316,28 @@ def home():
             f'<span class="bd-hero-show__name">{e(_d["name"])}</span></span></a>')
         hero_dots += f'<span class="{"is-on" if _i == 0 else ""}"></span>'
     return page("Toronto's best meals — in your lobby", extra_head=MAP_HEAD, body_class="bd-theme--cream", body=f"""
-<header class="bd-hero-wrap bd-hero--split bd-hero--textured">
-  <div class="bd-container">
-    <div>
-      <span class="bd-loc bd-reveal">Toronto · live in your building</span>
-      <h1 class="bd-hero-headline bd-reveal" style="margin-top: var(--bd-space-5);">Toronto's<br>best meals.<br><em>In your lobby.</em></h1>
-      <p class="bd-hero-lede bd-reveal">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer in your lobby. Heat. Eat. No delivery, no tip, no tax.</p>
-      <div class="bd-strapline bd-reveal">
-        <span>Made in real restaurants</span>
-        <span>By the chefs you love</span>
-        <span>Ready 24/7 downstairs</span>
-      </div>
-      <div style="display:flex; gap: var(--bd-space-3); flex-wrap: wrap; margin-top: var(--bd-space-7);" class="bd-reveal">
-        <a class="bd-btn bd-btn--primary" href="meals.html">Browse the menu</a>
-        <a class="bd-btn bd-btn--secondary" href="buildings.html">Is it in my building?</a>
-      </div>
+<header class="bd-hero-wrap bd-hero--showcase">
+  <div class="bd-hero__text bd-reveal">
+    <span class="bd-loc">Toronto · live in your building</span>
+    <h1 class="bd-hero-headline" style="margin-top: var(--bd-space-5);">Toronto's<br>best meals.<br><em>In your lobby.</em></h1>
+    <p class="bd-hero-lede">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer in your lobby. Heat. Eat. No delivery, no tip, no tax.</p>
+    <div class="bd-strapline">
+      <span>Made in real restaurants</span>
+      <span>By the chefs you love</span>
+      <span>Ready 24/7 downstairs</span>
     </div>
-    <div class="bd-hero__art bd-reveal">
-      <div class="bd-hero-show" data-interval="3200">
-        {hero_slides}
-        <img class="bd-hero-show__badge" src="assets/logos/bd-orange.png" alt="BestDish">
-        <span class="bd-hero-show__chip">Flash-frozen</span>
-        <div class="bd-hero-show__dots">{hero_dots}</div>
-      </div>
+    <div class="bd-hero__cta">
+      <a class="bd-btn bd-btn--primary" href="meals.html">Browse the menu</a>
+      <a class="bd-btn bd-btn--secondary" href="buildings.html">Is it in my building?</a>
     </div>
+  </div>
+  <div class="bd-hero__stage bd-reveal">
+    <div class="bd-hero-show" data-interval="3200">
+      {hero_slides}
+      <span class="bd-hero-show__chip">Flash-frozen</span>
+      <div class="bd-hero-show__dots">{hero_dots}</div>
+    </div>
+    <img class="bd-hero-show__badge" src="assets/logos/bd-orange.png" alt="BestDish">
   </div>
 </header>
 
