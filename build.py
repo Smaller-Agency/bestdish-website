@@ -301,6 +301,7 @@ def home():
     logo_marquee = "".join(logo_spans)
     by_slug = {d["slug"]: d for d in DISHES}
     hero_dish = by_slug["butter-chicken"]
+    hero_rest = RESTAURANTS[hero_dish["restaurant"]]
     return page("Toronto's best meals — in your lobby", extra_head=MAP_HEAD, body=f"""
 <header class="bd-hero-wrap bd-hero--split bd-hero--textured">
   <div class="bd-container">
@@ -319,7 +320,18 @@ def home():
       </div>
     </div>
     <div class="bd-hero__art bd-reveal">
-      {pack_panel(hero_dish, base=base, bg="var(--bd-cherry)")}
+      <a class="bd-hero-dish" href="meals/{hero_dish['slug']}.html">
+        <span class="bd-hero-dish__media">
+          <img src="assets/images/{hero_dish['image']}" alt="{e(hero_dish['name'])} from {e(hero_rest['name'])}">
+          <span class="bd-hero-dish__chip">Flash-frozen</span>
+          <span class="bd-hero-dish__cap">
+            <span class="bd-hero-dish__rest">{e(hero_rest['name'])}</span>
+            <span class="bd-hero-dish__name">{e(hero_dish['name'])}</span>
+            <span class="bd-hero-dish__cta">See the dish →</span>
+          </span>
+        </span>
+        <img class="bd-hero-dish__badge" src="assets/logos/bd-orange.png" alt="BestDish">
+      </a>
     </div>
   </div>
 </header>

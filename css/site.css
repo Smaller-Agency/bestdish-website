@@ -615,37 +615,39 @@ html.js-reveal-ready .bd-reveal.is-in { opacity: 1; transform: translateY(0); }
 /* ---------- Restaurant map + grid (home) ---------- */
 .bd-restmap {
   height: 460px; width: 100%; border-radius: var(--bd-radius-lg); overflow: hidden;
-  background: var(--bd-gravy); z-index: 0;
-  border: 1px solid color-mix(in srgb, var(--bd-cream) 12%, transparent);
+  background: var(--bd-cream); z-index: 0;
+  border: 1px solid color-mix(in srgb, var(--bd-cherry) 18%, transparent);
 }
 @media (max-width: 700px) { .bd-restmap { height: 360px; } }
-.bd-restmap .leaflet-container { font-family: var(--bd-font-body); background: var(--bd-gravy); }
+.bd-restmap .leaflet-container { font-family: var(--bd-font-body); background: #e9e9e0; }
 .bd-restmap .leaflet-control-zoom a {
   background: var(--bd-cherry); color: var(--bd-cream);
   border-color: color-mix(in srgb, var(--bd-cream) 15%, transparent);
 }
 .bd-restmap .leaflet-control-zoom a:hover { background: var(--bd-orange); color: var(--bd-cream); }
 .bd-restmap .leaflet-control-attribution {
-  background: color-mix(in srgb, var(--bd-gravy) 75%, transparent);
-  color: color-mix(in srgb, var(--bd-cream) 55%, transparent);
+  background: color-mix(in srgb, var(--bd-cream) 82%, transparent);
+  color: color-mix(in srgb, var(--bd-cherry) 60%, transparent);
 }
 .bd-restmap .leaflet-control-attribution a { color: var(--bd-orange); }
 
-/* logo pins */
+/* logo pins — cream tile + orange ring so they pop on the light basemap */
 .bd-pin { background: transparent !important; border: 0 !important; }
 .bd-pin__tile {
   display: flex; align-items: center; justify-content: center;
   width: 52px; height: 52px; padding: 7px; border-radius: 14px;
-  background: var(--bd-cream); box-shadow: 0 4px 14px rgba(0,0,0,.45);
+  background: var(--bd-cream); border: 2px solid var(--bd-orange);
+  box-shadow: 0 4px 12px rgba(32,4,0,.28);
 }
 /* override Leaflet's `.leaflet-container img { max-width:none !important }` */
 .bd-pin__tile img { width: 100% !important; height: 100% !important; object-fit: contain; }
 .bd-pin__point {
   display: block; width: 0; height: 0; margin: -1px auto 0;
   border-left: 8px solid transparent; border-right: 8px solid transparent;
-  border-top: 10px solid var(--bd-cream); filter: drop-shadow(0 3px 2px rgba(0,0,0,.3));
+  border-top: 10px solid var(--bd-orange); filter: drop-shadow(0 3px 2px rgba(32,4,0,.25));
 }
-.bd-pin:hover .bd-pin__tile { outline: 3px solid var(--bd-orange); }
+.bd-pin:hover .bd-pin__tile { background: var(--bd-orange); }
+.bd-pin:hover .bd-pin__tile img { filter: brightness(0) invert(1); }
 
 /* branded popups */
 .bd-popup .leaflet-popup-content-wrapper {
@@ -703,3 +705,33 @@ html.js-reveal-ready .bd-reveal.is-in { opacity: 1; transform: translateY(0); }
 .bd-pin__tile img { filter: brightness(0); }
 .bd-marquee--logos img { opacity: .8; }
 .bd-rest-card:hover .bd-rest-card__logo img { opacity: .65; }
+
+/* ---------- Hero dish showpiece (replaces the faux package) ---------- */
+.bd-hero-dish { position: relative; display: block; width: 100%; max-width: 420px; text-decoration: none; color: var(--bd-cream); }
+.bd-hero-dish__media {
+  position: relative; display: block; aspect-ratio: 4/5;
+  border-radius: var(--bd-radius-lg); overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+}
+.bd-hero-dish__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--bd-ease-out); }
+.bd-hero-dish:hover .bd-hero-dish__media img { transform: scale(1.04); }
+.bd-hero-dish__chip {
+  position: absolute; top: var(--bd-space-4); right: var(--bd-space-4); z-index: 2;
+  background: var(--bd-orange); color: var(--bd-cream);
+  font-family: var(--bd-font-mono); text-transform: uppercase;
+  letter-spacing: var(--bd-track-wide); font-size: var(--bd-size-xs);
+  padding: 6px 12px; border-radius: var(--bd-radius-pill);
+}
+.bd-hero-dish__cap {
+  position: absolute; left: 0; right: 0; bottom: 0; display: grid; gap: 3px;
+  padding: var(--bd-space-8) var(--bd-space-5) var(--bd-space-5);
+  background: linear-gradient(180deg, transparent, rgba(32,4,0,.92));
+}
+.bd-hero-dish__rest { font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-xs); color: var(--bd-orange); }
+.bd-hero-dish__name { font-family: var(--bd-font-display); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-tight); line-height: var(--bd-lh-tight); font-size: var(--bd-size-2xl); }
+.bd-hero-dish__cta { font-family: var(--bd-font-mono); font-size: var(--bd-size-xs); color: var(--bd-cream); opacity: .85; margin-top: 4px; }
+.bd-hero-dish__badge { position: absolute; top: -20px; left: -20px; width: 86px; height: 86px; z-index: 3; filter: drop-shadow(0 6px 14px rgba(0,0,0,.45)); }
+@media (max-width: 999px) {
+  .bd-hero-dish { margin-inline: auto; }
+  .bd-hero-dish__badge { width: 64px; height: 64px; top: -14px; left: -8px; }
+}
