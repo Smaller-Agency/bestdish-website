@@ -9,6 +9,7 @@
   document.querySelectorAll('.bd-hero-show').forEach((show) => {
     const slides = [...show.querySelectorAll('.bd-hero-show__slide')];
     const dots = [...show.querySelectorAll('.bd-hero-show__dots span')];
+    const credit = (show.closest('.bd-hero-wrap') || document).querySelector('.bd-hero-full__credit');
     if (slides.length < 2) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let i = 0, timer = null;
@@ -16,6 +17,7 @@
       slides[i].classList.remove('is-active'); if (dots[i]) dots[i].classList.remove('is-on');
       i = (n + slides.length) % slides.length;
       slides[i].classList.add('is-active'); if (dots[i]) dots[i].classList.add('is-on');
+      if (credit && slides[i].dataset.credit) credit.textContent = slides[i].dataset.credit;
     };
     const start = () => { if (reduce) return; clearInterval(timer); timer = setInterval(() => show_n(i + 1), parseInt(show.dataset.interval, 10) || 3500); };
     dots.forEach((d, idx) => d.addEventListener('click', (e) => { e.preventDefault(); show_n(idx); start(); }));
@@ -23,6 +25,33 @@
     show.addEventListener('mouseleave', start);
     start();
   });
+
+  // Savings calculator ("The math") — runs regardless of reduced-motion.
+  const calc = document.getElementById('bd-calc');
+  if (calc) {
+    const PRICE = 24, WEEKS = 52;
+    let meals = 4, price = 36;
+    const mealsEl = document.getElementById('bd-calc-meals');
+    const priceEl = document.getElementById('bd-calc-price');
+    const resultEl = document.getElementById('bd-calc-result');
+    const fmt = (n) => '$' + Math.round(n).toLocaleString('en-CA');
+    const update = () => {
+      mealsEl.textContent = meals;
+      priceEl.textContent = fmt(price);
+      resultEl.textContent = fmt(Math.max(price - PRICE, 0) * meals * WEEKS);
+    };
+    calc.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-calc]');
+      if (!btn) return;
+      const k = btn.dataset.calc;
+      if (k === 'meals-') meals = Math.max(1, meals - 1);
+      else if (k === 'meals+') meals = Math.min(14, meals + 1);
+      else if (k === 'price-') price = Math.max(24, price - 1);
+      else if (k === 'price+') price = Math.min(60, price + 1);
+      update();
+    });
+    update();
+  }
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     // Reduced motion — reveal everything immediately.

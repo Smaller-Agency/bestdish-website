@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/site.css?v=70fbb3cc">
+<link rel="stylesheet" href="css/site.css?v=897411c1">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
@@ -31,28 +31,27 @@
   </div>
 </nav>
 
-<header class="bd-hero-wrap bd-hero--showcase">
-  <div class="bd-hero__text bd-reveal">
-    <span class="bd-loc">Toronto · live in your building</span>
-    <h1 class="bd-hero-headline" style="margin-top: var(--bd-space-5);">Toronto's<br>best meals.<br><em>In your lobby.</em></h1>
-    <p class="bd-hero-lede">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer in your lobby. Heat. Eat. No delivery, no tip, no tax.</p>
-    <div class="bd-strapline">
-      <span>Made in real restaurants</span>
-      <span>By the chefs you love</span>
-      <span>Ready 24/7 downstairs</span>
-    </div>
-    <div class="bd-hero__cta">
-      <a class="bd-btn bd-btn--primary" href="meals.html">Browse the menu</a>
-      <a class="bd-btn bd-btn--secondary" href="buildings.html">Is it in my building?</a>
-    </div>
+<header class="bd-hero-wrap bd-hero--full">
+  <div class="bd-hero-show bd-hero-full__media" data-interval="4200">
+    <div class="bd-hero-show__slide is-active" data-credit="Pukka — Butter Chicken Curry"><img src="assets/images/butter-chicken.jpg" alt="Butter Chicken Curry from Pukka"></div><div class="bd-hero-show__slide" data-credit="La Palma — 100 Layer Lasagna"><img src="assets/images/100layer.jpg" alt="100 Layer Lasagna from La Palma" loading="lazy"></div><div class="bd-hero-show__slide" data-credit="The Carbon Bar — Pitmaster Platter"><img src="assets/images/pitmaster-platter.jpg" alt="Pitmaster Platter from The Carbon Bar" loading="lazy"></div><div class="bd-hero-show__slide" data-credit="Lucie — Beef Bourguignon"><img src="assets/images/beef-bourguignon-dish.jpg" alt="Beef Bourguignon from Lucie" loading="lazy"></div>
+    <div class="bd-hero-show__dots"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
   </div>
-  <div class="bd-hero__stage bd-reveal">
-    <div class="bd-hero-show" data-interval="3200">
-      <a class="bd-hero-show__slide is-active" href="meals/butter-chicken.html"><img src="assets/images/butter-chicken.jpg" alt="Butter Chicken Curry from Pukka"><span class="bd-hero-show__cap"><span class="bd-hero-show__rest">Pukka</span><span class="bd-hero-show__name">Butter Chicken Curry</span></span></a><a class="bd-hero-show__slide" href="meals/100-layer-lasagna.html"><img src="assets/images/100layer.jpg" alt="100 Layer Lasagna from La Palma" loading="lazy"><span class="bd-hero-show__cap"><span class="bd-hero-show__rest">La Palma</span><span class="bd-hero-show__name">100 Layer Lasagna</span></span></a><a class="bd-hero-show__slide" href="meals/pitmaster-platter.html"><img src="assets/images/pitmaster-platter.jpg" alt="Pitmaster Platter from The Carbon Bar" loading="lazy"><span class="bd-hero-show__cap"><span class="bd-hero-show__rest">The Carbon Bar</span><span class="bd-hero-show__name">Pitmaster Platter</span></span></a><a class="bd-hero-show__slide" href="meals/beef-bourguignon.html"><img src="assets/images/beef-bourguignon-dish.jpg" alt="Beef Bourguignon from Lucie" loading="lazy"><span class="bd-hero-show__cap"><span class="bd-hero-show__rest">Lucie</span><span class="bd-hero-show__name">Beef Bourguignon</span></span></a>
-      <span class="bd-hero-show__chip">Flash-frozen</span>
-      <div class="bd-hero-show__dots"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
+  <div class="bd-hero-full__inner bd-container">
+    <div class="bd-hero-full__content bd-reveal">
+      <span class="bd-loc">Toronto · live in your building</span>
+      <h1 class="bd-hero-headline">Toronto's<br>best meals.<br><em>In your lobby.</em></h1>
+      <p class="bd-hero-lede">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer in your lobby. Heat. Eat. No delivery, no tip, no tax.</p>
+      <div class="bd-strapline">
+        <span>Made in real restaurants</span>
+        <span>By the chefs you love</span>
+        <span>Ready 24/7 downstairs</span>
+      </div>
+      <div class="bd-hero__cta">
+        <a class="bd-btn bd-btn--primary" href="meals.html">Browse the menu</a>
+        <a class="bd-btn bd-btn--secondary" href="buildings.html">Is it in my building?</a>
+      </div>
     </div>
-    <img class="bd-hero-show__badge" src="assets/logos/bd-orange.png" alt="BestDish">
+    <span class="bd-hero-full__credit">Pukka — Butter Chicken Curry</span>
   </div>
 </header>
 
@@ -303,17 +302,73 @@
   </div>
 </section>
 
-<section class="bd-section bd-section--alt">
+
+<section class="bd-section">
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">Why BestDish is different</p>
-    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">Skip the apps.</h2>
-    <p class="bd-lede bd-reveal" style="max-width:60ch; margin-top: var(--bd-space-4);">No Uber. No delivery fee, no tip, no tax. No 40-minute wait, and nothing shows up cold and soggy — just the restaurant's dish, finished hot in your own kitchen.</p>
-    <div class="bd-compare" style="margin-top: var(--bd-space-7);">
-      <div class="bd-compare__row">
-        <div class="bd-compare__cell"><svg class="bd-compare__icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" aria-hidden="true"><path d="M30 40 H70 L66 86 H34 Z" stroke-linejoin="round"/><path d="M41 40 C41 27 59 27 59 40" stroke-linecap="round"/></svg><strong>Delivery apps</strong>Restaurant food that travelled. 40 minutes later it's lukewarm and soggy — and that's before the delivery fee, the tip, and the tax.</div>
-        <div class="bd-compare__cell"><svg class="bd-compare__icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" aria-hidden="true"><path d="M50 14 V86 M21 31 L79 69 M79 31 L21 69" stroke-linecap="round"/></svg><strong>Frozen grocery</strong>Mass-produced. No chef, no story, no consistency.</div>
-        <div class="bd-compare__cell"><svg class="bd-compare__icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" aria-hidden="true"><rect x="22" y="18" width="56" height="64" rx="6"/><path d="M22 40 H78 M22 60 H78 M41 71 H59" stroke-linecap="round"/></svg><strong>Typical vending</strong>Packaged snacks. Convenience only, no quality.</div>
-        <div class="bd-compare__cell bd-compare__cell--win"><img class="bd-compare__badge" src="assets/logos/bd-orange.png" alt="BestDish"><strong>BestDish</strong>The chef's own dish, flash-frozen at peak, finished hot in your oven. No fee, no tip, no tax, no wait.</div>
+    <h2 class="bd-headline bd-reveal" style="max-width:18ch;">This isn't a vending machine.</h2>
+    <p class="bd-lede bd-reveal" style="max-width:60ch; margin-top: var(--bd-space-4);">It's a curated freezer of chef-made meals — prepared in restaurant kitchens, frozen at peak quality, and finished fresh in your own oven.</p>
+    <div class="bd-vs-grid" style="margin-top: var(--bd-space-8);"><div class="bd-vs-card bd-reveal">
+      <svg class="bd-vs-card__icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" aria-hidden="true"><path d="M30 40 H70 L66 86 H34 Z" stroke-linejoin="round"/><path d="M41 40 C41 27 59 27 59 40" stroke-linecap="round"/></svg>
+      <span class="bd-vs-card__num">01</span>
+      <h3 class="bd-vs-card__title">No delivery</h3>
+      <p class="bd-vs-card__body">Never wait. Never arrives compromised.</p>
+    </div><div class="bd-vs-card bd-reveal">
+      <svg class="bd-vs-card__icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" aria-hidden="true"><path d="M50 14 V86 M21 31 L79 69 M79 31 L21 69" stroke-linecap="round"/></svg>
+      <span class="bd-vs-card__num">02</span>
+      <h3 class="bd-vs-card__title">No grocery freezers</h3>
+      <p class="bd-vs-card__body">Mass-produced. No chef. No story.</p>
+    </div><div class="bd-vs-card bd-vs-card--win bd-reveal">
+      <svg class="bd-vs-card__icon" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" aria-hidden="true"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="24"/></svg>
+      <span class="bd-vs-card__num">03</span>
+      <h3 class="bd-vs-card__title">BestDish</h3>
+      <p class="bd-vs-card__body">Chef-made. Batch-tracked. Finished the way it was designed.</p>
+    </div></div>
+  </div>
+</section>
+
+
+<section class="bd-section bd-section--accent">
+  <div class="bd-container">
+    <h2 class="bd-headline bd-reveal" style="max-width:20ch;">Why BestDish is different.</h2>
+    <div class="bd-ct-scroll bd-reveal">
+      <div class="bd-ct"><div class="bd-ct__cell bd-ct__corner"></div><div class="bd-ct__cell bd-ct__head">Delivery</div><div class="bd-ct__cell bd-ct__head">Frozen grocery</div><div class="bd-ct__cell bd-ct__head">Typical vending</div><div class="bd-ct__cell bd-ct__head bd-ct__win">BestDish</div><div class="bd-ct__cell bd-ct__label">Quality source</div><div class="bd-ct__cell">Restaurant (travelled)</div><div class="bd-ct__cell">Mass-produced</div><div class="bd-ct__cell">Packaged snacks / basic meals</div><div class="bd-ct__cell bd-ct__win">Real restaurant dishes</div><div class="bd-ct__cell bd-ct__label">How it&#x27;s made</div><div class="bd-ct__cell">Cooked → sits → delivered</div><div class="bd-ct__cell">Factory-made</div><div class="bd-ct__cell">Pre-packaged</div><div class="bd-ct__cell bd-ct__win">Chef-prepared, small batch</div><div class="bd-ct__cell bd-ct__label">When you get it</div><div class="bd-ct__cell">30–60 minutes later</div><div class="bd-ct__cell">Whenever you shop</div><div class="bd-ct__cell">Instant</div><div class="bd-ct__cell bd-ct__win">Immediately, in your building</div><div class="bd-ct__cell bd-ct__label">Final experience</div><div class="bd-ct__cell">Often compromised</div><div class="bd-ct__cell">Inconsistent</div><div class="bd-ct__cell">Convenience only</div><div class="bd-ct__cell bd-ct__win">Finished fresh at home</div></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="bd-section bd-calc" id="bd-calc">
+  <div class="bd-container">
+    <div class="bd-info-grid" style="align-items:center;">
+      <div class="bd-reveal">
+        <p class="bd-eyebrow" style="color:var(--bd-cream);">The math</p>
+        <h2 class="bd-headline" style="max-width:16ch;">Keep the difference.</h2>
+        <p class="bd-lede" style="color:var(--bd-cream); opacity:.92; max-width:42ch;">Real restaurant meals, without the delivery fees, the tip, or the tax. Here's what that adds up to in a year.</p>
+      </div>
+      <div class="bd-calc__panel bd-reveal">
+        <div class="bd-calc__control">
+          <span class="bd-calc__label">Dinners per week</span>
+          <div class="bd-calc__stepper">
+            <button type="button" class="bd-calc__btn" data-calc="meals-" aria-label="Fewer dinners">−</button>
+            <span id="bd-calc-meals">4</span>
+            <button type="button" class="bd-calc__btn" data-calc="meals+" aria-label="More dinners">+</button>
+          </div>
+        </div>
+        <div class="bd-calc__control">
+          <span class="bd-calc__label">Average delivery total</span>
+          <div class="bd-calc__stepper">
+            <button type="button" class="bd-calc__btn" data-calc="price-" aria-label="Lower total">−</button>
+            <span id="bd-calc-price">$36</span>
+            <button type="button" class="bd-calc__btn" data-calc="price+" aria-label="Higher total">+</button>
+          </div>
+        </div>
+        <div class="bd-calc__line"></div>
+        <div class="bd-calc__result-wrap">
+          <span class="bd-calc__result-label">Estimated annual difference</span>
+          <span class="bd-calc__result" id="bd-calc-result">$2,496</span>
+        </div>
+        <p class="bd-calc__fine">vs. delivery, at a BestDish price of $24/meal.</p>
       </div>
     </div>
   </div>
@@ -368,5 +423,5 @@
     <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
   </div>
 </footer>
-<script src="js/site.js?v=f3b45c44" defer></script>
+<script src="js/site.js?v=a3ff8ee4" defer></script>
 </body></html>

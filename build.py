@@ -260,6 +260,99 @@ def feedback_section(base=""):
   </div>
 </section>"""
 
+def vending_section(base=""):
+    """'This isn't a vending machine' — three numbered cards with brand icons."""
+    cards = [
+        ("01", "bag",  "No delivery",       "Never wait. Never arrives compromised."),
+        ("02", "snow", "No grocery freezers","Mass-produced. No chef. No story."),
+        ("03", "plate","BestDish",          "Chef-made. Batch-tracked. Finished the way it was designed."),
+    ]
+    out = []
+    for num, icon, title, body in cards:
+        win = " bd-vs-card--win" if num == "03" else ""
+        out.append(f"""<div class="bd-vs-card{win} bd-reveal">
+      {bd_icon(icon, 'bd-vs-card__icon')}
+      <span class="bd-vs-card__num">{num}</span>
+      <h3 class="bd-vs-card__title">{title}</h3>
+      <p class="bd-vs-card__body">{body}</p>
+    </div>""")
+    return f"""
+<section class="bd-section">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">Why BestDish is different</p>
+    <h2 class="bd-headline bd-reveal" style="max-width:18ch;">This isn't a vending machine.</h2>
+    <p class="bd-lede bd-reveal" style="max-width:60ch; margin-top: var(--bd-space-4);">It's a curated freezer of chef-made meals — prepared in restaurant kitchens, frozen at peak quality, and finished fresh in your own oven.</p>
+    <div class="bd-vs-grid" style="margin-top: var(--bd-space-8);">{"".join(out)}</div>
+  </div>
+</section>"""
+
+def compare_table(base=""):
+    """Detailed comparison table — Delivery / Frozen grocery / Typical vending / BestDish."""
+    cols = ["Delivery", "Frozen grocery", "Typical vending", "BestDish"]
+    rows = [
+        ("Quality source",   ["Restaurant (travelled)", "Mass-produced", "Packaged snacks / basic meals", "Real restaurant dishes"]),
+        ("How it's made",    ["Cooked → sits → delivered", "Factory-made", "Pre-packaged", "Chef-prepared, small batch"]),
+        ("When you get it",  ["30–60 minutes later", "Whenever you shop", "Instant", "Immediately, in your building"]),
+        ("Final experience", ["Often compromised", "Inconsistent", "Convenience only", "Finished fresh at home"]),
+    ]
+    head = '<div class="bd-ct__cell bd-ct__corner"></div>' + "".join(
+        f'<div class="bd-ct__cell bd-ct__head{" bd-ct__win" if i == len(cols)-1 else ""}">{e(c)}</div>'
+        for i, c in enumerate(cols))
+    body = ""
+    for label, vals in rows:
+        body += f'<div class="bd-ct__cell bd-ct__label">{e(label)}</div>'
+        for i, v in enumerate(vals):
+            win = " bd-ct__win" if i == len(vals)-1 else ""
+            body += f'<div class="bd-ct__cell{win}">{e(v)}</div>'
+    return f"""
+<section class="bd-section bd-section--accent">
+  <div class="bd-container">
+    <h2 class="bd-headline bd-reveal" style="max-width:20ch;">Why BestDish is different.</h2>
+    <div class="bd-ct-scroll bd-reveal">
+      <div class="bd-ct">{head}{body}</div>
+    </div>
+  </div>
+</section>"""
+
+def calculator_section(base=""):
+    """'The math' — annual savings vs delivery. Logic lives in site.js."""
+    return f"""
+<section class="bd-section bd-calc" id="bd-calc">
+  <div class="bd-container">
+    <div class="bd-info-grid" style="align-items:center;">
+      <div class="bd-reveal">
+        <p class="bd-eyebrow" style="color:var(--bd-cream);">The math</p>
+        <h2 class="bd-headline" style="max-width:16ch;">Keep the difference.</h2>
+        <p class="bd-lede" style="color:var(--bd-cream); opacity:.92; max-width:42ch;">Real restaurant meals, without the delivery fees, the tip, or the tax. Here's what that adds up to in a year.</p>
+      </div>
+      <div class="bd-calc__panel bd-reveal">
+        <div class="bd-calc__control">
+          <span class="bd-calc__label">Dinners per week</span>
+          <div class="bd-calc__stepper">
+            <button type="button" class="bd-calc__btn" data-calc="meals-" aria-label="Fewer dinners">−</button>
+            <span id="bd-calc-meals">4</span>
+            <button type="button" class="bd-calc__btn" data-calc="meals+" aria-label="More dinners">+</button>
+          </div>
+        </div>
+        <div class="bd-calc__control">
+          <span class="bd-calc__label">Average delivery total</span>
+          <div class="bd-calc__stepper">
+            <button type="button" class="bd-calc__btn" data-calc="price-" aria-label="Lower total">−</button>
+            <span id="bd-calc-price">$36</span>
+            <button type="button" class="bd-calc__btn" data-calc="price+" aria-label="Higher total">+</button>
+          </div>
+        </div>
+        <div class="bd-calc__line"></div>
+        <div class="bd-calc__result-wrap">
+          <span class="bd-calc__result-label">Estimated annual difference</span>
+          <span class="bd-calc__result" id="bd-calc-result">$2,496</span>
+        </div>
+        <p class="bd-calc__fine">vs. delivery, at a BestDish price of $24/meal.</p>
+      </div>
+    </div>
+  </div>
+</section>"""
+
 # ---------- Page parts ----------
 
 def dish_card(d, base="", big=False):
@@ -305,39 +398,40 @@ def home():
     # Rotating hero showcase — cycles the best dishes so the art actually moves.
     hero_show_slugs = ["butter-chicken", "100-layer-lasagna", "pitmaster-platter", "beef-bourguignon"]
     hero_slides, hero_dots = "", ""
+    hero_credit0 = ""
     for _i, _s in enumerate(hero_show_slugs):
         _d = by_slug[_s]; _r = RESTAURANTS[_d["restaurant"]]
         _on = " is-active" if _i == 0 else ""
         _lazy = "" if _i == 0 else ' loading="lazy"'
+        _credit = f"{_r['name']} — {_d['name']}"
+        if _i == 0:
+            hero_credit0 = e(_credit)
         hero_slides += (
-            f'<a class="bd-hero-show__slide{_on}" href="meals/{_s}.html">'
-            f'<img src="assets/images/{_d["image"]}" alt="{e(_d["name"])} from {e(_r["name"])}"{_lazy}>'
-            f'<span class="bd-hero-show__cap"><span class="bd-hero-show__rest">{e(_r["name"])}</span>'
-            f'<span class="bd-hero-show__name">{e(_d["name"])}</span></span></a>')
+            f'<div class="bd-hero-show__slide{_on}" data-credit="{e(_credit)}">'
+            f'<img src="assets/images/{_d["image"]}" alt="{e(_d["name"])} from {e(_r["name"])}"{_lazy}></div>')
         hero_dots += f'<span class="{"is-on" if _i == 0 else ""}"></span>'
     return page("Toronto's best meals — in your lobby", extra_head=MAP_HEAD, body_class="bd-theme--cream", body=f"""
-<header class="bd-hero-wrap bd-hero--showcase">
-  <div class="bd-hero__text bd-reveal">
-    <span class="bd-loc">Toronto · live in your building</span>
-    <h1 class="bd-hero-headline" style="margin-top: var(--bd-space-5);">Toronto's<br>best meals.<br><em>In your lobby.</em></h1>
-    <p class="bd-hero-lede">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer in your lobby. Heat. Eat. No delivery, no tip, no tax.</p>
-    <div class="bd-strapline">
-      <span>Made in real restaurants</span>
-      <span>By the chefs you love</span>
-      <span>Ready 24/7 downstairs</span>
-    </div>
-    <div class="bd-hero__cta">
-      <a class="bd-btn bd-btn--primary" href="meals.html">Browse the menu</a>
-      <a class="bd-btn bd-btn--secondary" href="buildings.html">Is it in my building?</a>
-    </div>
+<header class="bd-hero-wrap bd-hero--full">
+  <div class="bd-hero-show bd-hero-full__media" data-interval="4200">
+    {hero_slides}
+    <div class="bd-hero-show__dots">{hero_dots}</div>
   </div>
-  <div class="bd-hero__stage bd-reveal">
-    <div class="bd-hero-show" data-interval="3200">
-      {hero_slides}
-      <span class="bd-hero-show__chip">Flash-frozen</span>
-      <div class="bd-hero-show__dots">{hero_dots}</div>
+  <div class="bd-hero-full__inner bd-container">
+    <div class="bd-hero-full__content bd-reveal">
+      <span class="bd-loc">Toronto · live in your building</span>
+      <h1 class="bd-hero-headline">Toronto's<br>best meals.<br><em>In your lobby.</em></h1>
+      <p class="bd-hero-lede">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer in your lobby. Heat. Eat. No delivery, no tip, no tax.</p>
+      <div class="bd-strapline">
+        <span>Made in real restaurants</span>
+        <span>By the chefs you love</span>
+        <span>Ready 24/7 downstairs</span>
+      </div>
+      <div class="bd-hero__cta">
+        <a class="bd-btn bd-btn--primary" href="meals.html">Browse the menu</a>
+        <a class="bd-btn bd-btn--secondary" href="buildings.html">Is it in my building?</a>
+      </div>
     </div>
-    <img class="bd-hero-show__badge" src="assets/logos/bd-orange.png" alt="BestDish">
+    <span class="bd-hero-full__credit">{hero_credit0}</span>
   </div>
 </header>
 
@@ -409,21 +503,11 @@ def home():
 
 {feedback_section(base)}
 
-<section class="bd-section bd-section--alt">
-  <div class="bd-container">
-    <p class="bd-eyebrow bd-reveal">Why BestDish is different</p>
-    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">Skip the apps.</h2>
-    <p class="bd-lede bd-reveal" style="max-width:60ch; margin-top: var(--bd-space-4);">No Uber. No delivery fee, no tip, no tax. No 40-minute wait, and nothing shows up cold and soggy — just the restaurant's dish, finished hot in your own kitchen.</p>
-    <div class="bd-compare" style="margin-top: var(--bd-space-7);">
-      <div class="bd-compare__row">
-        <div class="bd-compare__cell">{bd_icon('bag', 'bd-compare__icon')}<strong>Delivery apps</strong>Restaurant food that travelled. 40 minutes later it's lukewarm and soggy — and that's before the delivery fee, the tip, and the tax.</div>
-        <div class="bd-compare__cell">{bd_icon('snow', 'bd-compare__icon')}<strong>Frozen grocery</strong>Mass-produced. No chef, no story, no consistency.</div>
-        <div class="bd-compare__cell">{bd_icon('box', 'bd-compare__icon')}<strong>Typical vending</strong>Packaged snacks. Convenience only, no quality.</div>
-        <div class="bd-compare__cell bd-compare__cell--win"><img class="bd-compare__badge" src="assets/logos/bd-orange.png" alt="BestDish"><strong>BestDish</strong>The chef's own dish, flash-frozen at peak, finished hot in your oven. No fee, no tip, no tax, no wait.</div>
-      </div>
-    </div>
-  </div>
-</section>
+{vending_section(base)}
+
+{compare_table(base)}
+
+{calculator_section(base)}
 
 <section class="bd-section">
   <div class="bd-container">
