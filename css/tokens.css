@@ -107,7 +107,8 @@
   /* ---------- Layout ---------- */
   --bd-container:    1200px;
   --bd-container-sm: 720px;
-  --bd-gutter:       var(--bd-space-5);
+  /* Generous, responsive side gutter so content never crowds the edges. */
+  --bd-gutter:       clamp(28px, 5.5vw, 88px);
 }
 
 /* Inverted theme — when content sits on a light surface */
