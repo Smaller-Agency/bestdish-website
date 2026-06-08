@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="../css/tokens.css">
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/components.css">
-<link rel="stylesheet" href="../css/site.css?v=2bbb782b">
+<link rel="stylesheet" href="../css/site.css?v=44fb319c">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body class="bd-site bd-theme--cream">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -52,9 +54,15 @@
 
 <section class="bd-section bd-section--alt">
   <div class="bd-container">
-    <p class="bd-pullquote bd-reveal" style="margin-bottom: var(--bd-space-3);">"At Pukka, we believe in real food — thoughtfully prepared, properly cooked, and rooted in tradition. This dish reflects that approach."
-      <span class="bd-pullquote__attr">— Dinesh Butola, Pukka</span>
-    </p>
+    <div class="bd-chefblock bd-reveal">
+      <div class="bd-chefblock__photo"><img src="../assets/chefs/dinesh-butola.webp" alt="Portrait of Dinesh Butola" loading="lazy"></div>
+      <div class="bd-chefblock__body">
+        <p class="bd-eyebrow">The chef</p>
+        <p class="bd-pullquote" style="margin-bottom: var(--bd-space-3);">"At Pukka, we believe in real food — thoughtfully prepared, properly cooked, and rooted in tradition. This dish reflects that approach."
+          <span class="bd-pullquote__attr">— Dinesh Butola, Pukka</span>
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -95,16 +103,21 @@
   </div>
 </section>
 
-<section class="bd-section">
+<section class="bd-section" id="restaurant">
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">From the restaurant</p>
     <h2 class="bd-headline bd-reveal" style="max-width:22ch;">Pukka.</h2>
     <p class="bd-lede bd-reveal" style="max-width: 60ch;">Pukka is known for its commitment to authentic Indian cooking, using fresh, locally sourced ingredients and traditional techniques to deliver bold, balanced flavours.</p>
-    <p style="margin-top: var(--bd-space-5); font-family: var(--bd-font-mono); font-size: var(--bd-size-sm); color: var(--bd-orange);" class="bd-reveal">
-      Visit them at<br>
-      <span style="font-family: var(--bd-font-display); font-weight: 700; font-size: var(--bd-size-xl); color: var(--bd-cherry); letter-spacing: var(--bd-track-tight); text-transform: uppercase;">778 St Clair Ave W</span><br>
-      <span style="color: var(--bd-gravy); font-family: var(--bd-font-body); font-size: var(--bd-size-sm); opacity: .7;">Toronto, ON · M6C 1B6</span>
-    </p>
+    <div class="bd-restloc bd-reveal">
+      <img class="bd-restloc__photo" src="../assets/restaurants/pukka.jpg" alt="Inside Pukka" loading="lazy">
+      <div class="bd-restloc__map-wrap">
+        <div class="bd-dishmap" id="bd-dishmap" role="img" aria-label="Map of Pukka" data-lat="43.681135" data-lng="-79.429227" data-logo="../assets/logos/pukka.png"></div>
+        <div class="bd-restloc__addr">
+          <p class="bd-restloc__address">778 St Clair Ave W<br><span>Toronto, ON · M6C 1B6</span></p>
+          <a class="bd-btn bd-btn--secondary" href="https://www.google.com/maps/dir/?api=1&destination=Pukka%2C%20778%20St%20Clair%20Ave%20W%2C%20Toronto%2C%20ON%20M6C%201B6" target="_blank" rel="noopener">Get directions →</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -211,5 +224,5 @@
     <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
   </div>
 </footer>
-<script src="../js/site.js?v=a3ff8ee4" defer></script>
+<script src="../js/site.js?v=f81cc875" defer></script>
 </body></html>

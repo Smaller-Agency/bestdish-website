@@ -115,6 +115,26 @@
     } catch (err) { /* leave the container empty on any failure */ }
   }
 
+  // Single-location map on a dish page (the restaurant's spot).
+  const dishMapEl = document.getElementById('bd-dishmap');
+  if (dishMapEl && window.L) {
+    try {
+      const lat = parseFloat(dishMapEl.dataset.lat), lng = parseFloat(dishMapEl.dataset.lng);
+      const map = L.map(dishMapEl, { scrollWheelZoom: false, zoomControl: true });
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd', maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+      }).addTo(map);
+      const icon = L.divIcon({
+        className: 'bd-pin',
+        html: '<span class="bd-pin__tile"><img src="' + dishMapEl.dataset.logo + '" alt=""></span><span class="bd-pin__point"></span>',
+        iconSize: [52, 64], iconAnchor: [26, 64]
+      });
+      L.marker([lat, lng], { icon }).addTo(map);
+      map.setView([lat, lng], 15);
+    } catch (err) { /* leave empty on failure */ }
+  }
+
   // Feedback form — no backend, so compose a pre-filled email to feedback@bestdish.ca
   const fbForm = document.querySelector('.bd-feedback-form');
   if (fbForm) {

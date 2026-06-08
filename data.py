@@ -94,15 +94,6 @@ RESTAURANTS = {
         "chef": "Victor Barry",
         "logo": "PianoPiano.png",
     },
-    "forno-cultura": {
-        "name": "Forno Cultura",
-        "address": "609 King St W",
-        "city": "Toronto, ON",
-        "postal": "M5V 1M5",
-        "blurb": "An artisanal Italian bakery — sourdough, pastry, biscotti made with patience and respect for tradition.",
-        "chef": "Andrea Mastrandrea",
-        "logo": "FornoCultura.png",
-    },
 }
 
 # Map coordinates (geocoded from the verified addresses) + neighbourhood.
@@ -118,7 +109,6 @@ _RESTAURANT_GEO = {
     "le-gourmand":      {"lat": 43.648251, "lng": -79.396455, "hood": "Fashion District"},
     "slowhand":         {"lat": 43.661785, "lng": -79.337644, "hood": "Leslieville"},
     "piano-piano":      {"lat": 43.649041, "lng": -79.374650, "hood": "St. Lawrence"},
-    "forno-cultura":    {"lat": 43.644225, "lng": -79.400595, "hood": "King West"},
 }
 for _slug, _geo in _RESTAURANT_GEO.items():
     RESTAURANTS[_slug].update(_geo)

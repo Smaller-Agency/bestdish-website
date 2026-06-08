@@ -1,6 +1,6 @@
 """BestDish site generator.
 Builds the static site from data.py into the current directory."""
-import os, sys, html, shutil, json
+import os, sys, html, shutil, json, urllib.parse
 from pathlib import Path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from data import RESTAURANTS, DISHES, FARMS, BUILDINGS, NAV, FOOTER_NAV
@@ -584,7 +584,25 @@ def dish_page(d):
         f'<div><p class="bd-heat__method">{e(method)}</p><p class="bd-heat__steps">{e(steps)}</p></div>'
         for method, steps in d["heat"])
 
-    return page(f"{d['name']} — {r['name']}", base=base, body=f"""
+    # Chef portrait (beside the quote)
+    chef_file = CHEF_PHOTOS.get(d["chef_signature"])
+    chef_img = ""
+    if chef_file and (ROOT / "assets/chefs" / chef_file).exists():
+        chef_img = (f'<div class="bd-chefblock__photo"><img src="{base}assets/chefs/{chef_file}" '
+                    f'alt="Portrait of {e(d["chef_signature"])}" loading="lazy"></div>')
+
+    # Restaurant photo + location map
+    rest_rel = f"assets/restaurants/{d['restaurant']}.jpg"
+    rest_img = (f'<img class="bd-restloc__photo" src="{base}{rest_rel}" alt="Inside {e(r["name"])}" loading="lazy">'
+                if (ROOT / rest_rel).exists() else "")
+    restloc_cls = "" if rest_img else " bd-restloc--single"
+    _dest = urllib.parse.quote(f"{r['name']}, {r['address']}, {r['city']} {r.get('postal','')}".strip())
+    gmaps_dir = f"https://www.google.com/maps/dir/?api=1&destination={_dest}"
+    dish_map = (f'<div class="bd-dishmap" id="bd-dishmap" role="img" aria-label="Map of {e(r["name"])}" '
+                f'data-lat="{r["lat"]}" data-lng="{r["lng"]}" '
+                f'data-logo="{base}assets/logos/{logo_file(d["restaurant"])}"></div>')
+
+    return page(f"{d['name']} — {r['name']}", base=base, extra_head=MAP_HEAD, body=f"""
 <section class="bd-section" style="padding-top: var(--bd-space-7); padding-bottom: 0;">
   <div class="bd-container">
     <div class="bd-dish-hero">
@@ -609,9 +627,15 @@ def dish_page(d):
 
 <section class="bd-section bd-section--alt">
   <div class="bd-container">
-    <p class="bd-pullquote bd-reveal" style="margin-bottom: var(--bd-space-3);">"{e(d["chef_note"])}"
-      <span class="bd-pullquote__attr">— {e(d["chef_signature"])}, {e(r["name"])}</span>
-    </p>
+    <div class="bd-chefblock bd-reveal">
+      {chef_img}
+      <div class="bd-chefblock__body">
+        <p class="bd-eyebrow">The chef</p>
+        <p class="bd-pullquote" style="margin-bottom: var(--bd-space-3);">"{e(d["chef_note"])}"
+          <span class="bd-pullquote__attr">— {e(d["chef_signature"])}, {e(r["name"])}</span>
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -652,16 +676,21 @@ def dish_page(d):
   </div>
 </section>
 
-<section class="bd-section">
+<section class="bd-section" id="restaurant">
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">From the restaurant</p>
     <h2 class="bd-headline bd-reveal" style="max-width:22ch;">{e(r["name"])}.</h2>
     <p class="bd-lede bd-reveal" style="max-width: 60ch;">{e(r["blurb"])}</p>
-    <p style="margin-top: var(--bd-space-5); font-family: var(--bd-font-mono); font-size: var(--bd-size-sm); color: var(--bd-orange);" class="bd-reveal">
-      Visit them at<br>
-      <span style="font-family: var(--bd-font-display); font-weight: 700; font-size: var(--bd-size-xl); color: var(--bd-cherry); letter-spacing: var(--bd-track-tight); text-transform: uppercase;">{e(r["address"])}</span><br>
-      <span style="color: var(--bd-gravy); font-family: var(--bd-font-body); font-size: var(--bd-size-sm); opacity: .7;">{e(r["city"])} · {e(r["postal"])}</span>
-    </p>
+    <div class="bd-restloc{restloc_cls} bd-reveal">
+      {rest_img}
+      <div class="bd-restloc__map-wrap">
+        {dish_map}
+        <div class="bd-restloc__addr">
+          <p class="bd-restloc__address">{e(r["address"])}<br><span>{e(r["city"])} · {e(r["postal"])}</span></p>
+          <a class="bd-btn bd-btn--secondary" href="{gmaps_dir}" target="_blank" rel="noopener">Get directions →</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -730,7 +759,6 @@ CHEF_PHOTOS = {
     "Craig Harding":         "craig-harding.jpg",
     "Duncan Simpson":        "duncan-simpson.jpg",
     "The Nunes Family":      "the-nunes-family.jpg",
-    "Andrea Mastrandrea":    None,
 }
 
 def chefs_page():
