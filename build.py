@@ -419,7 +419,7 @@ def home():
     <div class="bd-hero-full__content bd-reveal">
       <span class="bd-loc">Toronto · live in your building</span>
       <h1 class="bd-hero-headline">Toronto's<br>best meals.<br><em>In your lobby.</em></h1>
-      <p class="bd-hero-lede">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer in your lobby. Heat. Eat. No delivery, no tip, no tax.</p>
+      <p class="bd-hero-lede">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer in your lobby.<br>No delivery, no tip, no tax.</p>
       <div class="bd-strapline">
         <span>Made in real restaurants</span>
         <span>By the chefs you love</span>
