@@ -818,8 +818,8 @@ html:has(.bd-theme--cream) { background: var(--bd-cream); }
 .bd-hero-full__media::after {
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(32,4,0,.9) 0%, rgba(32,4,0,.58) 42%, rgba(32,4,0,.12) 100%),
-    linear-gradient(0deg, rgba(32,4,0,.8) 0%, rgba(32,4,0,.12) 46%, rgba(32,4,0,.34) 100%);
+    linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.48) 42%, rgba(0,0,0,.08) 100%),
+    linear-gradient(0deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.08) 46%, rgba(0,0,0,.3) 100%);
 }
 .bd-hero-show__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s var(--bd-ease-out); pointer-events: none; }
 .bd-hero-show__slide.is-active { opacity: 1; }
