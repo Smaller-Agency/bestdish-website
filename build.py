@@ -143,9 +143,8 @@ def head(title, desc=None, base="", extra_head="", body_class="bd-theme--cream")
 def nav(base=""):
     links = "".join(f'<a href="{rel(u, base)}">{e(t)}</a>' for t, u in NAV)
     return f"""<nav class="bd-nav">
-  <a class="bd-nav__brand" href="{base or './'}">
+  <a class="bd-nav__brand" href="{base or './'}" aria-label="BestDish home">
     <img src="{base}assets/logos/bd-orange.png" alt="BestDish">
-    <span class="bd-nav__brand-name">BestDish</span>
   </a>
   <div class="bd-nav__links">
     {links}

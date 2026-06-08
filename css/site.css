@@ -16,7 +16,7 @@
   border-bottom: 1px solid color-mix(in srgb, var(--bd-cream) 12%, transparent);
 }
 .bd-nav__brand { display: flex; align-items: center; gap: var(--bd-space-3); text-decoration: none; color: inherit; }
-.bd-nav__brand img { width: 44px; height: 44px; }
+.bd-nav__brand img { width: 56px; height: 56px; }
 .bd-nav__brand-name {
   font-family: var(--bd-font-display);
   font-weight: 900;
