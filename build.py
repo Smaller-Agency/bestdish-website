@@ -580,6 +580,10 @@ def dish_page(d):
         f'<div class="bd-nutri__row"><span>{e(k)}</span><span>{e(v)}</span></div>'
         for k, v in d["nutrition"].items() if k != "Calories")
 
+    heat_cols = "".join(
+        f'<div><p class="bd-heat__method">{e(method)}</p><p class="bd-heat__steps">{e(steps)}</p></div>'
+        for method, steps in d["heat"])
+
     return page(f"{d['name']} — {r['name']}", base=base, body=f"""
 <section class="bd-section" style="padding-top: var(--bd-space-7); padding-bottom: 0;">
   <div class="bd-container">
@@ -595,8 +599,8 @@ def dish_page(d):
         <div class="bd-dish-meta">
           <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Chef</p><p class="bd-dish-meta__value">{e(d["chef_signature"])}</p></div>
           <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Serving</p><p class="bd-dish-meta__value">{e(d["serving"])}</p></div>
-          <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Net weight</p><p class="bd-dish-meta__value">{e(d["weight"])}</p></div>
           <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Calories</p><p class="bd-dish-meta__value">{e(d["nutrition"]["Calories"])}</p></div>
+          <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Category</p><p class="bd-dish-meta__value">{e(d["category"])}</p></div>
         </div>
       </div>
     </div>
@@ -616,10 +620,7 @@ def dish_page(d):
     <div class="bd-info-grid">
       <div class="bd-panel bd-reveal">
         <h3>Heating instructions</h3>
-        <div class="bd-heat-cols">
-          <div><p class="bd-heat__method">Oven</p><p class="bd-heat__steps">{e(d["heat"]["oven"])}</p></div>
-          <div><p class="bd-heat__method">Microwave</p><p class="bd-heat__steps">{e(d["heat"]["microwave"])}</p></div>
-        </div>
+        <div class="bd-heat-cols">{heat_cols}</div>
         <p class="bd-heat__steps" style="margin-top: var(--bd-space-5); opacity:.7;">Keep frozen until use. Do not refreeze after thawing.</p>
       </div>
       <div class="bd-panel bd-reveal">
@@ -720,10 +721,10 @@ def how_it_works_page():
 # ---------- Chefs ----------
 
 CHEF_PHOTOS = {
-    "Taylor Well":          "taylor-well.jpg",
+    "Taylor Wells":          "taylor-well.jpg",
     "Afrim Pristine":        "afrim-pristine.jpg",
-    "Brett Feeley":          "brett-feeley.jpeg",
-    "Derek Valleau & Dinesh Butola": "dinesh-butola.webp",
+    "Brett Feeley & Dan Ewing": "brett-feeley.jpeg",
+    "Dinesh Butola":         "dinesh-butola.webp",
     "Victor Barry":          "victor-barry.webp",
     "Michael Angeloni":      "michael-angeloni.jpg",
     "Craig Harding":         "craig-harding.jpg",

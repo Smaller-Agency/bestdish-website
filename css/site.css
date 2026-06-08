@@ -213,8 +213,8 @@
 .bd-nutri__cal-label { font-weight: 900; font-size: var(--bd-size-md); }
 .bd-nutri__cal-value { font-weight: 900; font-size: var(--bd-size-2xl); font-family: var(--bd-font-display); }
 
-.bd-heat-cols { display: grid; gap: var(--bd-space-4); grid-template-columns: 1fr; margin-top: var(--bd-space-4); }
-@media (min-width: 640px) { .bd-heat-cols { grid-template-columns: 1fr 1fr; } }
+.bd-heat-cols { display: grid; gap: var(--bd-space-5) var(--bd-space-4); grid-template-columns: 1fr; margin-top: var(--bd-space-4); }
+@media (min-width: 600px) { .bd-heat-cols { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); } }
 .bd-heat__method { font-family: var(--bd-font-display); font-weight: 900; text-transform: uppercase; font-size: var(--bd-size-md); color: var(--bd-orange); letter-spacing: var(--bd-track-tight); margin: 0 0 var(--bd-space-2); }
 .bd-heat__steps { font-size: var(--bd-size-sm); line-height: var(--bd-lh-relaxed); }
 
