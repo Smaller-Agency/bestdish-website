@@ -24,15 +24,13 @@ def img_exists(rel):
 # ---------- Dish colourways (drawn from the packaging sleeves) ----------
 DISH_ACCENT = {
     "100-layer-lasagna":     "blueberry",
-    "beef-bourguignon":      "shrimp",
     "butter-chicken":        "pistachios",
     "cheesemaster-mac":      "honeydew",
     "cheeseburger-pot-pie":  "orange",
     "le-grand-fromage":      "pistachios",
-    "pitmaster-platter":     "orange",
     "nutella-tiramisu":      "honeydew",
-    "butter-tarts":          "pistachios",
     "chocolate-chip-cookies":"blueberry",
+    "gelato":                "shrimp",
 }
 
 def accent(slug):
@@ -104,7 +102,7 @@ def pack_panel(d, base="", bg="var(--bd-cherry)"):
   <p class="bd-pack__rest">{e(r['name'])}</p>
   <h3 class="bd-pack__name">{e(d['name'])}</h3>
   <span class="bd-pack__rule"></span>
-  <p class="bd-pack__meta">CHEF-MADE&nbsp;· FLASH-FROZEN&nbsp;· {e(d['weight']).upper().replace(' ', '&nbsp;')}</p>
+  <p class="bd-pack__meta">CHEF-MADE&nbsp;· FLASH-FROZEN{"&nbsp;· " + e(d['weight']).upper().replace(' ', '&nbsp;') if d.get('weight') else ""}</p>
 </div>"""
 
 # ---------- Chrome ----------
@@ -186,7 +184,7 @@ def page(title, body, desc=None, base="", extra_head="", body_class="bd-theme--c
 
 # Logo filenames don't all match slugs (Carbon Snack Bar reuses Carbon Bar's
 # logo; Carbon Bar is a webp). Resolve to the actual file in assets/logos/.
-LOGO_FILE = {"carbon-bar": "carbon-bar.webp", "carbon-snack-bar": "carbon-bar.webp"}
+LOGO_FILE = {}
 def logo_file(slug):
     return LOGO_FILE.get(slug, f"{slug}.png")
 
@@ -395,7 +393,7 @@ def home():
     hero_dish = by_slug["butter-chicken"]
     hero_rest = RESTAURANTS[hero_dish["restaurant"]]
     # Rotating hero showcase — cycles the best dishes so the art actually moves.
-    hero_show_slugs = ["butter-chicken", "100-layer-lasagna", "pitmaster-platter", "beef-bourguignon"]
+    hero_show_slugs = ["butter-chicken", "100-layer-lasagna", "cheesemaster-mac", "le-grand-fromage"]
     hero_slides, hero_dots = "", ""
     hero_credit0 = ""
     for _i, _s in enumerate(hero_show_slugs):
@@ -578,7 +576,7 @@ def dish_page(d):
 
     nutrition_rows = "".join(
         f'<div class="bd-nutri__row"><span>{e(k)}</span><span>{e(v)}</span></div>'
-        for k, v in d["nutrition"].items() if k != "Calories")
+        for k, v in d.get("nutrition", {}).items() if k != "Calories")
 
     heat_cols = "".join(
         f'<div><p class="bd-heat__method">{e(method)}</p><p class="bd-heat__steps">{e(steps)}</p></div>'
@@ -602,63 +600,36 @@ def dish_page(d):
                 f'data-lat="{r["lat"]}" data-lng="{r["lng"]}" '
                 f'data-logo="{base}assets/logos/{logo_file(d["restaurant"])}"></div>')
 
-    return page(f"{d['name']} — {r['name']}", base=base, extra_head=MAP_HEAD, body=f"""
-<section class="bd-section" style="padding-top: var(--bd-space-7); padding-bottom: 0;">
-  <div class="bd-container">
-    <div class="bd-dish-hero">
-      <div class="bd-reveal">
-        {photo}
-      </div>
-      <div class="bd-reveal">
-        <p class="bd-dish-hero__category">{e(d["category"])}</p>
-        <a class="bd-dish-hero__restaurant" href="{base}chefs.html#{d['restaurant']}">{e(r["name"])}</a>
-        <h1 class="bd-dish-hero__name">{e(d["name"])}</h1>
-        <p class="bd-dish-hero__tagline">{e(d["tagline"])}</p>
-        <div class="bd-dish-meta">
-          <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Chef</p><p class="bd-dish-meta__value">{e(d["chef_signature"])}</p></div>
-          <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Serving</p><p class="bd-dish-meta__value">{e(d["serving"])}</p></div>
-          <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Calories</p><p class="bd-dish-meta__value">{e(d["nutrition"]["Calories"])}</p></div>
-          <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Category</p><p class="bd-dish-meta__value">{e(d["category"])}</p></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="bd-section bd-section--alt">
+    # The chef — pullquote when we have a first-person note, plain bio otherwise.
+    if d.get("chef_note"):
+        chef_body = (f'<p class="bd-pullquote" style="margin-bottom: var(--bd-space-3);">"{e(d["chef_note"])}"'
+                     f'<span class="bd-pullquote__attr">— {e(d["chef_signature"])}, {e(r["name"])}</span></p>')
+    elif d.get("chef_bio"):
+        chef_body = (f'<h3 class="bd-headline" style="font-size:var(--bd-size-2xl); margin: 0 0 var(--bd-space-3);">{e(d["chef_signature"])}</h3>'
+                     f'<p style="line-height: var(--bd-lh-relaxed); margin: 0;">{e(d["chef_bio"])}</p>')
+    else:
+        chef_body = ""
+    chef_section = "" if not chef_body else f"""<section class="bd-section bd-section--alt">
   <div class="bd-container">
     <div class="bd-chefblock bd-reveal">
       {chef_img}
       <div class="bd-chefblock__body">
         <p class="bd-eyebrow">The chef</p>
-        <p class="bd-pullquote" style="margin-bottom: var(--bd-space-3);">"{e(d["chef_note"])}"
-          <span class="bd-pullquote__attr">— {e(d["chef_signature"])}, {e(r["name"])}</span>
-        </p>
+        {chef_body}
       </div>
     </div>
   </div>
-</section>
+</section>"""
 
-<section class="bd-section">
-  <div class="bd-container">
-    <div class="bd-info-grid">
-      <div class="bd-panel bd-reveal">
-        <h3>Heating instructions</h3>
-        <div class="bd-heat-cols">{heat_cols}</div>
-        <p class="bd-heat__steps" style="margin-top: var(--bd-space-5); opacity:.7;">Keep frozen until use. Do not refreeze after thawing.</p>
-      </div>
-      <div class="bd-panel bd-reveal">
+    ingredients_panel = "" if not d.get("ingredients") else f"""<div class="bd-panel bd-reveal">
         <h3>Ingredients</h3>
         <p style="line-height: var(--bd-lh-relaxed); margin: 0 0 var(--bd-space-4);">{e(d["ingredients"])}</p>
         <p style="font-size: var(--bd-size-sm); margin: 0;"><strong style="color:var(--bd-orange); font-weight:900;">Contains:</strong> {e(d["contains"])}</p>
         <p style="font-size: var(--bd-size-sm); margin: var(--bd-space-1) 0 0; opacity:.7;"><strong>May contain:</strong> {e(d["may_contain"])}</p>
         <p style="font-size: var(--bd-size-xs); margin: var(--bd-space-5) 0 0; opacity:.6;">Made in Canada with domestic and imported ingredients.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      </div>"""
 
-<section class="bd-section bd-section--cream">
+    nutrition_section = "" if not d.get("nutrition") else f"""<section class="bd-section bd-section--cream">
   <div class="bd-container">
     <div class="bd-info-grid">
       <div class="bd-reveal">
@@ -674,7 +645,47 @@ def dish_page(d):
       </div>
     </div>
   </div>
+</section>"""
+
+    return page(f"{d['name']} — {r['name']}", base=base, extra_head=MAP_HEAD, body=f"""
+<section class="bd-section" style="padding-top: var(--bd-space-7); padding-bottom: 0;">
+  <div class="bd-container">
+    <div class="bd-dish-hero">
+      <div class="bd-reveal">
+        {photo}
+      </div>
+      <div class="bd-reveal">
+        <p class="bd-dish-hero__category">{e(d["category"])}</p>
+        <a class="bd-dish-hero__restaurant" href="{base}chefs.html#{d['restaurant']}">{e(r["name"])}</a>
+        <h1 class="bd-dish-hero__name">{e(d["name"])}</h1>
+        <p class="bd-dish-hero__tagline">{e(d["tagline"])}</p>
+        <div class="bd-dish-meta">
+          <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Chef</p><p class="bd-dish-meta__value">{e(d["chef_signature"])}</p></div>
+          {f'<div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Serving</p><p class="bd-dish-meta__value">{e(d["serving"])}</p></div>' if d.get("serving") else ""}
+          {f'<div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Calories</p><p class="bd-dish-meta__value">{e(d["nutrition"]["Calories"])}</p></div>' if d.get("nutrition") else ""}
+          <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Category</p><p class="bd-dish-meta__value">{e(d["category"])}</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+{chef_section}
+
+<section class="bd-section">
+  <div class="bd-container">
+    <div class="bd-info-grid">
+      <div class="bd-panel bd-reveal">
+        <h3>Heating instructions</h3>
+        <div class="bd-heat-cols">{heat_cols}</div>
+        <p class="bd-heat__steps" style="margin-top: var(--bd-space-5); opacity:.7;">Keep frozen until use. Do not refreeze after thawing.</p>
+      </div>
+      {ingredients_panel}
+    </div>
+  </div>
+</section>
+
+{nutrition_section}
 
 <section class="bd-section" id="restaurant">
   <div class="bd-container">
@@ -750,15 +761,14 @@ def how_it_works_page():
 # ---------- Chefs ----------
 
 CHEF_PHOTOS = {
-    "Taylor Wells":          "taylor-well.jpg",
     "Afrim Pristine":        "afrim-pristine.jpg",
     "Brett Feeley & Dan Ewing": "brett-feeley.jpeg",
     "Dinesh Butola":         "dinesh-butola.webp",
     "Victor Barry":          "victor-barry.webp",
-    "Michael Angeloni":      "michael-angeloni.jpg",
     "Craig Harding":         "craig-harding.jpg",
     "Duncan Simpson":        "duncan-simpson.jpg",
     "The Nunes Family":      "the-nunes-family.jpg",
+    "Kaya Ogruce":           "kaya-ogruce.jpg",
 }
 
 def chefs_page():
