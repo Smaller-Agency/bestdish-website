@@ -163,7 +163,6 @@ def footer(base=""):
     <div class="bd-footer__col"><h4>Partner</h4><ul>
       <li><a href="{base}for-properties.html">For properties</a></li>
       <li><a href="{base}for-restaurants.html">For restaurants</a></li>
-      <li><a href="{base}farms.html">Farms</a></li>
     </ul></div>
     <div class="bd-footer__col"><h4>Visit</h4><ul>
       <li>507 King St E<br>Toronto, ON, M5A 1M3</li>
@@ -987,7 +986,10 @@ def for_restaurants_page():
     <p class="bd-eyebrow bd-reveal">For chefs and restaurants</p>
     <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">Monetize<br>the kitchen<br>you already have.</h1>
     <p class="bd-hero-lede bd-reveal">Royalties + execution fees on iconic dishes from your kitchen. No new storefront. No new staff. Your name on every package.</p>
-    <a class="bd-btn bd-btn--primary bd-reveal" href="#apply">Apply</a>
+    <div class="bd-reveal" style="display:flex; gap:var(--bd-space-3); flex-wrap:wrap;">
+      <a class="bd-btn bd-btn--primary" href="#apply">Apply</a>
+      <a class="bd-btn bd-btn--secondary" href="chef-onboarding.html">Partner onboarding →</a>
+    </div>
   </div>
 </header>
 
@@ -1068,7 +1070,7 @@ def build():
     (ROOT / "meals.html").write_text(meals_page())
     (ROOT / "how-it-works.html").write_text(how_it_works_page())
     (ROOT / "chefs.html").write_text(chefs_page())
-    (ROOT / "farms.html").write_text(farms_page())
+    # (ROOT / "farms.html").write_text(farms_page())  # farm page hidden for now
     (ROOT / "buildings.html").write_text(buildings_page())
     (ROOT / "for-properties.html").write_text(for_properties_page())
     (ROOT / "for-restaurants.html").write_text(for_restaurants_page())

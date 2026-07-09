@@ -376,14 +376,12 @@ NAV = [
     ("Browse meals",  "/meals.html"),
     ("How it works",  "/how-it-works.html"),
     ("Chefs",         "/chefs.html"),
-    ("Farms",         "/farms.html"),
 ]
 
 FOOTER_NAV = [
     ("Browse meals",  "/meals.html"),
     ("How it works",  "/how-it-works.html"),
     ("Chefs",         "/chefs.html"),
-    ("Farms",         "/farms.html"),
     ("Buildings",     "/buildings.html"),
     ("For properties","/for-properties.html"),
     ("For restaurants","/for-restaurants.html"),
