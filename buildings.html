@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/site.css?v=a6fd8dcb">
+<link rel="stylesheet" href="css/site.css?v=80d2e7a2">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body class="bd-site bd-theme--cream">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -37,8 +39,8 @@
         <p class="bd-hero-lede bd-reveal">BestDish freezers are installed in premium residential buildings, co-working spaces, and members' clubs across Toronto. Find yours below — or ask your property manager to bring it in.</p>
       </div>
       <div class="bd-reveal" style="display:grid; gap: var(--bd-space-3); grid-template-columns: 1fr 1fr; padding-bottom: var(--bd-space-4);">
-        <div style="border-top: 4px solid var(--bd-orange); padding-top: var(--bd-space-3);"><p style="font-family: var(--bd-font-display); font-weight:900; font-size: var(--bd-size-5xl); color: var(--bd-orange); line-height: 1; margin: 0;">3</p><p style="font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-xs); margin: var(--bd-space-2) 0 0;">Live in Toronto</p></div>
-        <div style="border-top: 4px solid var(--bd-orange); padding-top: var(--bd-space-3);"><p style="font-family: var(--bd-font-display); font-weight:900; font-size: var(--bd-size-5xl); color: var(--bd-orange); line-height: 1; margin: 0;">3</p><p style="font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-xs); margin: var(--bd-space-2) 0 0;">Coming this year</p></div>
+        <div style="border-top: 4px solid var(--bd-orange); padding-top: var(--bd-space-3);"><p style="font-family: var(--bd-font-display); font-weight:900; font-size: var(--bd-size-5xl); color: var(--bd-orange); line-height: 1; margin: 0;">4</p><p style="font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-xs); margin: var(--bd-space-2) 0 0;">Live in Toronto</p></div>
+        <div style="border-top: 4px solid var(--bd-orange); padding-top: var(--bd-space-3);"><p style="font-family: var(--bd-font-display); font-weight:900; font-size: var(--bd-size-5xl); color: var(--bd-orange); line-height: 1; margin: 0;">4</p><p style="font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-xs); margin: var(--bd-space-2) 0 0;">Coming this year</p></div>
       </div>
     </div>
   </div>
@@ -47,55 +49,72 @@
 
 <section class="bd-section" style="padding-top:0;">
   <div class="bd-container">
-    <div class="bd-buildings"><div class="bd-building-row bd-reveal">
-          <span class="bd-building-row__num">01</span>
-          <div>
-            <h3 class="bd-building-row__name">East Room</h3>
-            <span class="bd-building-row__address">507 King St E, Toronto</span>
+    <div class="bd-bldg-grid"><article class="bd-bldg-card bd-reveal">
+          <div class="bd-bldg-card__media"><div class="bd-bldg-card__fill"><span>E</span></div><span class="bd-bldg-card__status bd-bldg-card__status--live">Live</span></div>
+          <div class="bd-bldg-card__body">
+            <h3 class="bd-bldg-card__name">East Room</h3>
+            <p class="bd-bldg-card__address">507 King St E, Toronto</p>
+            <p class="bd-bldg-card__type">Co-working</p>
           </div>
-          <span class="bd-building-row__type">Co-working</span>
-          <span class="bd-building-row__status bd-building-row__status--live">Live</span>
-        </div><div class="bd-building-row bd-reveal">
-          <span class="bd-building-row__num">02</span>
-          <div>
-            <h3 class="bd-building-row__name">The Selby</h3>
-            <span class="bd-building-row__address">592 Sherbourne St, Toronto</span>
+        </article><article class="bd-bldg-card bd-reveal">
+          <div class="bd-bldg-card__media"><div class="bd-bldg-card__fill"><span>T</span></div><span class="bd-bldg-card__status bd-bldg-card__status--live">Live</span></div>
+          <div class="bd-bldg-card__body">
+            <h3 class="bd-bldg-card__name">The Selby</h3>
+            <p class="bd-bldg-card__address">592 Sherbourne St, Toronto</p>
+            <p class="bd-bldg-card__type">Luxury rental</p>
           </div>
-          <span class="bd-building-row__type">Luxury rental</span>
-          <span class="bd-building-row__status bd-building-row__status--live">Live</span>
-        </div><div class="bd-building-row bd-reveal">
-          <span class="bd-building-row__num">03</span>
-          <div>
-            <h3 class="bd-building-row__name">Club Apex</h3>
-            <span class="bd-building-row__address">Yonge &amp; Bloor (3rd floor)</span>
+        </article><article class="bd-bldg-card bd-reveal">
+          <div class="bd-bldg-card__media"><div class="bd-bldg-card__fill"><span>C</span></div><span class="bd-bldg-card__status bd-bldg-card__status--live">Live</span></div>
+          <div class="bd-bldg-card__body">
+            <h3 class="bd-bldg-card__name">Club Apex</h3>
+            <p class="bd-bldg-card__address">Yonge &amp; Bloor (3rd floor)</p>
+            <p class="bd-bldg-card__type">Members club</p>
           </div>
-          <span class="bd-building-row__type">Members club</span>
-          <span class="bd-building-row__status bd-building-row__status--live">Live</span>
-        </div><div class="bd-building-row bd-reveal">
-          <span class="bd-building-row__num">04</span>
-          <div>
-            <h3 class="bd-building-row__name">King Charlotte</h3>
-            <span class="bd-building-row__address">11 Charlotte St, Toronto</span>
+        </article><article class="bd-bldg-card bd-reveal">
+          <div class="bd-bldg-card__media"><div class="bd-bldg-card__fill"><span>M</span></div><span class="bd-bldg-card__status bd-bldg-card__status--live">Live</span></div>
+          <div class="bd-bldg-card__body">
+            <h3 class="bd-bldg-card__name">Maple House</h3>
+            <p class="bd-bldg-card__address">Canary Landing, Front St E &amp; Cherry St</p>
+            <p class="bd-bldg-card__type">Luxury rental</p>
           </div>
-          <span class="bd-building-row__type">Condominium</span>
-          <span class="bd-building-row__status ">Q3 2026</span>
-        </div><div class="bd-building-row bd-reveal">
-          <span class="bd-building-row__num">05</span>
-          <div>
-            <h3 class="bd-building-row__name">The Well</h3>
-            <span class="bd-building-row__address">486 Front St W, Toronto</span>
+        </article><article class="bd-bldg-card bd-reveal">
+          <div class="bd-bldg-card__media"><div class="bd-bldg-card__fill"><span>K</span></div><span class="bd-bldg-card__status ">Q3 2026</span></div>
+          <div class="bd-bldg-card__body">
+            <h3 class="bd-bldg-card__name">King Charlotte</h3>
+            <p class="bd-bldg-card__address">11 Charlotte St, Toronto</p>
+            <p class="bd-bldg-card__type">Condominium</p>
           </div>
-          <span class="bd-building-row__type">Mixed-use residence</span>
-          <span class="bd-building-row__status ">Q4 2026</span>
-        </div><div class="bd-building-row bd-reveal">
-          <span class="bd-building-row__num">06</span>
-          <div>
-            <h3 class="bd-building-row__name">One Bloor East</h3>
-            <span class="bd-building-row__address">1 Bloor St E, Toronto</span>
+        </article><article class="bd-bldg-card bd-reveal">
+          <div class="bd-bldg-card__media"><div class="bd-bldg-card__fill"><span>T</span></div><span class="bd-bldg-card__status ">Q4 2026</span></div>
+          <div class="bd-bldg-card__body">
+            <h3 class="bd-bldg-card__name">The Well</h3>
+            <p class="bd-bldg-card__address">486 Front St W, Toronto</p>
+            <p class="bd-bldg-card__type">Mixed-use residence</p>
           </div>
-          <span class="bd-building-row__type">Luxury rental</span>
-          <span class="bd-building-row__status ">Q4 2026</span>
-        </div></div>
+        </article><article class="bd-bldg-card bd-reveal">
+          <div class="bd-bldg-card__media"><div class="bd-bldg-card__fill"><span>O</span></div><span class="bd-bldg-card__status ">Q4 2026</span></div>
+          <div class="bd-bldg-card__body">
+            <h3 class="bd-bldg-card__name">One Bloor East</h3>
+            <p class="bd-bldg-card__address">1 Bloor St E, Toronto</p>
+            <p class="bd-bldg-card__type">Luxury rental</p>
+          </div>
+        </article><article class="bd-bldg-card bd-reveal">
+          <div class="bd-bldg-card__media"><div class="bd-bldg-card__fill"><span>S</span></div><span class="bd-bldg-card__status ">August 2026</span></div>
+          <div class="bd-bldg-card__body">
+            <h3 class="bd-bldg-card__name">Sloane</h3>
+            <p class="bd-bldg-card__address">5 York Garden Way, North York</p>
+            <p class="bd-bldg-card__type">Rental community</p>
+          </div>
+        </article></div>
+  </div>
+</section>
+
+<section class="bd-section" style="padding-top:0;">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">Across the city</p>
+    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">Every freezer on the map.</h2>
+    <div class="bd-bldg-map bd-reveal" id="bd-buildings-map" role="img" aria-label="Map of BestDish buildings in Toronto"></div>
+    <script type="application/json" id="bd-buildings-map-data">[{"name": "East Room", "address": "507 King St E, Toronto", "status": "Live", "live": true, "lat": 43.6554, "lng": -79.359}, {"name": "The Selby", "address": "592 Sherbourne St, Toronto", "status": "Live", "live": true, "lat": 43.669, "lng": -79.3762}, {"name": "Club Apex", "address": "Yonge & Bloor (3rd floor)", "status": "Live", "live": true, "lat": 43.671, "lng": -79.3868}, {"name": "Maple House", "address": "Canary Landing, Front St E & Cherry St", "status": "Live", "live": true, "lat": 43.6528, "lng": -79.3548}, {"name": "King Charlotte", "address": "11 Charlotte St, Toronto", "status": "Q3 2026", "live": false, "lat": 43.6465, "lng": -79.3939}, {"name": "The Well", "address": "486 Front St W, Toronto", "status": "Q4 2026", "live": false, "lat": 43.642, "lng": -79.3999}, {"name": "One Bloor East", "address": "1 Bloor St E, Toronto", "status": "Q4 2026", "live": false, "lat": 43.6702, "lng": -79.3855}, {"name": "Sloane", "address": "5 York Garden Way, North York", "status": "August 2026", "live": false, "lat": 43.725, "lng": -79.4545}]</script>
   </div>
 </section>
 
@@ -130,5 +149,5 @@
     <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
   </div>
 </footer>
-<script src="js/site.js?v=f81cc875" defer></script>
+<script src="js/site.js?v=aa3a2452" defer></script>
 </body></html>

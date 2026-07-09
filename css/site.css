@@ -980,3 +980,75 @@ html:has(.bd-theme--cream) { background: var(--bd-cream); }
 .bd-restloc__addr { display: flex; justify-content: space-between; align-items: center; gap: var(--bd-space-4); flex-wrap: wrap; margin-top: var(--bd-space-4); }
 .bd-restloc__address { margin: 0; font-family: var(--bd-font-display); font-weight: 700; text-transform: uppercase; letter-spacing: var(--bd-track-tight); font-size: var(--bd-size-lg); color: var(--bd-cherry); line-height: var(--bd-lh-tight); }
 .bd-restloc__address span { display: block; font-family: var(--bd-font-body); font-weight: 400; text-transform: none; letter-spacing: 0; font-size: var(--bd-size-sm); color: var(--bd-gravy); opacity: .7; margin-top: 4px; }
+
+/* ============================================================
+   Soft palette pass (2026-07-09) — lighten every dark surface.
+   Cherry/Gravy blocks become warm light bands; the hero scrim
+   lifts; orange retreats to CTAs and eyebrows.
+   ============================================================ */
+
+/* hero: lift the black overlay so the photography breathes */
+.bd-hero-full__media::after {
+  background:
+    linear-gradient(90deg, rgba(20,4,0,.58) 0%, rgba(20,4,0,.32) 42%, rgba(20,4,0,.04) 100%),
+    linear-gradient(0deg, rgba(20,4,0,.52) 0%, rgba(20,4,0,.05) 46%, rgba(20,4,0,.16) 100%);
+}
+
+/* accent bands: cherry texture blocks become a warm honeydew tint */
+.bd-theme--cream .bd-section:has(.bd-statband),
+.bd-theme--cream .bd-section:has(.bd-finalcta) {
+  background-color: #F4F1E2;
+  background-image: none;
+  color: var(--bd-gravy);
+  border-block: 1px solid var(--c-line);
+}
+.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat__l { color: var(--bd-gravy); opacity: .8; }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__head { color: var(--bd-cherry); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-lede { color: var(--bd-gravy); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__partners { color: var(--bd-gravy); border-top-color: var(--c-line); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__partners a { color: var(--bd-cherry); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__partners a:hover { color: var(--bd-orange); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-btn--secondary { color: var(--bd-cherry); border-color: var(--bd-cherry); }
+.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-btn--secondary:hover { background: var(--bd-cherry); color: var(--bd-cream); }
+
+/* stats: smaller orange hits — numbers go cherry, rules go honeydew */
+.bd-stat { border-top-color: var(--bd-honeydew); }
+.bd-stat__n { color: var(--bd-cherry); }
+
+/* footer: gravy block becomes a light close */
+.bd-footer { background: #F4F1E2; color: var(--bd-gravy); border-top: 1px solid color-mix(in srgb, var(--bd-cherry) 14%, transparent); }
+.bd-footer__col h4 { color: var(--bd-cherry); }
+.bd-footer__col a { color: var(--bd-gravy); }
+.bd-footer__brand-line { color: var(--bd-cherry); }
+.bd-footer__bottom { border-top-color: color-mix(in srgb, var(--bd-cherry) 14%, transparent); }
+
+/* soften remaining heavy fills */
+.bd-theme--cream .bd-dish-card--placeholder { background: #F4F1E2; }
+.bd-theme--cream .bd-person__photo { background: #F4F1E2; }
+
+/* ---------- Buildings: photo cards + city map (2026-07-09) ---------- */
+.bd-bldg-grid { display: grid; gap: var(--bd-space-5); grid-template-columns: 1fr; }
+@media (min-width: 640px)  { .bd-bldg-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .bd-bldg-grid { grid-template-columns: repeat(4, 1fr); } }
+.bd-bldg-card { background: #fff; border: 1px solid var(--c-line, rgba(80,0,8,.14)); border-radius: var(--bd-radius-lg); overflow: hidden; }
+.bd-bldg-card__media { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+.bd-bldg-card__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--bd-ease-out); }
+.bd-bldg-card:hover .bd-bldg-card__img { transform: scale(1.04); }
+.bd-bldg-card__fill { width: 100%; height: 100%; display: grid; place-items: center; background: #F4F1E2; }
+.bd-bldg-card__fill span { font-family: var(--bd-font-display); font-weight: 900; font-size: var(--bd-size-5xl); color: var(--bd-honeydew); }
+.bd-bldg-card__status {
+  position: absolute; top: var(--bd-space-3); left: var(--bd-space-3);
+  font-family: var(--bd-font-body); font-weight: 900; font-size: var(--bd-size-xs);
+  text-transform: uppercase; letter-spacing: var(--bd-track-wider);
+  padding: 4px 12px; border-radius: var(--bd-radius-pill);
+  background: #fff; color: var(--bd-cherry); border: 1px solid var(--c-line, rgba(80,0,8,.14));
+}
+.bd-bldg-card__status--live { background: var(--bd-orange); color: var(--bd-cream); border-color: var(--bd-orange); }
+.bd-bldg-card__body { padding: var(--bd-space-4) var(--bd-space-4) var(--bd-space-5); }
+.bd-bldg-card__name { font-family: var(--bd-font-display); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-tight); font-size: var(--bd-size-lg); color: var(--bd-cherry); margin: 0 0 var(--bd-space-1); line-height: var(--bd-lh-snug); }
+.bd-bldg-card__address { margin: 0; font-size: var(--bd-size-sm); color: var(--bd-gravy); opacity: .8; }
+.bd-bldg-card__type { margin: var(--bd-space-1) 0 0; font-size: var(--bd-size-xs); font-weight: 700; text-transform: uppercase; letter-spacing: var(--bd-track-wide); color: var(--bd-gravy); opacity: .55; }
+
+.bd-bldg-map { height: 460px; border-radius: var(--bd-radius-lg); overflow: hidden; border: 1px solid var(--c-line, rgba(80,0,8,.14)); margin-top: var(--bd-space-6); }
+.bd-bldgpin { display: block; width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 3px solid var(--bd-cherry); box-shadow: 0 1px 6px rgba(32,4,0,.25); }
+.bd-bldgpin--live { background: var(--bd-orange); border-color: #fff; }

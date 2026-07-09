@@ -361,12 +361,14 @@ FARMS = [
 ]
 
 BUILDINGS = [
-    {"name": "East Room",         "address": "507 King St E, Toronto",      "type": "Co-working",          "status": "Live"},
-    {"name": "The Selby",         "address": "592 Sherbourne St, Toronto",  "type": "Luxury rental",       "status": "Live"},
-    {"name": "Club Apex",         "address": "Yonge & Bloor (3rd floor)",    "type": "Members club",        "status": "Live"},
-    {"name": "King Charlotte",    "address": "11 Charlotte St, Toronto",     "type": "Condominium",         "status": "Q3 2026"},
-    {"name": "The Well",          "address": "486 Front St W, Toronto",      "type": "Mixed-use residence", "status": "Q4 2026"},
-    {"name": "One Bloor East",    "address": "1 Bloor St E, Toronto",        "type": "Luxury rental",       "status": "Q4 2026"},
+    {"slug": "east-room",      "name": "East Room",      "address": "507 King St E, Toronto",                  "type": "Co-working",          "status": "Live",        "lat": 43.65540, "lng": -79.35900},
+    {"slug": "the-selby",      "name": "The Selby",      "address": "592 Sherbourne St, Toronto",              "type": "Luxury rental",       "status": "Live",        "lat": 43.66900, "lng": -79.37620},
+    {"slug": "club-apex",      "name": "Club Apex",      "address": "Yonge & Bloor (3rd floor)",               "type": "Members club",        "status": "Live",        "lat": 43.67100, "lng": -79.38680},
+    {"slug": "maple-house",    "name": "Maple House",    "address": "Canary Landing, Front St E & Cherry St",  "type": "Luxury rental",       "status": "Live",        "lat": 43.65280, "lng": -79.35480},
+    {"slug": "king-charlotte", "name": "King Charlotte", "address": "11 Charlotte St, Toronto",                "type": "Condominium",         "status": "Q3 2026",     "lat": 43.64650, "lng": -79.39390},
+    {"slug": "the-well",       "name": "The Well",       "address": "486 Front St W, Toronto",                 "type": "Mixed-use residence", "status": "Q4 2026",     "lat": 43.64200, "lng": -79.39990},
+    {"slug": "one-bloor-east", "name": "One Bloor East", "address": "1 Bloor St E, Toronto",                   "type": "Luxury rental",       "status": "Q4 2026",     "lat": 43.67020, "lng": -79.38550},
+    {"slug": "sloane",         "name": "Sloane",         "address": "5 York Garden Way, North York",           "type": "Rental community",    "status": "August 2026", "lat": 43.72500, "lng": -79.45450},
 ]
 
 NAV = [

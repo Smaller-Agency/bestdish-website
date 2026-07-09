@@ -135,6 +135,35 @@
     } catch (err) { /* leave empty on failure */ }
   }
 
+  // Buildings map — every freezer location, live vs coming pins.
+  const bldgMapEl = document.getElementById('bd-buildings-map');
+  const bldgData = document.getElementById('bd-buildings-map-data');
+  if (bldgMapEl && bldgData && window.L) {
+    try {
+      const bldgs = JSON.parse(bldgData.textContent);
+      const map = L.map(bldgMapEl, { scrollWheelZoom: false, zoomControl: true });
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd', maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+      }).addTo(map);
+      const markers = bldgs.map((b) => {
+        const icon = L.divIcon({
+          className: 'bd-pin',
+          html: '<span class="bd-bldgpin' + (b.live ? ' bd-bldgpin--live' : '') + '"></span>',
+          iconSize: [22, 22], iconAnchor: [11, 11], popupAnchor: [0, -14]
+        });
+        return L.marker([b.lat, b.lng], { icon, title: b.name })
+          .bindPopup(
+            '<strong>' + b.name + '</strong>' +
+            '<span class="bd-popup__meta">' + b.address + ' &middot; ' + b.status + '</span>',
+            { className: 'bd-popup', closeButton: false }
+          );
+      });
+      const group = L.featureGroup(markers).addTo(map);
+      map.fitBounds(group.getBounds().pad(0.18));
+    } catch (err) { /* leave the container empty on any failure */ }
+  }
+
   // Feedback form — no backend, so compose a pre-filled email to feedback@bestdish.ca
   const fbForm = document.querySelector('.bd-feedback-form');
   if (fbForm) {

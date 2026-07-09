@@ -846,20 +846,30 @@ def farms_page():
 # ---------- Buildings ----------
 
 def buildings_page():
-    rows = []
+    import json as _json
+    cards = []
     live_count = sum(1 for b in BUILDINGS if b["status"] == "Live")
-    for i, b in enumerate(BUILDINGS, 1):
-        status_cls = "bd-building-row__status--live" if b["status"] == "Live" else ""
-        rows.append(f"""<div class="bd-building-row bd-reveal">
-          <span class="bd-building-row__num">{i:02d}</span>
-          <div>
-            <h3 class="bd-building-row__name">{e(b["name"])}</h3>
-            <span class="bd-building-row__address">{e(b["address"])}</span>
+    for b in BUILDINGS:
+        photo_rel = f"assets/buildings/{b['slug']}.jpg"
+        if img_exists(photo_rel):
+            media = f'<img class="bd-bldg-card__img" src="{photo_rel}" alt="{e(b["name"])}" loading="lazy">'
+        else:
+            media = (f'<div class="bd-bldg-card__fill"><span>{e(b["name"][0])}</span></div>')
+        live = b["status"] == "Live"
+        pill_cls = "bd-bldg-card__status--live" if live else ""
+        cards.append(f"""<article class="bd-bldg-card bd-reveal">
+          <div class="bd-bldg-card__media">{media}<span class="bd-bldg-card__status {pill_cls}">{e(b["status"])}</span></div>
+          <div class="bd-bldg-card__body">
+            <h3 class="bd-bldg-card__name">{e(b["name"])}</h3>
+            <p class="bd-bldg-card__address">{e(b["address"])}</p>
+            <p class="bd-bldg-card__type">{e(b["type"])}</p>
           </div>
-          <span class="bd-building-row__type">{e(b["type"])}</span>
-          <span class="bd-building-row__status {status_cls}">{e(b["status"])}</span>
-        </div>""")
-    return page("Find a building", f"""
+        </article>""")
+    map_data = _json.dumps([
+        {"name": b["name"], "address": b["address"], "status": b["status"],
+         "live": b["status"] == "Live", "lat": b["lat"], "lng": b["lng"]}
+        for b in BUILDINGS])
+    return page("Find a building", extra_head=MAP_HEAD, body=f"""
 <header class="bd-section">
   <div class="bd-container">
     <div style="display:grid; gap: var(--bd-space-7); grid-template-columns: 1fr; align-items: end;" class="bd-buildings-hero">
@@ -879,7 +889,16 @@ def buildings_page():
 
 <section class="bd-section" style="padding-top:0;">
   <div class="bd-container">
-    <div class="bd-buildings">{"".join(rows)}</div>
+    <div class="bd-bldg-grid">{"".join(cards)}</div>
+  </div>
+</section>
+
+<section class="bd-section" style="padding-top:0;">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">Across the city</p>
+    <h2 class="bd-headline bd-reveal" style="max-width:22ch;">Every freezer on the map.</h2>
+    <div class="bd-bldg-map bd-reveal" id="bd-buildings-map" role="img" aria-label="Map of BestDish buildings in Toronto"></div>
+    <script type="application/json" id="bd-buildings-map-data">{map_data}</script>
   </div>
 </section>
 
