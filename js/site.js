@@ -1,4 +1,4 @@
-// BestDish — light scroll reveal + magnetic CTA
+// BestDish — light scroll reveal + interactions
 (function () {
   // Promote to "JS ready" so CSS can hide reveal targets and play the animation.
   // Without this class, .bd-reveal stays visible (no-JS / search engines / screenshot tools).
@@ -71,18 +71,7 @@
 
   document.querySelectorAll('.bd-reveal').forEach((el) => io.observe(el));
 
-  // Subtle magnetic hover on .bd-btn--primary (within ~40px)
-  document.querySelectorAll('.bd-btn--primary').forEach((btn) => {
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
-    });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
-  });
+  // (magnetic button hover removed — it fought the CSS transform transition and jittered)
 
   // Restaurant map (Leaflet) — renders only where the map container exists
   // and the library loaded. Logo pins, branded popups, scroll-zoom disabled.
