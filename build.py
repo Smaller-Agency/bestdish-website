@@ -763,7 +763,7 @@ def how_it_works_page():
 CHEF_PHOTOS = {
     "Afrim Pristine":        "afrim-pristine.jpg",
     "Brett Feeley & Dan Ewing": "brett-feeley.jpeg",
-    "Dinesh Butola":         "dinesh-butola.webp",
+    "Dinesh Butola":         "dinesh-butola.jpg",
     "Victor Barry":          "victor-barry.webp",
     "Craig Harding":         "craig-harding.jpg",
     "Duncan Simpson":        "duncan-simpson.jpg",
