@@ -136,6 +136,7 @@ DISHES = [
         "chef_note": "This dish represents the way we build food in the restaurant — with patience, repetition, and attention to detail. Every layer matters.",
         "chef_signature": "Craig Harding",
         "image": "100layer.jpg",
+        "hero_image": "100layer-wide.jpg",
         "weight": "503 g",
         "serving": "2 cups (300 g)",
         "ingredients": "Canned tomatoes, Mozzarella cheese, Flour, Ground meat mix (beef, pork, veal), Whole milk, Pasteurized egg yolks, Grana Padano cheese, Chicken stock, Olive oil, Onions, White wine, Butter, Carrots, Tomato paste, Whole eggs, Celery, Garlic.",

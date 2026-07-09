@@ -405,7 +405,7 @@ def home():
             hero_credit0 = e(_credit)
         hero_slides += (
             f'<div class="bd-hero-show__slide{_on}" data-credit="{e(_credit)}">'
-            f'<img src="assets/images/{_d["image"]}" alt="{e(_d["name"])} from {e(_r["name"])}"{_lazy}></div>')
+            f'<img src="assets/images/{_d.get("hero_image", _d["image"])}" alt="{e(_d["name"])} from {e(_r["name"])}"{_lazy}></div>')
         hero_dots += f'<span class="{"is-on" if _i == 0 else ""}"></span>'
     return page("Toronto's best meals — in your lobby", extra_head=MAP_HEAD, body_class="bd-theme--cream", body=f"""
 <header class="bd-hero-wrap bd-hero--full">
@@ -440,7 +440,7 @@ def home():
 <section class="bd-section" style="padding-block: var(--bd-space-8);">
   <div class="bd-container">
     <div class="bd-statband">
-      <div class="bd-stat bd-reveal">{bd_icon('plate', 'bd-stat__icon')}<p class="bd-stat__n">11</p><p class="bd-stat__l">Iconic Toronto restaurants on the menu.</p></div>
+      <div class="bd-stat bd-reveal">{bd_icon('plate', 'bd-stat__icon')}<p class="bd-stat__n">8</p><p class="bd-stat__l">Iconic Toronto restaurants on the menu.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('clock', 'bd-stat__icon')}<p class="bd-stat__n">24/7</p><p class="bd-stat__l">In your lobby. No hours, no waiting.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('dollar', 'bd-stat__icon')}<p class="bd-stat__n">$0</p><p class="bd-stat__l">Delivery fees, tips, or tax. Ever.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('bolt', 'bd-stat__icon')}<p class="bd-stat__n">~10<span style="font-size:.5em;">min</span></p><p class="bd-stat__l">From the freezer to your plate.</p></div>

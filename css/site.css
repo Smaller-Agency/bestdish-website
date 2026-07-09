@@ -994,26 +994,16 @@ html:has(.bd-theme--cream) { background: var(--bd-cream); }
     linear-gradient(0deg, rgba(20,4,0,.52) 0%, rgba(20,4,0,.05) 46%, rgba(20,4,0,.16) 100%);
 }
 
-/* accent bands: cherry texture blocks become a warm honeydew tint */
-.bd-theme--cream .bd-section:has(.bd-statband),
-.bd-theme--cream .bd-section:has(.bd-finalcta) {
-  background-color: #F4F1E2;
-  background-image: none;
-  color: var(--bd-gravy);
-  border-block: 1px solid var(--c-line);
-}
-.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat__l { color: var(--bd-gravy); opacity: .8; }
-.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__head { color: var(--bd-cherry); }
-.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-lede { color: var(--bd-gravy); }
-.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__partners { color: var(--bd-gravy); border-top-color: var(--c-line); }
-.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__partners a { color: var(--bd-cherry); }
-.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-finalcta__partners a:hover { color: var(--bd-orange); }
-.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-btn--secondary { color: var(--bd-cherry); border-color: var(--bd-cherry); }
-.bd-theme--cream .bd-section:has(.bd-finalcta) .bd-btn--secondary:hover { background: var(--bd-cherry); color: var(--bd-cream); }
-
-/* stats: smaller orange hits — numbers go cherry, rules go honeydew */
-.bd-stat { border-top-color: var(--bd-honeydew); }
-.bd-stat__n { color: var(--bd-cherry); }
+/* stat band + final CTA keep the red theme — the cherry rhythm stays.
+   Playful pass: each stat carries its own packaging colourway. */
+.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat:nth-child(1) { border-top-color: var(--bd-orange); }
+.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat:nth-child(2) { border-top-color: var(--bd-blueberry); }
+.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat:nth-child(3) { border-top-color: var(--bd-shrimp); }
+.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat:nth-child(4) { border-top-color: var(--bd-pistachios); }
+.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat:nth-child(1) .bd-stat__icon { color: var(--bd-orange); }
+.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat:nth-child(2) .bd-stat__icon { color: var(--bd-blueberry); }
+.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat:nth-child(3) .bd-stat__icon { color: var(--bd-shrimp); }
+.bd-theme--cream .bd-section:has(.bd-statband) .bd-stat:nth-child(4) .bd-stat__icon { color: var(--bd-pistachios); }
 
 /* footer: gravy block becomes a light close */
 .bd-footer { background: #F4F1E2; color: var(--bd-gravy); border-top: 1px solid color-mix(in srgb, var(--bd-cherry) 14%, transparent); }
