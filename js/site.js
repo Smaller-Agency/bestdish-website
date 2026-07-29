@@ -186,13 +186,9 @@
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
       if (status) { status.textContent = ''; status.classList.remove('is-err'); }
       try {
-        // Google Apps Script Web App: text/plain avoids a CORS preflight; the /exec
-        // 302-redirects to a CORS-enabled response we can read.
-        const payload = { source: 'first-meal-free' };
-        new FormData(joinForm).forEach((v, k) => { payload[k] = v; });
-        const res = await fetch(action, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
-        const data = await res.json().catch(() => ({}));
-        if (!data.ok) throw new Error('bad status');
+        // Formspree AJAX: send the form data with Accept: application/json.
+        const res = await fetch(action, { method: 'POST', body: new FormData(joinForm), headers: { 'Accept': 'application/json' } });
+        if (!res.ok) throw new Error('bad status');
         joinForm.reset();
         joinForm.classList.add('is-sent');
         if (status) status.textContent = 'You’re in. Watch your inbox — we’ll email you when your free meal is active.';

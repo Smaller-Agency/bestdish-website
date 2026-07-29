@@ -18,11 +18,9 @@ def _asset_v(rel):
 CSS_V = _asset_v("css/site.css")
 JS_V = _asset_v("js/site.js")
 
-# First-meal-free signup endpoint — paste the Google Apps Script Web App /exec URL here
-# once deployed (see first-meal-free.gs). The signup form POSTs {name, phone, email,
-# wishlist, news} as JSON; the script appends a row to a Google Sheet and returns {ok:true}.
-# Until it's a real https URL, the form shows a graceful "not connected yet" message.
-JOIN_ENDPOINT = "REPLACE_WITH_APPS_SCRIPT_EXEC_URL"
+# First-meal-free signup endpoint (Formspree). The signup form POSTs
+# name/phone/email/wishlist/news here; JS submits via AJAX and shows an inline success.
+JOIN_ENDPOINT = "https://formspree.io/f/xvzeybzl"
 
 def img_exists(rel):
     return (ROOT / rel).exists()
@@ -1103,6 +1101,8 @@ def join_page():
         <p style="max-width: 42ch; margin-top: var(--bd-space-4);">Enter your details and we'll set up your free meal. You'll get an email when it's ready to redeem downstairs.</p>
       </div>
       <form class="bd-form bd-join-form bd-reveal" style="color: {_bc};" action="{JOIN_ENDPOINT}" method="POST">
+        <input type="hidden" name="_subject" value="New First Meal Free signup — bestdish">
+        <input type="hidden" name="source" value="first-meal-free">
         <div class="bd-field"><label for="j-name">First name</label><input id="j-name" name="name" type="text" autocomplete="given-name" style="border-bottom-color: {_bc}; color: {_bc};"></div>
         <div class="bd-field"><label for="j-phone">Phone <span style="color:var(--bd-orange);">*</span></label><input id="j-phone" name="phone" type="tel" required autocomplete="tel" style="border-bottom-color: {_bc}; color: {_bc};"><small class="bd-field__hint">We link this to your free meal — and text you when it's active.</small></div>
         <div class="bd-field"><label for="j-email">Email <span style="color:var(--bd-orange);">*</span></label><input id="j-email" name="email" type="email" required autocomplete="email" style="border-bottom-color: {_bc}; color: {_bc};"></div>
