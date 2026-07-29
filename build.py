@@ -1164,7 +1164,7 @@ def contact_page():
       <div class="bd-reveal">
         <p class="bd-eyebrow">Visit</p>
         <p>507 King St E<br>Toronto, ON, M5A 1M3</p>
-        <a class="bd-btn bd-btn--primary" style="margin-top: var(--bd-space-5);" href="/buildings">Find a building</a>
+        <a class="bd-btn bd-btn--primary" style="margin-top: var(--bd-space-5);" href="buildings">Find a building</a>
       </div>
     </div>
   </div>
@@ -1201,8 +1201,10 @@ def build():
     for d in DISHES:
         (ROOT / f"{dish_url(d['slug'])}.html").write_text(dish_page(d))
     # Redirect stubs for live URLs that don't map to a real redesign page.
-    (ROOT / "home.html").write_text(redirect_stub("/"))
-    (ROOT / "contest.html").write_text(redirect_stub("/join"))
+    # Relative targets so the stubs work both under the /bestdish-website/
+    # preview subpath and at the root custom domain post-cutover.
+    (ROOT / "home.html").write_text(redirect_stub("./"))
+    (ROOT / "contest.html").write_text(redirect_stub("join"))
     print(f"Built site at {ROOT}")
     print(f"  - Pages: {len(list(ROOT.glob('*.html')))} total")
 
