@@ -76,6 +76,15 @@ RESTAURANTS = {
         "chef": "Kaya Ogruce",
         "logo": "DeathInVenice.png",
     },
+    "bunners": {
+        "name": "Bunner's Bakeshop",
+        "address": "3054 Dundas St W",
+        "city": "Toronto, ON",
+        "postal": "M6P 1Z3",
+        "blurb": "Since 2010, Bunner's Bakeshop has been proving that vegan and gluten-free don't require compromise — traditional baked goods indistinguishable from their classic counterparts, made in a dedicated nut-free kitchen.",
+        "chef": "Bunner's Bakeshop",
+        "logo": "bunners.png",
+    },
 }
 
 # Map coordinates (geocoded from the verified addresses) + neighbourhood.
@@ -89,6 +98,7 @@ _RESTAURANT_GEO = {
     "slowhand":         {"lat": 43.661785, "lng": -79.337644, "hood": "Leslieville"},
     "piano-piano":      {"lat": 43.649041, "lng": -79.374650, "hood": "St. Lawrence"},
     "death-in-venice":  {"lat": 43.649650, "lng": -79.426750, "hood": "Little Portugal"},
+    "bunners":          {"lat": 43.665560, "lng": -79.466950, "hood": "The Junction"},
 }
 for _slug, _geo in _RESTAURANT_GEO.items():
     RESTAURANTS[_slug].update(_geo)
@@ -336,6 +346,25 @@ DISHES = [
         "image": "gelato.jpg",
         "heat": [
             ("Serve", "Keep frozen. Let sit at room temperature for a few minutes before scooping."),
+        ],
+    },
+    {
+        "slug": "brownie-bites",
+        "name": "Brownie Bites",
+        "category": "Sweet",
+        "restaurant": "bunners",
+        "tagline": "Nine mini brownies, baked in Bunner's own kitchen. Rich, moist, and completely delicious — no animal products, no gluten, no nuts. Sized for a quick chocolate fix, waiting in your building.",
+        "chef_note": "No matter what diet or allergy you live with, everyone deserves the option to eat something that makes them feel safe.",
+        "chef_signature": "Bunner's Bakeshop",
+        "image": "brownie-bites.jpg",
+        "weight": "225 g (9 brownies)",
+        "serving": "1 brownie (25 g)",
+        "ingredients": "Bunner's all-purpose flour blend (chickpea flour, sorghum flour, fava bean flour, potato starch, tapioca starch), Cocoa, Salt, Baking powder, Xanthan gum, Canola oil, Sugar, Sucanat, Applesauce, Vanilla, Vegan chocolate chips (sugar, unsweetened chocolate, cocoa butter, soy lecithin, vanilla).",
+        "contains": "Soy.",
+        "may_contain": "Nothing — baked on dedicated gluten-free, nut-free lines.",
+        "heat": [
+            ("Serve", "Keep frozen. Let thaw at room temperature for 10–15 minutes before serving."),
+            ("Warm", "For a gooey centre, microwave one brownie for 10–15 seconds."),
         ],
     },
 ]

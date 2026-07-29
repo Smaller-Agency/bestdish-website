@@ -35,6 +35,7 @@ DISH_ACCENT = {
     "nutella-tiramisu":      "honeydew",
     "chocolate-chip-cookies":"blueberry",
     "gelato":                "shrimp",
+    "brownie-bites":         "shrimp",
 }
 
 def accent(slug):
@@ -230,7 +231,7 @@ def restaurants_section(base=""):
       </div>
       <a class="bd-btn bd-btn--ghost bd-reveal" href="{base}chefs.html">Meet the chefs →</a>
     </div>
-    <p class="bd-lede bd-reveal" style="max-width:62ch; margin-bottom: var(--bd-space-7);">We didn't invent the food — we partnered with eleven of the city's most-loved restaurants and their chefs to bring their signature dishes, made exactly as they make them, to the freezer downstairs. Tap a pin to see who's cooking.</p>
+    <p class="bd-lede bd-reveal" style="max-width:62ch; margin-bottom: var(--bd-space-7);">We didn't invent the food — we partnered with {len(RESTAURANTS)} of the city's most-loved restaurants and their chefs to bring their signature dishes, made exactly as they make them, to the freezer downstairs. Tap a pin to see who's cooking.</p>
     <script type="application/json" id="bd-map-data">{data_json}</script>
     <div class="bd-restmap" id="bd-map" role="img" aria-label="Map of featured Toronto restaurants"></div>
     <div class="bd-restgrid">{"".join(cards)}</div>
@@ -443,7 +444,7 @@ def home():
 <section class="bd-section" style="padding-block: var(--bd-space-8);">
   <div class="bd-container">
     <div class="bd-statband">
-      <div class="bd-stat bd-reveal">{bd_icon('plate', 'bd-stat__icon')}<p class="bd-stat__n">8</p><p class="bd-stat__l">Iconic Toronto restaurants on the menu.</p></div>
+      <div class="bd-stat bd-reveal">{bd_icon('plate', 'bd-stat__icon')}<p class="bd-stat__n">{len(RESTAURANTS)}</p><p class="bd-stat__l">Iconic Toronto restaurants on the menu.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('clock', 'bd-stat__icon')}<p class="bd-stat__n">24/7</p><p class="bd-stat__l">In your lobby. No hours, no waiting.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('dollar', 'bd-stat__icon')}<p class="bd-stat__n">$0</p><p class="bd-stat__l">Delivery fees, tips, or tax. Ever.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('bolt', 'bd-stat__icon')}<p class="bd-stat__n">~10<span style="font-size:.5em;">min</span></p><p class="bd-stat__l">From the freezer to your plate.</p></div>
