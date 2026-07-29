@@ -41,6 +41,23 @@ DISH_ACCENT = {
 def accent(slug):
     return DISH_ACCENT.get(slug, "orange")
 
+# Dish page URLs — map each dish to the slug the LIVE bestdish.ca site uses, so a
+# domain cutover keeps existing links / SEO intact. Dish pages live at the site root.
+DISH_URL = {
+    "cheesemaster-mac":      "cheese-master-mac",
+    "100-layer-lasagna":     "100-layer-lasagna",
+    "cheeseburger-pot-pie":  "cheese-burger-pot-pie",
+    "butter-chicken":        "butter-chicken-curry",
+    "le-grand-fromage":      "le-grand-fromage",
+    "nutella-tiramisu":      "nutella-tiramisu",
+    "chocolate-chip-cookies":"chocolate-chip-cookie",
+    "gelato":                "deathinvenice",
+    "brownie-bites":         "brownie-bites",
+}
+
+def dish_url(slug):
+    return DISH_URL.get(slug, slug)
+
 def pat(colorway, base=""):
     """Inline style var pointing at a damask colourway tile."""
     return f"--pat:url({base}assets/patterns/damask-{colorway}.svg)"
@@ -210,7 +227,7 @@ def restaurants_section(base=""):
     for slug, r in RESTAURANTS.items():
         d = REST_DISH.get(slug)
         logo = f"{base}assets/logos/{logo_file(slug)}"
-        href = f"{base}meals/{d['slug']}.html" if d else f"{base}chefs.html#{slug}"
+        href = f"{base}{dish_url(d['slug'])}" if d else f"{base}chefs#{slug}"
         dish_label = d["name"] if d else "Meet the chef"
         cards.append(f"""<a class="bd-rest-card bd-reveal" href="{href}">
       <span class="bd-rest-card__logo"><img src="{logo}" alt="{e(r['name'])} logo" loading="lazy"></span>
@@ -369,7 +386,7 @@ def dish_card(d, base="", big=False):
                  f'--pack-bg:color-mix(in srgb, var(--bd-{cw}) 17%, var(--bd-gravy));">'
                  f'<img class="bd-dish-card__badge" src="{base}assets/logos/bd-orange.png" alt="">'
                  f'<span class="bd-dish-card__frozen">Flash-frozen</span></div>')
-    return f"""<a class="bd-dish-card bd-reveal" href="{base}meals/{d['slug']}.html">
+    return f"""<a class="bd-dish-card bd-reveal" href="{base}{dish_url(d['slug'])}">
   {media}
   <span class="bd-dish-card__tab">{e(r['name'])}</span>
   <span class="bd-dish-card__chip">{e(d['category'])}</span>
@@ -428,7 +445,7 @@ def home():
         <span>Ready 24/7 downstairs</span>
       </div>
       <div class="bd-hero__cta">
-        <a class="bd-btn bd-btn--primary" href="meals.html">Browse the menu</a>
+        <a class="bd-btn bd-btn--primary" href="browse-meals">Browse the menu</a>
         <a class="bd-btn bd-btn--secondary" href="buildings.html">Is it in my building?</a>
       </div>
     </div>
@@ -459,7 +476,7 @@ def home():
         <p class="bd-eyebrow bd-reveal">The menu</p>
         <h2 class="bd-headline bd-reveal">The city's best,<br>in your lobby.</h2>
       </div>
-      <a class="bd-btn bd-btn--ghost bd-reveal" href="meals.html">All meals →</a>
+      <a class="bd-btn bd-btn--ghost bd-reveal" href="browse-meals">All meals →</a>
     </div>
     <div class="bd-reel">{dishes}</div>
   </div>
@@ -518,7 +535,7 @@ def home():
       <p class="bd-lede bd-finalcta__lede">Find your building to see what's waiting in the freezer downstairs. Not there yet? We'll add it to the list — the more residents ask, the faster we install.</p>
       <div class="bd-finalcta__actions">
         <a class="bd-btn bd-btn--primary" href="buildings.html">Find a building</a>
-        <a class="bd-btn bd-btn--secondary" href="meals.html">Browse the menu</a>
+        <a class="bd-btn bd-btn--secondary" href="browse-meals">Browse the menu</a>
       </div>
     </div>
     <p class="bd-finalcta__partners bd-reveal">Manage a building or run a restaurant?
@@ -571,7 +588,7 @@ def meals_page():
 # ---------- Dish detail ----------
 
 def dish_page(d):
-    base = "../"
+    base = ""  # dish pages now live at the site root (/cheese-master-mac, etc.)
     r = RESTAURANTS[d["restaurant"]]
     img_rel = f"assets/images/{d['image']}"
     has_img = img_exists(img_rel)
@@ -1117,24 +1134,77 @@ def join_page():
 </section>
 """)
 
+# ---------- Feedback / Contact (parity with live bestdish.ca) ----------
+
+def feedback_page():
+    return page("Feedback", f"""
+<header class="bd-section" style="padding-bottom:0;">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">Feedback</p>
+    <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">Tell us how we did.</h1>
+    <p class="bd-hero-lede bd-reveal">Tried a dish and loved it — or didn't? Want a restaurant added to the freezer in your building? We read every note.</p>
+  </div>
+</header>
+{feedback_section()}
+""")
+
+def contact_page():
+    return page("Contact", """
+<header class="bd-section">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">Contact</p>
+    <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">Get in touch.</h1>
+    <p class="bd-hero-lede bd-reveal">Questions, partnerships, or press — we'd love to hear from you.</p>
+    <div class="bd-info-grid" style="margin-top: var(--bd-space-7);">
+      <div class="bd-reveal">
+        <p class="bd-eyebrow">Say hello</p>
+        <p style="font-size: var(--bd-size-xl); margin:0 0 var(--bd-space-2);"><a href="mailto:hello@bestdish.ca">hello@bestdish.ca</a></p>
+        <p style="font-size: var(--bd-size-xl); margin:0;"><a href="tel:+14168246626">(416) 824-6626</a></p>
+      </div>
+      <div class="bd-reveal">
+        <p class="bd-eyebrow">Visit</p>
+        <p>507 King St E<br>Toronto, ON, M5A 1M3</p>
+        <a class="bd-btn bd-btn--primary" style="margin-top: var(--bd-space-5);" href="/buildings">Find a building</a>
+      </div>
+    </div>
+  </div>
+</header>
+""")
+
+def redirect_stub(to):
+    """Client-side redirect (GitHub Pages can't do server-side 3xx)."""
+    return (f'<!doctype html><html lang="en"><head><meta charset="utf-8">'
+            f'<meta http-equiv="refresh" content="0; url={to}">'
+            f'<link rel="canonical" href="{to}"><title>Redirecting…</title></head>'
+            f'<body><p>Redirecting to <a href="{to}">{to}</a>…</p></body></html>')
+
 # ---------- Build ----------
 
 def build():
+    # Clean stale outputs from the old URL scheme (meals.html + /meals/*).
+    import shutil as _sh
+    (ROOT / "meals.html").unlink(missing_ok=True)
+    _sh.rmtree(ROOT / "meals", ignore_errors=True)
+
     (ROOT / "index.html").write_text(home())
-    (ROOT / "meals.html").write_text(meals_page())
+    (ROOT / "browse-meals.html").write_text(meals_page())
     (ROOT / "how-it-works.html").write_text(how_it_works_page())
     (ROOT / "chefs.html").write_text(chefs_page())
-    # (ROOT / "farms.html").write_text(farms_page())  # farm page hidden for now
     (ROOT / "buildings.html").write_text(buildings_page())
     (ROOT / "for-properties.html").write_text(for_properties_page())
     (ROOT / "for-restaurants.html").write_text(for_restaurants_page())
     (ROOT / "faq.html").write_text(faq_page())
     (ROOT / "join.html").write_text(join_page())
-    (ROOT / "meals").mkdir(exist_ok=True)
+    (ROOT / "feedback.html").write_text(feedback_page())
+    (ROOT / "contact.html").write_text(contact_page())
+    # Dish pages at the live bestdish.ca slugs (site root).
     for d in DISHES:
-        (ROOT / "meals" / f"{d['slug']}.html").write_text(dish_page(d))
+        (ROOT / f"{dish_url(d['slug'])}.html").write_text(dish_page(d))
+    # Redirect stubs for live URLs that don't map to a real redesign page.
+    (ROOT / "home.html").write_text(redirect_stub("/"))
+    (ROOT / "contest.html").write_text(redirect_stub("/join"))
     print(f"Built site at {ROOT}")
-    print(f"  - Pages: {len(list(ROOT.glob('*.html'))) + len(list((ROOT/'meals').glob('*.html')))} total")
+    print(f"  - Pages: {len(list(ROOT.glob('*.html')))} total")
 
 if __name__ == "__main__":
     build()

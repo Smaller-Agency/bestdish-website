@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>100 Layer Lasagna — La Palma — BestDish</title>
 <meta name="description" content="Iconic restaurant dishes, in your building. Chef-made. Flash-frozen at peak. Finished in your kitchen.">
-<link rel="icon" href="../assets/logos/favicon.png">
+<link rel="icon" href="assets/logos/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Nunito+Sans:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/tokens.css">
-<link rel="stylesheet" href="../css/base.css">
-<link rel="stylesheet" href="../css/components.css">
-<link rel="stylesheet" href="../css/site.css?v=6f956095">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/site.css?v=6f956095">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
@@ -21,12 +21,12 @@
   <filter id="bd-grit"><feTurbulence baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.1"/><feComposite in="SourceGraphic" operator="in"/></filter>
 </svg>
 <nav class="bd-nav">
-  <a class="bd-nav__brand" href="../" aria-label="BestDish home">
-    <img src="../assets/logos/bd-orange.png" alt="BestDish">
+  <a class="bd-nav__brand" href="./" aria-label="BestDish home">
+    <img src="assets/logos/bd-orange.png" alt="BestDish">
   </a>
   <div class="bd-nav__links">
-    <a href="../meals.html">Browse meals</a><a href="../how-it-works.html">How it works</a><a href="../chefs.html">Chefs</a><a href="../join.html">First meal free</a>
-    <a class="bd-btn bd-btn--primary" href="../buildings.html">Find a building</a>
+    <a href="browse-meals">Browse meals</a><a href="how-it-works">How it works</a><a href="chefs">Chefs</a><a href="join">First meal free</a>
+    <a class="bd-btn bd-btn--primary" href="buildings.html">Find a building</a>
   </div>
 </nav>
 
@@ -34,11 +34,11 @@
   <div class="bd-container">
     <div class="bd-dish-hero">
       <div class="bd-reveal">
-        <img class="bd-dish-hero__photo" src="../assets/images/100layer.jpg" alt="100 Layer Lasagna by La Palma">
+        <img class="bd-dish-hero__photo" src="assets/images/100layer.jpg" alt="100 Layer Lasagna by La Palma">
       </div>
       <div class="bd-reveal">
         <p class="bd-dish-hero__category">Savoury</p>
-        <a class="bd-dish-hero__restaurant" href="../chefs.html#la-palma">La Palma</a>
+        <a class="bd-dish-hero__restaurant" href="chefs.html#la-palma">La Palma</a>
         <h1 class="bd-dish-hero__name">100 Layer Lasagna</h1>
         <p class="bd-dish-hero__tagline">A fully handmade lasagna built layer by layer using pasta, slow-cooked meat, and béchamel. Each layer is intentional, creating a structure and texture that defines the dish.</p>
         <div class="bd-dish-meta">
@@ -55,7 +55,7 @@
 <section class="bd-section bd-section--alt">
   <div class="bd-container">
     <div class="bd-chefblock bd-reveal">
-      <div class="bd-chefblock__photo"><img src="../assets/chefs/craig-harding.jpg" alt="Portrait of Craig Harding" loading="lazy"></div>
+      <div class="bd-chefblock__photo"><img src="assets/chefs/craig-harding.jpg" alt="Portrait of Craig Harding" loading="lazy"></div>
       <div class="bd-chefblock__body">
         <p class="bd-eyebrow">The chef</p>
         <p class="bd-pullquote" style="margin-bottom: var(--bd-space-3);">"This dish represents the way we build food in the restaurant — with patience, repetition, and attention to detail. Every layer matters."<span class="bd-pullquote__attr">— Craig Harding, La Palma</span></p>
@@ -107,9 +107,9 @@
     <h2 class="bd-headline bd-reveal" style="max-width:22ch;">La Palma.</h2>
     <p class="bd-lede bd-reveal" style="max-width: 60ch;">La Palma is known for its modern Italian cooking, combining traditional techniques with a focus on ingredient quality and precision.</p>
     <div class="bd-restloc bd-reveal">
-      <img class="bd-restloc__photo" src="../assets/restaurants/la-palma.jpg" alt="Inside La Palma" loading="lazy">
+      <img class="bd-restloc__photo" src="assets/restaurants/la-palma.jpg" alt="Inside La Palma" loading="lazy">
       <div class="bd-restloc__map-wrap">
-        <div class="bd-dishmap" id="bd-dishmap" role="img" aria-label="Map of La Palma" data-lat="43.651347" data-lng="-79.410118" data-logo="../assets/logos/la-palma.png"></div>
+        <div class="bd-dishmap" id="bd-dishmap" role="img" aria-label="Map of La Palma" data-lat="43.651347" data-lng="-79.410118" data-logo="assets/logos/la-palma.png"></div>
         <div class="bd-restloc__addr">
           <p class="bd-restloc__address">849 Dundas St W<br><span>Toronto, ON · M6J 1V5</span></p>
           <a class="bd-btn bd-btn--secondary" href="https://www.google.com/maps/dir/?api=1&destination=La%20Palma%2C%20849%20Dundas%20St%20W%2C%20Toronto%2C%20ON%20M6J%201V5" target="_blank" rel="noopener">Get directions →</a>
@@ -123,64 +123,64 @@
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">More from the menu</p>
     <div class="bd-reel" style="margin-top: var(--bd-space-6);">
-      <a class="bd-dish-card bd-reveal" href="../meals/cheesemaster-mac.html">
-  <img src="../assets/images/cheesemaster-mac.jpg" alt="Cheese Master Mac by Cheese Boutique" class="bd-dish-card__img" loading="lazy">
+      <a class="bd-dish-card bd-reveal" href="cheese-master-mac">
+  <img src="assets/images/cheesemaster-mac.jpg" alt="Cheese Master Mac by Cheese Boutique" class="bd-dish-card__img" loading="lazy">
   <span class="bd-dish-card__tab">Cheese Boutique</span>
   <span class="bd-dish-card__chip">Savoury</span>
   <div class="bd-dish-card__overlay">
     <h3 class="bd-dish-card__name">Cheese Master Mac</h3>
     <span class="bd-dish-card__cta">View dish →</span>
   </div>
-</a><a class="bd-dish-card bd-reveal" href="../meals/cheeseburger-pot-pie.html">
-  <img src="../assets/images/cheeseburger-pot-pie.jpg" alt="Cheese Burger Pot Pie by The Queen &amp; Beaver" class="bd-dish-card__img" loading="lazy">
+</a><a class="bd-dish-card bd-reveal" href="cheese-burger-pot-pie">
+  <img src="assets/images/cheeseburger-pot-pie.jpg" alt="Cheese Burger Pot Pie by The Queen &amp; Beaver" class="bd-dish-card__img" loading="lazy">
   <span class="bd-dish-card__tab">The Queen &amp; Beaver</span>
   <span class="bd-dish-card__chip">Savoury</span>
   <div class="bd-dish-card__overlay">
     <h3 class="bd-dish-card__name">Cheese Burger Pot Pie</h3>
     <span class="bd-dish-card__cta">View dish →</span>
   </div>
-</a><a class="bd-dish-card bd-reveal" href="../meals/butter-chicken.html">
-  <img src="../assets/images/butter-chicken.jpg" alt="Butter Chicken Curry by Pukka" class="bd-dish-card__img" loading="lazy">
+</a><a class="bd-dish-card bd-reveal" href="butter-chicken-curry">
+  <img src="assets/images/butter-chicken.jpg" alt="Butter Chicken Curry by Pukka" class="bd-dish-card__img" loading="lazy">
   <span class="bd-dish-card__tab">Pukka</span>
   <span class="bd-dish-card__chip">Savoury</span>
   <div class="bd-dish-card__overlay">
     <h3 class="bd-dish-card__name">Butter Chicken Curry</h3>
     <span class="bd-dish-card__cta">View dish →</span>
   </div>
-</a><a class="bd-dish-card bd-reveal" href="../meals/le-grand-fromage.html">
-  <img src="../assets/images/le-grand-fromage.jpg" alt="Le Grand Fromage Pizza by Slowhand" class="bd-dish-card__img" loading="lazy">
+</a><a class="bd-dish-card bd-reveal" href="le-grand-fromage">
+  <img src="assets/images/le-grand-fromage.jpg" alt="Le Grand Fromage Pizza by Slowhand" class="bd-dish-card__img" loading="lazy">
   <span class="bd-dish-card__tab">Slowhand</span>
   <span class="bd-dish-card__chip">Savoury</span>
   <div class="bd-dish-card__overlay">
     <h3 class="bd-dish-card__name">Le Grand Fromage Pizza</h3>
     <span class="bd-dish-card__cta">View dish →</span>
   </div>
-</a><a class="bd-dish-card bd-reveal" href="../meals/nutella-tiramisu.html">
-  <img src="../assets/images/nutella-tiramisu-dish.jpg" alt="Nutella Tiramisu by Piano Piano" class="bd-dish-card__img" loading="lazy">
+</a><a class="bd-dish-card bd-reveal" href="nutella-tiramisu">
+  <img src="assets/images/nutella-tiramisu-dish.jpg" alt="Nutella Tiramisu by Piano Piano" class="bd-dish-card__img" loading="lazy">
   <span class="bd-dish-card__tab">Piano Piano</span>
   <span class="bd-dish-card__chip">Sweet</span>
   <div class="bd-dish-card__overlay">
     <h3 class="bd-dish-card__name">Nutella Tiramisu</h3>
     <span class="bd-dish-card__cta">View dish →</span>
   </div>
-</a><a class="bd-dish-card bd-reveal" href="../meals/chocolate-chip-cookies.html">
-  <img src="../assets/images/chocolate-chip-cookies-dish.jpg" alt="The Best Chocolate Chip Cookie by Le Gourmand" class="bd-dish-card__img" loading="lazy">
+</a><a class="bd-dish-card bd-reveal" href="chocolate-chip-cookie">
+  <img src="assets/images/chocolate-chip-cookies-dish.jpg" alt="The Best Chocolate Chip Cookie by Le Gourmand" class="bd-dish-card__img" loading="lazy">
   <span class="bd-dish-card__tab">Le Gourmand</span>
   <span class="bd-dish-card__chip">Sweet</span>
   <div class="bd-dish-card__overlay">
     <h3 class="bd-dish-card__name">The Best Chocolate Chip Cookie</h3>
     <span class="bd-dish-card__cta">View dish →</span>
   </div>
-</a><a class="bd-dish-card bd-reveal" href="../meals/gelato.html">
-  <img src="../assets/images/gelato.jpg" alt="Gelato by Death in Venice" class="bd-dish-card__img" loading="lazy">
+</a><a class="bd-dish-card bd-reveal" href="deathinvenice">
+  <img src="assets/images/gelato.jpg" alt="Gelato by Death in Venice" class="bd-dish-card__img" loading="lazy">
   <span class="bd-dish-card__tab">Death in Venice</span>
   <span class="bd-dish-card__chip">Sweet</span>
   <div class="bd-dish-card__overlay">
     <h3 class="bd-dish-card__name">Gelato</h3>
     <span class="bd-dish-card__cta">View dish →</span>
   </div>
-</a><a class="bd-dish-card bd-reveal" href="../meals/brownie-bites.html">
-  <img src="../assets/images/brownie-bites.jpg" alt="Brownie Bites by Bunner&#x27;s Bakeshop" class="bd-dish-card__img" loading="lazy">
+</a><a class="bd-dish-card bd-reveal" href="brownie-bites">
+  <img src="assets/images/brownie-bites.jpg" alt="Brownie Bites by Bunner&#x27;s Bakeshop" class="bd-dish-card__img" loading="lazy">
   <span class="bd-dish-card__tab">Bunner&#x27;s Bakeshop</span>
   <span class="bd-dish-card__chip">Sweet</span>
   <div class="bd-dish-card__overlay">
@@ -197,10 +197,10 @@
       <p class="bd-footer__brand-line">From farm,<br>to chef,<br>to <em style="color:var(--bd-orange); font-style: normal;">you</em>.</p>
       <p style="opacity:.7; max-width: 28ch; margin-top: var(--bd-space-4);">BestDish Foods Inc. Toronto, Ontario.</p>
     </div>
-    <div class="bd-footer__col"><h4>Eat</h4><ul><li><a href="../meals.html">Browse meals</a></li><li><a href="../how-it-works.html">How it works</a></li><li><a href="../chefs.html">Chefs</a></li><li><a href="../buildings.html">Buildings</a></li><li><a href="../for-properties.html">For properties</a></li><li><a href="../for-restaurants.html">For restaurants</a></li><li><a href="../faq.html">FAQ</a></li></ul></div>
+    <div class="bd-footer__col"><h4>Eat</h4><ul><li><a href="browse-meals">Browse meals</a></li><li><a href="how-it-works">How it works</a></li><li><a href="chefs">Chefs</a></li><li><a href="buildings">Buildings</a></li><li><a href="for-properties">For properties</a></li><li><a href="for-restaurants">For restaurants</a></li><li><a href="faq">FAQ</a></li></ul></div>
     <div class="bd-footer__col"><h4>Partner</h4><ul>
-      <li><a href="../for-properties.html">For properties</a></li>
-      <li><a href="../for-restaurants.html">For restaurants</a></li>
+      <li><a href="for-properties.html">For properties</a></li>
+      <li><a href="for-restaurants.html">For restaurants</a></li>
     </ul></div>
     <div class="bd-footer__col"><h4>Visit</h4><ul>
       <li>507 King St E<br>Toronto, ON, M5A 1M3</li>
@@ -213,5 +213,5 @@
     <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
   </div>
 </footer>
-<script src="../js/site.js?v=2369e8c4" defer></script>
+<script src="js/site.js?v=2369e8c4" defer></script>
 </body></html>

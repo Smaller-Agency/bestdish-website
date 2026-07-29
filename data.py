@@ -401,19 +401,21 @@ BUILDINGS = [
     {"slug": "sloane",         "name": "Sloane",         "address": "5 York Garden Way, North York",           "type": "Rental community",    "status": "August 2026", "lat": 43.72500, "lng": -79.45450},
 ]
 
+# Clean URLs — GitHub Pages serves `foo.html` at `/foo`, so these match the live
+# bestdish.ca paths for a domain cutover with no broken links.
 NAV = [
-    ("Browse meals",  "/meals.html"),
-    ("How it works",  "/how-it-works.html"),
-    ("Chefs",         "/chefs.html"),
-    ("First meal free", "/join.html"),
+    ("Browse meals",  "/browse-meals"),
+    ("How it works",  "/how-it-works"),
+    ("Chefs",         "/chefs"),
+    ("First meal free", "/join"),
 ]
 
 FOOTER_NAV = [
-    ("Browse meals",  "/meals.html"),
-    ("How it works",  "/how-it-works.html"),
-    ("Chefs",         "/chefs.html"),
-    ("Buildings",     "/buildings.html"),
-    ("For properties","/for-properties.html"),
-    ("For restaurants","/for-restaurants.html"),
-    ("FAQ",           "/faq.html"),
+    ("Browse meals",  "/browse-meals"),
+    ("How it works",  "/how-it-works"),
+    ("Chefs",         "/chefs"),
+    ("Buildings",     "/buildings"),
+    ("For properties","/for-properties"),
+    ("For restaurants","/for-restaurants"),
+    ("FAQ",           "/faq"),
 ]
