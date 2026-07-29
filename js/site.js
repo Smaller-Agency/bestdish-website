@@ -191,6 +191,7 @@
         if (!res.ok) throw new Error('bad status');
         joinForm.reset();
         joinForm.classList.add('is-sent');
+        if (btn) btn.textContent = 'Sent ✓';
         if (status) status.textContent = 'You’re in. Watch your inbox — we’ll email you when your free meal is active.';
       } catch (err) {
         if (status) { status.textContent = 'Something went wrong. Email hello@bestdish.ca and we’ll sort it out.'; status.classList.add('is-err'); }
