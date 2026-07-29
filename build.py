@@ -18,6 +18,12 @@ def _asset_v(rel):
 CSS_V = _asset_v("css/site.css")
 JS_V = _asset_v("js/site.js")
 
+# First-meal-free signup endpoint — paste the Google Apps Script Web App /exec URL here
+# once deployed (see first-meal-free.gs). The signup form POSTs {name, phone, email,
+# wishlist, news} as JSON; the script appends a row to a Google Sheet and returns {ok:true}.
+# Until it's a real https URL, the form shows a graceful "not connected yet" message.
+JOIN_ENDPOINT = "REPLACE_WITH_APPS_SCRIPT_EXEC_URL"
+
 def img_exists(rel):
     return (ROOT / rel).exists()
 
@@ -464,7 +470,7 @@ def home():
   <div class="bd-container">
     <div class="bd-lobby">
       <div class="bd-lobby__media bd-reveal">
-        <img class="bd-lobby__img" src="assets/marketing/freezer-mockup.jpg" alt="A BestDish freezer in a residential lobby">
+        <img class="bd-lobby__img bd-lobby__img--product" src="assets/marketing/freezer-branded.png" alt="The BestDish freezer — from farm, to chef, to you">
         <span class="bd-lobby__tag">The freezer in your lobby</span>
       </div>
       <div class="bd-reveal">
@@ -1063,6 +1069,53 @@ def faq_page():
 </section>
 """)
 
+# ---------- First meal free (/join) ----------
+
+def join_page():
+    _bc = "var(--bd-cherry)"
+    return page("First meal free", desc="Your first BestDish is on us. Sign up with your phone number and redeem a free meal at the freezer in your building.", body=f"""
+<header class="bd-section" style="padding-bottom: var(--bd-space-6);">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">First meal free</p>
+    <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">Your first dish<br>is <em>on us</em>.</h1>
+    <p class="bd-hero-lede bd-reveal">Sign up with your phone number and we'll link a free meal to it. Redeem it at the BestDish freezer in your building — no delivery fees, no tip, no tax.</p>
+  </div>
+</header>
+
+<section class="bd-section" style="padding-top:0;">
+  <div class="bd-container">
+    {step_flow([
+      ("Sign up", "Drop your phone number and email below. Takes twenty seconds."),
+      ("We link it", "Your number gets tied to one free meal, on the house."),
+      ("Watch your inbox", "We'll email you the moment your free meal is active."),
+      ("Redeem at the freezer", "Enter the same number at the BestDish freezer checkout to claim it."),
+    ])}
+    <p class="bd-reveal" style="font-family:var(--bd-font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--bd-track-tight); font-size:var(--bd-size-lg); margin-top: var(--bd-space-7);">No delivery fees. No tip. No waiting.</p>
+  </div>
+</section>
+
+<section class="bd-section bd-section--cream" id="signup">
+  <div class="bd-container">
+    <div class="bd-info-grid">
+      <div class="bd-reveal">
+        <p class="bd-eyebrow">Claim it</p>
+        <h2 class="bd-headline" style="font-size: var(--bd-size-3xl); max-width: 16ch;">One dish, on the house.</h2>
+        <p style="max-width: 42ch; margin-top: var(--bd-space-4);">Enter your details and we'll set up your free meal. You'll get an email when it's ready to redeem downstairs.</p>
+      </div>
+      <form class="bd-form bd-join-form bd-reveal" style="color: {_bc};" action="{JOIN_ENDPOINT}" method="POST">
+        <div class="bd-field"><label for="j-name">First name</label><input id="j-name" name="name" type="text" autocomplete="given-name" style="border-bottom-color: {_bc}; color: {_bc};"></div>
+        <div class="bd-field"><label for="j-phone">Phone <span style="color:var(--bd-orange);">*</span></label><input id="j-phone" name="phone" type="tel" required autocomplete="tel" style="border-bottom-color: {_bc}; color: {_bc};"><small class="bd-field__hint">We link this to your free meal — and text you when it's active.</small></div>
+        <div class="bd-field"><label for="j-email">Email <span style="color:var(--bd-orange);">*</span></label><input id="j-email" name="email" type="email" required autocomplete="email" style="border-bottom-color: {_bc}; color: {_bc};"></div>
+        <div class="bd-field"><label for="j-wish">What would you love to see next?</label><textarea id="j-wish" name="wishlist" placeholder="A dish or restaurant you'd love in the freezer." style="border-bottom-color: {_bc}; color: {_bc};"></textarea></div>
+        <label class="bd-check"><input type="checkbox" name="news" value="yes"> <span>Sign me up for news &amp; new meal drops.</span></label>
+        <button class="bd-btn bd-btn--primary" type="submit">Claim my free meal</button>
+        <p class="bd-join-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+""")
+
 # ---------- Build ----------
 
 def build():
@@ -1075,6 +1128,7 @@ def build():
     (ROOT / "for-properties.html").write_text(for_properties_page())
     (ROOT / "for-restaurants.html").write_text(for_restaurants_page())
     (ROOT / "faq.html").write_text(faq_page())
+    (ROOT / "join.html").write_text(join_page())
     (ROOT / "meals").mkdir(exist_ok=True)
     for d in DISHES:
         (ROOT / "meals" / f"{d['slug']}.html").write_text(dish_page(d))

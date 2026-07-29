@@ -167,6 +167,42 @@
     });
   }
 
+  // First-meal-free signup — POST to the configured form service (Formspree / Apps Script),
+  // show an inline success without leaving the page. Falls back to a native submit if fetch fails.
+  const joinForm = document.querySelector('.bd-join-form');
+  if (joinForm) {
+    joinForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = joinForm.querySelector('.bd-join-status');
+      const btn = joinForm.querySelector('button[type="submit"]');
+      const action = joinForm.getAttribute('action') || '';
+      if (!joinForm.reportValidity()) return;
+      // Endpoint not wired up yet — don't pretend it sent.
+      if (!action || action.indexOf('REPLACE') !== -1 || action.indexOf('http') !== 0) {
+        if (status) { status.textContent = 'Signup isn’t connected yet — email hello@bestdish.ca and we’ll set you up.'; status.classList.add('is-err'); }
+        return;
+      }
+      const label = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      if (status) { status.textContent = ''; status.classList.remove('is-err'); }
+      try {
+        // Google Apps Script Web App: text/plain avoids a CORS preflight; the /exec
+        // 302-redirects to a CORS-enabled response we can read.
+        const payload = { source: 'first-meal-free' };
+        new FormData(joinForm).forEach((v, k) => { payload[k] = v; });
+        const res = await fetch(action, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'text/plain;charset=utf-8' } });
+        const data = await res.json().catch(() => ({}));
+        if (!data.ok) throw new Error('bad status');
+        joinForm.reset();
+        joinForm.classList.add('is-sent');
+        if (status) status.textContent = 'You’re in. Watch your inbox — we’ll email you when your free meal is active.';
+      } catch (err) {
+        if (status) { status.textContent = 'Something went wrong. Email hello@bestdish.ca and we’ll sort it out.'; status.classList.add('is-err'); }
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+      }
+    });
+  }
+
   // Splash parallax (light)
   const splashes = document.querySelectorAll('.bd-splash-fixed');
   if (splashes.length) {

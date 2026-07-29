@@ -376,6 +376,7 @@ NAV = [
     ("Browse meals",  "/meals.html"),
     ("How it works",  "/how-it-works.html"),
     ("Chefs",         "/chefs.html"),
+    ("First meal free", "/join.html"),
 ]
 
 FOOTER_NAV = [

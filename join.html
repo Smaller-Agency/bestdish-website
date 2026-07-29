@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>First meal free — BestDish</title>
+<meta name="description" content="Your first BestDish is on us. Sign up with your phone number and redeem a free meal at the freezer in your building.">
+<link rel="icon" href="assets/logos/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&family=Nunito+Sans:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/site.css?v=6f956095">
+</head>
+<body class="bd-site bd-theme--cream">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="bd-grit"><feTurbulence baseFrequency="0.9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.1"/><feComposite in="SourceGraphic" operator="in"/></filter>
+</svg>
+<nav class="bd-nav">
+  <a class="bd-nav__brand" href="./" aria-label="BestDish home">
+    <img src="assets/logos/bd-orange.png" alt="BestDish">
+  </a>
+  <div class="bd-nav__links">
+    <a href="meals.html">Browse meals</a><a href="how-it-works.html">How it works</a><a href="chefs.html">Chefs</a><a href="join.html">First meal free</a>
+    <a class="bd-btn bd-btn--primary" href="buildings.html">Find a building</a>
+  </div>
+</nav>
+
+<header class="bd-section" style="padding-bottom: var(--bd-space-6);">
+  <div class="bd-container">
+    <p class="bd-eyebrow bd-reveal">First meal free</p>
+    <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">Your first dish<br>is <em>on us</em>.</h1>
+    <p class="bd-hero-lede bd-reveal">Sign up with your phone number and we'll link a free meal to it. Redeem it at the BestDish freezer in your building — no delivery fees, no tip, no tax.</p>
+  </div>
+</header>
+
+<section class="bd-section" style="padding-top:0;">
+  <div class="bd-container">
+    <ol class="bd-flow bd-flow--c4"><li class="bd-flow__step bd-reveal">
+      <span class="bd-flow__num">1<svg class="bd-flow__arrow" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" aria-hidden="true"><path d="M40 26 L66 50 L40 74" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <h3 class="bd-flow__title">Sign up</h3>
+      <p class="bd-flow__body">Drop your phone number and email below. Takes twenty seconds.</p>
+    </li><li class="bd-flow__step bd-reveal">
+      <span class="bd-flow__num">2<svg class="bd-flow__arrow" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" aria-hidden="true"><path d="M40 26 L66 50 L40 74" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <h3 class="bd-flow__title">We link it</h3>
+      <p class="bd-flow__body">Your number gets tied to one free meal, on the house.</p>
+    </li><li class="bd-flow__step bd-reveal">
+      <span class="bd-flow__num">3<svg class="bd-flow__arrow" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="7" aria-hidden="true"><path d="M40 26 L66 50 L40 74" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <h3 class="bd-flow__title">Watch your inbox</h3>
+      <p class="bd-flow__body">We'll email you the moment your free meal is active.</p>
+    </li><li class="bd-flow__step bd-reveal">
+      <span class="bd-flow__num">4</span>
+      <h3 class="bd-flow__title">Redeem at the freezer</h3>
+      <p class="bd-flow__body">Enter the same number at the BestDish freezer checkout to claim it.</p>
+    </li></ol>
+    <p class="bd-reveal" style="font-family:var(--bd-font-display); font-weight:700; text-transform:uppercase; letter-spacing:var(--bd-track-tight); font-size:var(--bd-size-lg); margin-top: var(--bd-space-7);">No delivery fees. No tip. No waiting.</p>
+  </div>
+</section>
+
+<section class="bd-section bd-section--cream" id="signup">
+  <div class="bd-container">
+    <div class="bd-info-grid">
+      <div class="bd-reveal">
+        <p class="bd-eyebrow">Claim it</p>
+        <h2 class="bd-headline" style="font-size: var(--bd-size-3xl); max-width: 16ch;">One dish, on the house.</h2>
+        <p style="max-width: 42ch; margin-top: var(--bd-space-4);">Enter your details and we'll set up your free meal. You'll get an email when it's ready to redeem downstairs.</p>
+      </div>
+      <form class="bd-form bd-join-form bd-reveal" style="color: var(--bd-cherry);" action="REPLACE_WITH_APPS_SCRIPT_EXEC_URL" method="POST">
+        <div class="bd-field"><label for="j-name">First name</label><input id="j-name" name="name" type="text" autocomplete="given-name" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></div>
+        <div class="bd-field"><label for="j-phone">Phone <span style="color:var(--bd-orange);">*</span></label><input id="j-phone" name="phone" type="tel" required autocomplete="tel" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"><small class="bd-field__hint">We link this to your free meal — and text you when it's active.</small></div>
+        <div class="bd-field"><label for="j-email">Email <span style="color:var(--bd-orange);">*</span></label><input id="j-email" name="email" type="email" required autocomplete="email" style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></div>
+        <div class="bd-field"><label for="j-wish">What would you love to see next?</label><textarea id="j-wish" name="wishlist" placeholder="A dish or restaurant you'd love in the freezer." style="border-bottom-color: var(--bd-cherry); color: var(--bd-cherry);"></textarea></div>
+        <label class="bd-check"><input type="checkbox" name="news" value="yes"> <span>Sign me up for news &amp; new meal drops.</span></label>
+        <button class="bd-btn bd-btn--primary" type="submit">Claim my free meal</button>
+        <p class="bd-join-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+<footer class="bd-footer">
+  <div class="bd-footer__top">
+    <div>
+      <p class="bd-footer__brand-line">From farm,<br>to chef,<br>to <em style="color:var(--bd-orange); font-style: normal;">you</em>.</p>
+      <p style="opacity:.7; max-width: 28ch; margin-top: var(--bd-space-4);">BestDish Foods Inc. Toronto, Ontario.</p>
+    </div>
+    <div class="bd-footer__col"><h4>Eat</h4><ul><li><a href="meals.html">Browse meals</a></li><li><a href="how-it-works.html">How it works</a></li><li><a href="chefs.html">Chefs</a></li><li><a href="buildings.html">Buildings</a></li><li><a href="for-properties.html">For properties</a></li><li><a href="for-restaurants.html">For restaurants</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+    <div class="bd-footer__col"><h4>Partner</h4><ul>
+      <li><a href="for-properties.html">For properties</a></li>
+      <li><a href="for-restaurants.html">For restaurants</a></li>
+    </ul></div>
+    <div class="bd-footer__col"><h4>Visit</h4><ul>
+      <li>507 King St E<br>Toronto, ON, M5A 1M3</li>
+      <li><a href="mailto:hello@bestdish.ca">hello@bestdish.ca</a></li>
+      <li><a href="tel:+14168246626">(416) 824-6626</a></li>
+    </ul></div>
+  </div>
+  <div class="bd-footer__bottom">
+    <span>© 2026 BestDish Foods Inc.</span>
+    <span>HACCP-compliant · CFIA-labelled · PIPEDA-aligned</span>
+  </div>
+</footer>
+<script src="js/site.js?v=c9eeadde" defer></script>
+</body></html>

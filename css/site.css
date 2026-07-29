@@ -1044,12 +1044,14 @@ html:has(.bd-theme--cream) { background: var(--bd-cream); }
 .bd-bldgpin--live { background: var(--bd-orange); border-color: #fff; }
 
 
-/* ---------- Fork cursor (playful brand pointer) ---------- */
-:root { --bd-cursor: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2728%27%20height%3D%2728%27%20viewBox%3D%270%200%2028%2028%27%3E%3Cg%20stroke%3D%27%23FCFCF4%27%20stroke-width%3D%271%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%27M8%202.6v8.4M13%202.6v9.2M18%202.6v8.4%27%20fill%3D%27none%27%20stroke%3D%27%23E43C00%27%20stroke-width%3D%272.7%27%20stroke-linecap%3D%27round%27%2F%3E%3Crect%20x%3D%276.3%27%20y%3D%279.8%27%20width%3D%2713.4%27%20height%3D%276.2%27%20rx%3D%272.7%27%20fill%3D%27%23E43C00%27%2F%3E%3Crect%20x%3D%2711.6%27%20y%3D%2715.2%27%20width%3D%272.9%27%20height%3D%2710.6%27%20rx%3D%271.45%27%20fill%3D%27%23E43C00%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") 8 3; }
-html { cursor: var(--bd-cursor), auto; }
-a, button, .bd-btn, summary, label, [role="button"], select,
-input[type="checkbox"], input[type="radio"], input[type="file"],
-input[type="submit"], input[type="button"], input[type="date"] { cursor: var(--bd-cursor), pointer; }
-input[type="text"], input[type="email"], input[type="tel"], input[type="url"],
-input[type="number"], input[type="search"], input[type="password"], textarea { cursor: text; }
-@media (hover: none) { html { cursor: auto; } }
+
+/* Branded freezer product render (square art on white) */
+.bd-lobby__img--product { object-fit: contain; background:#fff; aspect-ratio: 5/6; border: 1px solid color-mix(in srgb, var(--bd-gravy) 12%, transparent); }
+
+/* ---------- First-meal-free signup form ---------- */
+.bd-field__hint { display:block; margin-top: var(--bd-space-2); font-size: var(--bd-size-xs); opacity:.62; line-height:1.4; }
+.bd-check { display:flex; align-items:flex-start; gap: var(--bd-space-3); font-size: var(--bd-size-sm); line-height:1.4; cursor:pointer; margin-top: calc(-1 * var(--bd-space-2)); }
+.bd-check input[type="checkbox"] { flex:none; width:18px; height:18px; margin-top:1px; accent-color: var(--bd-orange); cursor:pointer; }
+.bd-join-status { min-height:1.2em; margin: var(--bd-space-3) 0 0; font-size: var(--bd-size-sm); font-weight:700; color: var(--bd-orange); }
+.bd-join-status.is-err { color: var(--bd-cherry); }
+.bd-join-form.is-sent .bd-field, .bd-join-form.is-sent .bd-check, .bd-join-form.is-sent .bd-btn { opacity:.5; pointer-events:none; }
