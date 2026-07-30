@@ -229,10 +229,15 @@ def restaurants_section(base=""):
         logo = f"{base}assets/logos/{logo_file(slug)}"
         href = f"{base}{dish_url(d['slug'])}" if d else f"{base}chefs#{slug}"
         dish_label = d["name"] if d else "Meet the chef"
+        # Second slot is the chef's name — but skip it when the "chef" is just
+        # the restaurant again (e.g. a bakeshop), which would read redundantly.
+        meta = e(r['hood'])
+        if r['chef'] and r['chef'].strip().lower() != r['name'].strip().lower():
+            meta += f" · {e(r['chef'])}"
         cards.append(f"""<a class="bd-rest-card bd-reveal" href="{href}">
       <span class="bd-rest-card__logo"><img src="{logo}" alt="{e(r['name'])} logo" loading="lazy"></span>
       <h3 class="bd-rest-card__name">{e(r['name'])}</h3>
-      <p class="bd-rest-card__meta">{e(r['hood'])} · {e(r['chef'])}</p>
+      <p class="bd-rest-card__meta">{meta}</p>
       <span class="bd-rest-card__dish">{e(dish_label)} →</span>
     </a>""")
         pins.append({"name": r["name"], "lat": r["lat"], "lng": r["lng"],
@@ -623,8 +628,12 @@ def dish_page(d):
 
     # The chef — pullquote when we have a first-person note, plain bio otherwise.
     if d.get("chef_note"):
+        # Drop the restaurant suffix when the signature already is the restaurant.
+        attr = e(d["chef_signature"])
+        if d["chef_signature"].strip().lower() != r["name"].strip().lower():
+            attr += f', {e(r["name"])}'
         chef_body = (f'<p class="bd-pullquote" style="margin-bottom: var(--bd-space-3);">"{e(d["chef_note"])}"'
-                     f'<span class="bd-pullquote__attr">— {e(d["chef_signature"])}, {e(r["name"])}</span></p>')
+                     f'<span class="bd-pullquote__attr">— {attr}</span></p>')
     elif d.get("chef_bio"):
         chef_body = (f'<h3 class="bd-headline" style="font-size:var(--bd-size-2xl); margin: 0 0 var(--bd-space-3);">{e(d["chef_signature"])}</h3>'
                      f'<p style="line-height: var(--bd-lh-relaxed); margin: 0;">{e(d["chef_bio"])}</p>')
