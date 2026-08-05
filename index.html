@@ -26,14 +26,14 @@
   </a>
   <div class="bd-nav__links">
     <a href="browse-meals">Browse meals</a><a href="how-it-works">How it works</a><a href="chefs">Chefs</a><a href="join">First meal free</a>
-    <a class="bd-btn bd-btn--primary" href="buildings.html">Find a building</a>
+    <a class="bd-btn bd-btn--primary" href="buildings">Find a building</a>
   </div>
 </nav>
 
 <header class="bd-hero-wrap bd-hero--full">
   <div class="bd-hero-show bd-hero-full__media" data-interval="4200">
-    <div class="bd-hero-show__slide is-active" data-credit="Pukka — Butter Chicken Curry"><img src="assets/images/butter-chicken.jpg" alt="Butter Chicken Curry from Pukka"></div><div class="bd-hero-show__slide" data-credit="La Palma — 100 Layer Lasagna"><img src="assets/images/100layer-wide.jpg" alt="100 Layer Lasagna from La Palma" loading="lazy"></div><div class="bd-hero-show__slide" data-credit="Cheese Boutique — Cheese Master Mac"><img src="assets/images/cheesemaster-mac.jpg" alt="Cheese Master Mac from Cheese Boutique" loading="lazy"></div><div class="bd-hero-show__slide" data-credit="Slowhand — Le Grand Fromage Pizza"><img src="assets/images/le-grand-fromage.jpg" alt="Le Grand Fromage Pizza from Slowhand" loading="lazy"></div>
-    <div class="bd-hero-show__dots"><span class="is-on"></span><span class=""></span><span class=""></span><span class=""></span></div>
+    <div class="bd-hero-show__slide is-active" data-credit="Pukka — Butter Chicken Curry"><img src="assets/images/butter-chicken.jpg" alt="Butter Chicken Curry from Pukka"></div><div class="bd-hero-show__slide" data-credit="La Palma — 100 Layer Lasagna"><img src="assets/images/100layer-wide.jpg" alt="100 Layer Lasagna from La Palma" loading="lazy"></div><div class="bd-hero-show__slide" data-credit="Slowhand — Le Grand Fromage Pizza"><img src="assets/images/le-grand-fromage.jpg" alt="Le Grand Fromage Pizza from Slowhand" loading="lazy"></div>
+    <div class="bd-hero-show__dots"><span class="is-on"></span><span class=""></span><span class=""></span></div>
   </div>
   <div class="bd-hero-full__inner bd-container">
     <div class="bd-hero-full__content bd-reveal">
@@ -46,8 +46,8 @@
         <span>Ready 24/7 downstairs</span>
       </div>
       <div class="bd-hero__cta">
-        <a class="bd-btn bd-btn--primary" href="browse-meals">Browse the menu</a>
-        <a class="bd-btn bd-btn--secondary" href="buildings.html">Is it in my building?</a>
+        <a class="bd-btn bd-btn--primary" href="join">First one's on us &mdash; claim your free dish</a>
+        <a class="bd-btn bd-btn--secondary" href="browse-meals">Browse the menu</a>
       </div>
     </div>
     <span class="bd-hero-full__credit">Pukka — Butter Chicken Curry</span>
@@ -70,6 +70,23 @@
   </div>
 </section>
 
+<section class="bd-section" id="first-dish" style="background:var(--bd-cherry); color:var(--bd-cream); position:relative; overflow:hidden;">
+  <div style="position:absolute; width:340px; height:340px; background:var(--bd-orange); border-radius:52% 48% 61% 39% / 44% 59% 41% 56%; top:-200px; right:-120px; opacity:.92;" aria-hidden="true"></div>
+  <div class="bd-container" style="position:relative; z-index:2;">
+    <div class="bd-info-grid" style="align-items:center;">
+      <div class="bd-reveal">
+        <p class="bd-eyebrow" style="color:var(--bd-shrimp);">First meal free</p>
+        <h2 class="bd-headline" style="color:var(--bd-cream); max-width:14ch;">First one's on us.</h2>
+        <p class="bd-lede" style="color:var(--bd-cream); opacity:.92; max-width:46ch; margin-top:var(--bd-space-4);">Join with your phone number and email. We link a first-dish credit to your number <strong>within 24 hours</strong> &mdash; and you'll get the weekly menu drop, so you know what's new downstairs before anyone else.</p>
+      </div>
+      <div class="bd-reveal" style="text-align:center;">
+        <a class="bd-btn bd-btn--primary" href="join" style="display:inline-block; padding-inline:var(--bd-space-6);">Claim my first dish</a>
+        <p style="font-size:var(--bd-size-xs, 13px); font-style:italic; opacity:.8; margin-top:var(--bd-space-3);">One per household. Joining adds you to the weekly menu email &mdash; unsubscribe anytime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="bd-section bd-section--alt">
   <div class="bd-container">
     <div class="bd-sec-head">
@@ -79,15 +96,7 @@
       </div>
       <a class="bd-btn bd-btn--ghost bd-reveal" href="browse-meals">All meals →</a>
     </div>
-    <div class="bd-reel"><a class="bd-dish-card bd-reveal" href="cheese-master-mac">
-  <img src="assets/images/cheesemaster-mac.jpg" alt="Cheese Master Mac by Cheese Boutique" class="bd-dish-card__img" loading="lazy">
-  <span class="bd-dish-card__tab">Cheese Boutique</span>
-  <span class="bd-dish-card__chip">Savoury</span>
-  <div class="bd-dish-card__overlay">
-    <h3 class="bd-dish-card__name">Cheese Master Mac</h3>
-    <span class="bd-dish-card__cta">View dish →</span>
-  </div>
-</a><a class="bd-dish-card bd-reveal" href="100-layer-lasagna">
+    <div class="bd-reel"><a class="bd-dish-card bd-reveal" href="100-layer-lasagna">
   <img src="assets/images/100layer.jpg" alt="100 Layer Lasagna by La Palma" class="bd-dish-card__img" loading="lazy">
   <span class="bd-dish-card__tab">La Palma</span>
   <span class="bd-dish-card__chip">Savoury</span>
@@ -171,7 +180,7 @@
           <span>Pick your dish</span>
           <span>Heat &amp; eat upstairs</span>
         </div>
-        <a class="bd-btn bd-btn--primary" style="margin-top: var(--bd-space-7);" href="buildings.html">Find a building</a>
+        <a class="bd-btn bd-btn--primary" style="margin-top: var(--bd-space-7);" href="buildings">Find a building</a>
       </div>
     </div>
   </div>
@@ -209,7 +218,7 @@
         <p class="bd-eyebrow bd-reveal">In partnership with the best</p>
         <h2 class="bd-headline bd-reveal" style="max-width:18ch;">The best tables in Toronto.<br>In your building.</h2>
       </div>
-      <a class="bd-btn bd-btn--ghost bd-reveal" href="chefs.html">Meet the chefs →</a>
+      <a class="bd-btn bd-btn--ghost bd-reveal" href="chefs">Meet the chefs →</a>
     </div>
     <p class="bd-lede bd-reveal" style="max-width:62ch; margin-bottom: var(--bd-space-7);">We didn't invent the food — we partnered with 9 of the city's most-loved restaurants and their chefs to bring their signature dishes, made exactly as they make them, to the freezer downstairs. Tap a pin to see who's cooking.</p>
     <script type="application/json" id="bd-map-data">[{"name": "La Palma", "lat": 43.651347, "lng": -79.410118, "logo": "assets/logos/la-palma.png", "hood": "Trinity Bellwoods", "dish": "100 Layer Lasagna", "url": "100-layer-lasagna"}, {"name": "Pukka", "lat": 43.681135, "lng": -79.429227, "logo": "assets/logos/pukka.png", "hood": "Wychwood", "dish": "Butter Chicken Curry", "url": "butter-chicken-curry"}, {"name": "Cheese Boutique", "lat": 43.63854, "lng": -79.475088, "logo": "assets/logos/cheese-boutique.png", "hood": "Swansea", "dish": "Cheese Master Mac", "url": "cheese-master-mac"}, {"name": "The Queen & Beaver", "lat": 43.657345, "lng": -79.383358, "logo": "assets/logos/queen-and-beaver.png", "hood": "Yonge & Dundas", "dish": "Cheese Burger Pot Pie", "url": "cheese-burger-pot-pie"}, {"name": "Le Gourmand", "lat": 43.648251, "lng": -79.396455, "logo": "assets/logos/le-gourmand.png", "hood": "Fashion District", "dish": "The Best Chocolate Chip Cookie", "url": "chocolate-chip-cookie"}, {"name": "Slowhand", "lat": 43.661785, "lng": -79.337644, "logo": "assets/logos/slowhand.png", "hood": "Leslieville", "dish": "Le Grand Fromage Pizza", "url": "le-grand-fromage"}, {"name": "Piano Piano", "lat": 43.649041, "lng": -79.37465, "logo": "assets/logos/piano-piano.png", "hood": "St. Lawrence", "dish": "Nutella Tiramisu", "url": "nutella-tiramisu"}, {"name": "Death in Venice", "lat": 43.64965, "lng": -79.42675, "logo": "assets/logos/death-in-venice.png", "hood": "Little Portugal", "dish": "Gelato", "url": "deathinvenice"}, {"name": "Bunner's Bakeshop", "lat": 43.66556, "lng": -79.46695, "logo": "assets/logos/bunners.png", "hood": "The Junction", "dish": "Brownie Bites", "url": "brownie-bites"}]</script>
@@ -362,13 +371,13 @@
       <h2 class="bd-finalcta__head">Is BestDish in your building yet?</h2>
       <p class="bd-lede bd-finalcta__lede">Find your building to see what's waiting in the freezer downstairs. Not there yet? We'll add it to the list — the more residents ask, the faster we install.</p>
       <div class="bd-finalcta__actions">
-        <a class="bd-btn bd-btn--primary" href="buildings.html">Find a building</a>
+        <a class="bd-btn bd-btn--primary" href="buildings">Find a building</a>
         <a class="bd-btn bd-btn--secondary" href="browse-meals">Browse the menu</a>
       </div>
     </div>
     <p class="bd-finalcta__partners bd-reveal">Manage a building or run a restaurant?
-      <a href="for-properties.html">Add a freezer →</a>
-      <a href="for-restaurants.html">Partner your kitchen →</a>
+      <a href="for-properties">Add a freezer →</a>
+      <a href="for-restaurants">Partner your kitchen →</a>
     </p>
   </div>
 </section>
@@ -389,8 +398,8 @@
     </div>
     <div class="bd-footer__col"><h4>Eat</h4><ul><li><a href="browse-meals">Browse meals</a></li><li><a href="how-it-works">How it works</a></li><li><a href="chefs">Chefs</a></li><li><a href="buildings">Buildings</a></li><li><a href="for-properties">For properties</a></li><li><a href="for-restaurants">For restaurants</a></li><li><a href="faq">FAQ</a></li></ul></div>
     <div class="bd-footer__col"><h4>Partner</h4><ul>
-      <li><a href="for-properties.html">For properties</a></li>
-      <li><a href="for-restaurants.html">For restaurants</a></li>
+      <li><a href="for-properties">For properties</a></li>
+      <li><a href="for-restaurants">For restaurants</a></li>
     </ul></div>
     <div class="bd-footer__col"><h4>Visit</h4><ul>
       <li>507 King St E<br>Toronto, ON, M5A 1M3</li>

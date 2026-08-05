@@ -192,7 +192,7 @@
         joinForm.reset();
         joinForm.classList.add('is-sent');
         if (btn) btn.textContent = 'Sent ✓';
-        if (status) status.textContent = 'You’re in. Watch your inbox — we’ll email you when your free meal is active.';
+        if (status) status.textContent = 'Done — your free dish will be linked to your number within 24 hours. Watch your email for the go-ahead.';
       } catch (err) {
         if (status) { status.textContent = 'Something went wrong. Email hello@bestdish.ca and we’ll sort it out.'; status.classList.add('is-err'); }
         if (btn) { btn.disabled = false; btn.textContent = label; }

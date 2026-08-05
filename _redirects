@@ -1,0 +1,3 @@
+# Cloudflare Pages serves clean URLs natively (/join -> join.html, and .html URLs redirect to clean).
+# Custom rules only:
+/first-meal-free /join 301
