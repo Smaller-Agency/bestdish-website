@@ -710,7 +710,18 @@ html.js-reveal-ready .bd-reveal.is-in { opacity: 1; transform: translateY(0); }
   filter: none;
   opacity: 1;
   height: 64px;
+  background: var(--bd-gravy);
+  border-radius: var(--bd-radius-sm);
+  padding: 4px 8px;
 }
+.bd-rest-card__logo img[src$="death-in-venice.png"] {
+  filter: none;
+  background: var(--bd-gravy);
+  border-radius: var(--bd-radius-sm);
+  padding: 4px;
+}
+.bd-pin__tile:has(img[src$="death-in-venice.png"]) { background: var(--bd-gravy); }
+.bd-pin__tile img[src$="death-in-venice.png"] { filter: none; }
 .bd-rest-card:hover .bd-rest-card__logo img { opacity: .65; }
 
 /* ---------- Hero dish showpiece (replaces the faux package) ---------- */
@@ -850,7 +861,12 @@ html:has(.bd-theme--cream) { background: var(--bd-cream); }
 /* dark-hero text overrides (text sits over the photo) */
 .bd-hero--full .bd-hero-headline { color: var(--bd-cream); margin-top: var(--bd-space-5); max-width: 18ch; }
 .bd-hero--full .bd-hero-headline em { color: var(--bd-orange); }
-.bd-hero--full .bd-hero-lede { color: var(--bd-cream); opacity: .94; }
+.bd-hero--full .bd-hero-lede {
+  color: var(--bd-cream);
+  font-weight: 500;
+  opacity: 1;
+  text-shadow: 0 1px 12px rgba(20, 4, 0, .55);
+}
 .bd-hero--full .bd-strapline { color: var(--bd-cream); }
 .bd-hero--full .bd-loc { color: var(--bd-cream); border-color: color-mix(in srgb, var(--bd-cream) 45%, transparent); background: color-mix(in srgb, var(--bd-gravy) 35%, transparent); }
 .bd-hero--full .bd-btn--secondary { color: var(--bd-cream); border-color: var(--bd-cream); }
