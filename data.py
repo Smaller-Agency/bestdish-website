@@ -350,6 +350,7 @@ DISHES = [
     },
     {
         "slug": "brownie-bites",
+        "active": False,
         "name": "Brownie Bites",
         "category": "Sweet",
         "restaurant": "bunners",

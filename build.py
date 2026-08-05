@@ -5,6 +5,8 @@ from pathlib import Path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from data import RESTAURANTS, DISHES, FARMS, BUILDINGS, NAV, FOOTER_NAV
 
+ACTIVE_DISHES = [dish for dish in DISHES if dish.get("active", True)]
+
 ROOT = Path(__file__).parent
 e = html.escape
 
@@ -209,9 +211,9 @@ LOGO_FILE = {}
 def logo_file(slug):
     return LOGO_FILE.get(slug, f"{slug}.png")
 
-# restaurant slug -> the dish it makes (first match in DISHES)
+# restaurant slug -> its first currently available dish
 REST_DISH = {}
-for _d in DISHES:
+for _d in ACTIVE_DISHES:
     REST_DISH.setdefault(_d["restaurant"], _d)
 
 # Leaflet assets — only injected on pages that show the map.
@@ -405,7 +407,7 @@ def dish_card(d, base="", big=False):
 
 def home():
     base = ""
-    dishes = "".join(dish_card(d, base=base) for d in DISHES)
+    dishes = "".join(dish_card(d, base=base) for d in ACTIVE_DISHES)
     _seen = set()
     logo_spans = []
     for _slug, _r in RESTAURANTS.items():
@@ -415,7 +417,7 @@ def home():
         _seen.add(_lf)
         logo_spans.append(f'<span><img src="{base}assets/logos/{_lf}" alt="{e(_r["name"])}" loading="lazy"></span>')
     logo_marquee = "".join(logo_spans)
-    by_slug = {d["slug"]: d for d in DISHES}
+    by_slug = {d["slug"]: d for d in ACTIVE_DISHES}
     hero_dish = by_slug["butter-chicken"]
     hero_rest = RESTAURANTS[hero_dish["restaurant"]]
     # Rotating hero showcase — cycles the best dishes so the art actually moves.
@@ -563,8 +565,8 @@ def home():
 
 def meals_page():
     base = ""
-    savoury = [d for d in DISHES if d["category"] == "Savoury"]
-    sweet   = [d for d in DISHES if d["category"] == "Sweet"]
+    savoury = [d for d in ACTIVE_DISHES if d["category"] == "Savoury"]
+    sweet   = [d for d in ACTIVE_DISHES if d["category"] == "Sweet"]
     return page("Browse meals", f"""
 <header class="bd-section">
   <div class="bd-container">
@@ -738,7 +740,7 @@ def dish_page(d):
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">More from the menu</p>
     <div class="bd-reel" style="margin-top: var(--bd-space-6);">
-      {"".join(dish_card(other, base=base) for other in DISHES if other["slug"] != d["slug"])}
+      {"".join(dish_card(other, base=base) for other in ACTIVE_DISHES if other["slug"] != d["slug"])}
     </div>
   </div>
 </section>
@@ -1206,8 +1208,13 @@ def build():
     (ROOT / "feedback.html").write_text(feedback_page())
     (ROOT / "contact.html").write_text(contact_page())
     # Dish pages at the live bestdish.ca slugs (site root).
-    for d in DISHES:
+    for d in ACTIVE_DISHES:
         (ROOT / f"{dish_url(d['slug'])}.html").write_text(dish_page(d))
+    # Keep paused dishes out of the public menu while preserving their source
+    # data and assets for a clean future return.
+    for d in DISHES:
+        if not d.get("active", True):
+            (ROOT / f"{dish_url(d['slug'])}.html").write_text(redirect_stub("browse-meals"))
     # Redirect stubs for live URLs that don't map to a real redesign page.
     # Relative targets so the stubs work both under the /bestdish-website/
     # preview subpath and at the root custom domain post-cutover.
