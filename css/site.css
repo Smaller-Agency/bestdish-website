@@ -697,6 +697,7 @@ html.js-reveal-ready .bd-reveal.is-in { opacity: 1; transform: translateY(0); }
 .bd-marquee--logos img {
   height: 52px; width: auto; max-width: 180px; object-fit: contain; display: block;
 }
+.bd-marquee--logos img[src$="pukka.png"] { height: 64px; }
 
 /* ---------- Uniform monochrome restaurant logos on light surfaces ---------- */
 /* brightness(0) renders any logo (colour or light) as a solid black silhouette,
@@ -705,6 +706,11 @@ html.js-reveal-ready .bd-reveal.is-in { opacity: 1; transform: translateY(0); }
 .bd-rest-card__logo img,
 .bd-pin__tile img { filter: brightness(0); }
 .bd-marquee--logos img { opacity: .8; }
+.bd-marquee--logos img[src$="death-in-venice.png"] {
+  filter: none;
+  opacity: 1;
+  height: 64px;
+}
 .bd-rest-card:hover .bd-rest-card__logo img { opacity: .65; }
 
 /* ---------- Hero dish showpiece (replaces the faux package) ---------- */

@@ -459,7 +459,6 @@ def home():
 </header>
 
 <section class="bd-logobar">
-  <p class="bd-logobar__label">In partnership with Toronto's best</p>
   <div class="bd-marquee bd-marquee--logos"><div class="bd-marquee__track">{logo_marquee}{logo_marquee}</div></div>
 </section>
 

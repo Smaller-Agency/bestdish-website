@@ -154,6 +154,24 @@ p{margin:0 0 1em}
   .bd-form-wrap{background:#fff}
   .bd-fs{break-inside:avoid; padding:14px 0}
 }
+.bd-typeform-shell{
+  overflow:hidden;
+  min-height:760px;
+  border:1px solid rgba(80,0,8,.14);
+  border-radius:var(--bd-radius-lg);
+  background:var(--bd-cherry);
+  box-shadow:var(--bd-shadow-lift);
+}
+.bd-typeform-shell [data-tf-live]{min-height:760px}
+.bd-typeform-fallback{
+  margin-top:18px;
+  color:#6a3338;
+  font-size:var(--bd-size-sm);
+}
+.bd-typeform-fallback a{color:var(--bd-orange);font-weight:700}
+@media (max-width:640px){
+  .bd-typeform-shell,.bd-typeform-shell [data-tf-live]{min-height:680px}
+}
 </style>
 </head>
 <body>
@@ -177,7 +195,7 @@ p{margin:0 0 1em}
   <div class="bd-container">
     <p class="bd-eyebrow">Partner onboarding · Chef intake</p>
     <h1>Welcome to BestDish.</h1>
-    <p class="bd-hero__lede">You've agreed on the dish. This is where we gather everything we need to put it into premium residential buildings — chef-authored, restaurant-originated, batch-tracked. It takes about 20 minutes. Your responses save as you go.</p>
+    <p class="bd-hero__lede">You've agreed on the dish. This is where we gather everything we need to put it into premium residential buildings — chef-authored, restaurant-originated, batch-tracked. Set aside 25–35 minutes. You can save your progress and return.</p>
     <p class="bd-credit"><b>The format you'll see on every package:</b><br>Dish Name /YOUR RESTAURANT</p>
     <div class="bd-submitbar" style="margin-top:32px">
       <a class="bd-btn bd-btn--primary bd-btn--lg" href="#intake">Start the intake</a>
@@ -228,9 +246,15 @@ p{margin:0 0 1em}
   <div class="bd-container" style="max-width:980px">
     <p class="bd-eyebrow">The intake</p>
     <div class="bd-formhead" style="margin-bottom:8px"><h2>Tell us your dish.</h2></div>
-    <p class="bd-formhead" style="margin-bottom:30px">Fields marked <span class="bd-req">*</span> are needed before we can build your packaging and CFIA-compliant label. Everything saves to this browser automatically — finish in one sitting or come back later.</p>
+    <p class="bd-formhead" style="margin-bottom:30px">Fields marked <span class="bd-req">*</span> are needed before we can build your packaging and CFIA-compliant label. The seven-section intake takes approximately 25–35 minutes. Save your progress if you need to return.</p>
 
-    <form id="bdForm" autocomplete="on">
+    <div class="bd-typeform-shell" aria-label="BestDish chef onboarding form">
+      <div data-tf-live="01KZ9T20C0CDG273ZMKN1EQQ9X"></div>
+    </div>
+    <p class="bd-typeform-fallback">Having trouble with the embedded form? <a href="https://form.typeform.com/to/PxBejaR8" target="_blank" rel="noopener">Open the chef intake in a new tab.</a></p>
+    <script src="https://embed.typeform.com/next/embed.js"></script>
+
+    <form id="bdForm" autocomplete="on" hidden aria-hidden="true">
 
     <!-- 1. Restaurant & contact -->
     <fieldset class="bd-fs">
