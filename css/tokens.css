@@ -34,7 +34,9 @@
   --bd-font-body:    "Avenir Next", Avenir, "Nunito Sans", "Helvetica Neue", Arial, sans-serif;
   --bd-font-mono:    "IBM Plex Mono", "JetBrains Mono", ui-monospace, monospace;
 
-  --bd-weight-light:  300;
+  /* Book is the lightest body weight used on-screen. Avenir/Nunito at 300
+     loses too much definition beside the expanded display face. */
+  --bd-weight-light:  400;
   --bd-weight-book:   400;
   --bd-weight-medium: 500;
   --bd-weight-bold:   700;

@@ -69,7 +69,7 @@
   margin: 0 0 var(--bd-space-5);
 }
 .bd-hero-headline em { font-style: normal; color: var(--bd-orange); }
-.bd-hero-lede { max-width: 60ch; font-size: clamp(var(--bd-size-md), 2vw, var(--bd-size-lg)); font-weight: 300; line-height: var(--bd-lh-relaxed); margin: 0 0 var(--bd-space-6); }
+.bd-hero-lede { max-width: 60ch; font-size: clamp(var(--bd-size-md), 2vw, var(--bd-size-lg)); font-weight: var(--bd-weight-book); line-height: var(--bd-lh-relaxed); margin: 0 0 var(--bd-space-6); }
 
 /* ---------- Sections ---------- */
 .bd-section { padding: var(--bd-space-9) 0; position: relative; }
@@ -170,7 +170,7 @@
   line-height: var(--bd-lh-tight);
   margin: 0 0 var(--bd-space-5);
 }
-.bd-dish-hero__tagline { font-size: var(--bd-size-lg); font-weight: 300; line-height: var(--bd-lh-relaxed); max-width: 50ch; margin: 0 0 var(--bd-space-6); }
+.bd-dish-hero__tagline { font-size: var(--bd-size-lg); font-weight: var(--bd-weight-book); line-height: var(--bd-lh-relaxed); max-width: 50ch; margin: 0 0 var(--bd-space-6); }
 
 .bd-dish-meta { display: grid; gap: var(--bd-space-5); grid-template-columns: repeat(2, 1fr); margin-top: var(--bd-space-7); }
 .bd-dish-meta__cell { padding-top: var(--bd-space-3); border-top: 2px solid var(--bd-orange); }
