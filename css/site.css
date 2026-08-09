@@ -951,6 +951,7 @@ html:has(.bd-theme--cream) { background: var(--bd-cream); }
 /* ---------- Comparison table ---------- */
 .bd-ct-scroll { margin-top: var(--bd-space-7); overflow-x: auto; }
 .bd-ct { display: grid; grid-template-columns: 1.3fr repeat(4, 1fr); min-width: 760px; }
+.bd-ct--2 { grid-template-columns: 1.3fr repeat(2, 1fr); min-width: 480px; }
 .bd-ct__cell {
   display: flex; align-items: center; padding: var(--bd-space-4);
   font-size: var(--bd-size-sm); line-height: var(--bd-lh-snug);
@@ -964,6 +965,10 @@ html:has(.bd-theme--cream) { background: var(--bd-cream); }
 }
 .bd-ct__label { font-family: var(--bd-font-body); font-weight: 900; text-transform: uppercase; letter-spacing: var(--bd-track-wider); font-size: var(--bd-size-xs); opacity: .75; }
 .bd-ct__win { color: var(--bd-orange); font-weight: 700; }
+
+/* ---------- Guarantee band ---------- */
+.bd-guarantee { background: var(--bd-cherry); color: var(--bd-cream); }
+.bd-guarantee .bd-eyebrow { color: var(--bd-cream); opacity: .8; }
 
 /* ---------- Savings calculator ('The math') ---------- */
 .bd-calc { background: var(--bd-orange); color: var(--bd-cream); }

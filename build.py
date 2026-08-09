@@ -65,8 +65,8 @@ def pat(colorway, base=""):
     return f"--pat:url({base}assets/patterns/damask-{colorway}.svg)"
 
 def ribbon():
-    return ('<div class="bd-ribbon"><span>From farm</span>'
-            '<span>to chef</span><span>to you</span></div>')
+    return ('<div class="bd-ribbon"><span>From the chefs</span>'
+            '<span>flash-frozen</span><span>in your building</span></div>')
 
 # ---------- Brand icon set (recreated from the Website graphics, as crisp
 # inline SVG so they recolour per surface) ----------
@@ -180,7 +180,7 @@ def footer(base=""):
     return f"""<footer class="bd-footer">
   <div class="bd-footer__top">
     <div>
-      <p class="bd-footer__brand-line">From farm,<br>to chef,<br>to <em style="color:var(--bd-orange); font-style: normal;">you</em>.</p>
+      <p class="bd-footer__brand-line">Toronto's<br>best dishes.<br>In your <em style="color:var(--bd-orange); font-style: normal;">oven</em>.</p>
       <p style="opacity:.7; max-width: 28ch; margin-top: var(--bd-space-4);">BestDish Foods Inc. Toronto, Ontario.</p>
     </div>
     <div class="bd-footer__col"><h4>Eat</h4><ul>{nav_links}</ul></div>
@@ -285,17 +285,16 @@ def feedback_section(base=""):
   </div>
 </section>"""
 
-def vending_section(base=""):
-    """'This isn't a vending machine' — three numbered cards with brand icons."""
+def amenity_section(base=""):
+    """'Your building's food amenity' — three positive cards on what BestDish is."""
     cards = [
-        ("01", "bag",  "No delivery",       "Never wait. Never arrives compromised."),
-        ("02", "snow", "No grocery freezers","Mass-produced. No chef. No story."),
-        ("03", "plate","BestDish",          "Chef-made. Batch-tracked. Finished the way it was designed."),
+        ("01", "plate", "By the chefs you love", "Real dishes from Toronto's iconic restaurants, cooked in their own kitchens."),
+        ("02", "snow",  "Flash-frozen at peak",  "Frozen the moment it's cooked — so nothing sits and nothing arrives compromised."),
+        ("03", "bolt",  "Finished in your oven",  "Ready in minutes, exactly the way the chef designed it."),
     ]
     out = []
     for num, icon, title, body in cards:
-        win = " bd-vs-card--win" if num == "03" else ""
-        out.append(f"""<div class="bd-vs-card{win} bd-reveal">
+        out.append(f"""<div class="bd-vs-card bd-reveal">
       {bd_icon(icon, 'bd-vs-card__icon')}
       <span class="bd-vs-card__num">{num}</span>
       <h3 class="bd-vs-card__title">{title}</h3>
@@ -304,38 +303,41 @@ def vending_section(base=""):
     return f"""
 <section class="bd-section">
   <div class="bd-container">
-    <p class="bd-eyebrow bd-reveal">Why BestDish is different</p>
-    <h2 class="bd-headline bd-reveal" style="max-width:18ch;">This isn't a vending machine.</h2>
-    <p class="bd-lede bd-reveal" style="max-width:60ch; margin-top: var(--bd-space-4);">It's a curated freezer of chef-made meals — prepared in restaurant kitchens, frozen at peak quality, and finished fresh in your own oven.</p>
+    <p class="bd-eyebrow bd-reveal">A new building amenity</p>
+    <h2 class="bd-headline bd-reveal" style="max-width:18ch;">Your building's food amenity.</h2>
+    <p class="bd-lede bd-reveal" style="max-width:62ch; margin-top: var(--bd-space-4);">Not delivery. Not the grocery freezer. A curated freezer of chef-made dishes from Toronto's best restaurants — downstairs, ready when you are.</p>
     <div class="bd-vs-grid" style="margin-top: var(--bd-space-8);">{"".join(out)}</div>
   </div>
 </section>"""
 
 def compare_table(base=""):
-    """Detailed comparison table — Delivery / Frozen grocery / Typical vending / BestDish."""
-    cols = ["Delivery", "Frozen grocery", "Typical vending", "BestDish"]
+    """Focused comparison — BestDish vs. delivery apps (the amenity vs. the app)."""
+    cols = ["Delivery apps", "BestDish"]
     rows = [
-        ("Quality source",   ["Restaurant (travelled)", "Mass-produced", "Packaged snacks / basic meals", "Real restaurant dishes"]),
-        ("How it's made",    ["Cooked → sits → delivered", "Factory-made", "Pre-packaged", "Chef-prepared, small batch"]),
-        ("When you get it",  ["30–60 minutes later", "Whenever you shop", "Instant", "Immediately, in your building"]),
-        ("Final experience", ["Often compromised", "Inconsistent", "Convenience only", "Finished fresh at home"]),
+        ("What you get",  ["Restaurant food that travelled", "Restaurant dishes, flash-frozen at peak"]),
+        ("The bill",      ["$45+ with fees, tip &amp; tax", "$24 average basket — no fees, no tip"]),
+        ("When",          ["30–60 min, if it shows", "Downstairs, ready when you are"]),
+        ("Condition",     ["Often soggy or cold", "Finished fresh in your own oven"]),
+        ("Who made it",   ["A courier you'll never meet", "The chef who made it famous"]),
     ]
     head = '<div class="bd-ct__cell bd-ct__corner"></div>' + "".join(
-        f'<div class="bd-ct__cell bd-ct__head{" bd-ct__win" if i == len(cols)-1 else ""}">{e(c)}</div>'
+        f'<div class="bd-ct__cell bd-ct__head{" bd-ct__win" if i == len(cols)-1 else ""}">{c}</div>'
         for i, c in enumerate(cols))
     body = ""
     for label, vals in rows:
-        body += f'<div class="bd-ct__cell bd-ct__label">{e(label)}</div>'
+        body += f'<div class="bd-ct__cell bd-ct__label">{label}</div>'
         for i, v in enumerate(vals):
             win = " bd-ct__win" if i == len(vals)-1 else ""
-            body += f'<div class="bd-ct__cell{win}">{e(v)}</div>'
+            body += f'<div class="bd-ct__cell{win}">{v}</div>'
     return f"""
 <section class="bd-section bd-section--accent">
   <div class="bd-container">
-    <h2 class="bd-headline bd-reveal" style="max-width:20ch;">Why BestDish is different.</h2>
+    <p class="bd-eyebrow bd-reveal">The amenity vs. the app</p>
+    <h2 class="bd-headline bd-reveal" style="max-width:20ch;">Everything delivery isn't.</h2>
     <div class="bd-ct-scroll bd-reveal">
-      <div class="bd-ct">{head}{body}</div>
+      <div class="bd-ct bd-ct--2">{head}{body}</div>
     </div>
+    <p class="bd-reveal" style="opacity:.75; margin-top: var(--bd-space-5); max-width:64ch; font-size: var(--bd-size-sm);">Real example: Pukka's butter chicken runs $45+ on delivery apps once you add fees, tip, and tax — versus a $24 average basket at the freezer. Based on an actual checkout, on file.</p>
   </div>
 </section>"""
 
@@ -363,16 +365,16 @@ def calculator_section(base=""):
           <span class="bd-calc__label">Average delivery total</span>
           <div class="bd-calc__stepper">
             <button type="button" class="bd-calc__btn" data-calc="price-" aria-label="Lower total">−</button>
-            <span id="bd-calc-price">$36</span>
+            <span id="bd-calc-price">$45</span>
             <button type="button" class="bd-calc__btn" data-calc="price+" aria-label="Higher total">+</button>
           </div>
         </div>
         <div class="bd-calc__line"></div>
         <div class="bd-calc__result-wrap">
           <span class="bd-calc__result-label">Estimated annual difference</span>
-          <span class="bd-calc__result" id="bd-calc-result">$2,496</span>
+          <span class="bd-calc__result" id="bd-calc-result">$4,368</span>
         </div>
-        <p class="bd-calc__fine">vs. delivery, at a BestDish price of $24/meal.</p>
+        <p class="bd-calc__fine">vs. delivery, at a $24 average BestDish basket.</p>
       </div>
     </div>
   </div>
@@ -435,7 +437,7 @@ def home():
             f'<div class="bd-hero-show__slide{_on}" data-credit="{e(_credit)}">'
             f'<img src="assets/images/{_d.get("hero_image", _d["image"])}" alt="{e(_d["name"])} from {e(_r["name"])}"{_lazy}></div>')
         hero_dots += f'<span class="{"is-on" if _i == 0 else ""}"></span>'
-    return page("Toronto's best meals — in your lobby", extra_head=MAP_HEAD, body_class="bd-theme--cream", body=f"""
+    return page("Toronto's best dishes — in your oven", extra_head=MAP_HEAD, body_class="bd-theme--cream", body=f"""
 <header class="bd-hero-wrap bd-hero--full">
   <div class="bd-hero-show bd-hero-full__media" data-interval="4200">
     {hero_slides}
@@ -444,8 +446,8 @@ def home():
   <div class="bd-hero-full__inner bd-container">
     <div class="bd-hero-full__content bd-reveal">
       <span class="bd-loc">Toronto · live in your building</span>
-      <h1 class="bd-hero-headline">Toronto's<br>best meals.<br><em>In your lobby.</em></h1>
-      <p class="bd-hero-lede">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer in your lobby.<br>No delivery, no tip, no tax.</p>
+      <h1 class="bd-hero-headline">Toronto's<br>best dishes.<br><em>In your oven.</em></h1>
+      <p class="bd-hero-lede">Iconic dishes from the city's best restaurants — chef-made, flash-frozen at peak, waiting in the freezer downstairs.<br>No delivery, no tip, no tax.</p>
       <div class="bd-strapline">
         <span>Made in real restaurants</span>
         <span>By the chefs you love</span>
@@ -468,7 +470,7 @@ def home():
   <div class="bd-container">
     <div class="bd-statband">
       <div class="bd-stat bd-reveal">{bd_icon('plate', 'bd-stat__icon')}<p class="bd-stat__n">{len(RESTAURANTS)}</p><p class="bd-stat__l">Iconic Toronto restaurants on the menu.</p></div>
-      <div class="bd-stat bd-reveal">{bd_icon('clock', 'bd-stat__icon')}<p class="bd-stat__n">24/7</p><p class="bd-stat__l">In your lobby. No hours, no waiting.</p></div>
+      <div class="bd-stat bd-reveal">{bd_icon('clock', 'bd-stat__icon')}<p class="bd-stat__n">24/7</p><p class="bd-stat__l">In your building. No hours, no waiting.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('dollar', 'bd-stat__icon')}<p class="bd-stat__n">$0</p><p class="bd-stat__l">Delivery fees, tips, or tax. Ever.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('bolt', 'bd-stat__icon')}<p class="bd-stat__n">~10<span style="font-size:.5em;">min</span></p><p class="bd-stat__l">From the freezer to your plate.</p></div>
     </div>
@@ -480,9 +482,9 @@ def home():
     <div class="bd-sec-head">
       <div>
         <p class="bd-eyebrow bd-reveal">The menu</p>
-        <h2 class="bd-headline bd-reveal">The city's best,<br>in your lobby.</h2>
+        <h2 class="bd-headline bd-reveal">The city's best,<br>in your building.</h2>
       </div>
-      <a class="bd-btn bd-btn--ghost bd-reveal" href="browse-meals">All meals →</a>
+      <a class="bd-btn bd-btn--ghost bd-reveal" href="browse-meals">All dishes →</a>
     </div>
     <div class="bd-reel">{dishes}</div>
   </div>
@@ -492,8 +494,8 @@ def home():
   <div class="bd-container">
     <div class="bd-lobby">
       <div class="bd-lobby__media bd-reveal">
-        <img class="bd-lobby__img bd-lobby__img--product" src="assets/marketing/freezer-branded.png" alt="The BestDish freezer — from farm, to chef, to you">
-        <span class="bd-lobby__tag">The freezer in your lobby</span>
+        <img class="bd-lobby__img bd-lobby__img--product" src="assets/marketing/freezer-branded.png" alt="The BestDish freezer, stocked with chef-made dishes">
+        <span class="bd-lobby__tag">The freezer in your building</span>
       </div>
       <div class="bd-reveal">
         <p class="bd-eyebrow">Dinner is downstairs</p>
@@ -517,7 +519,7 @@ def home():
     {step_flow([
       ("Made by chefs", "Cooked by the chefs who made them famous — same techniques, same ingredients, same standards as service."),
       ("Flash frozen", "Locked in at peak the moment they leave the kitchen. Flavour, texture, and nutrients stay intact."),
-      ("In your building", "A curated freezer of chef meals in your lobby. Tap your card, pick your dish, done."),
+      ("In your building", "A curated freezer of chef dishes in your building. Tap your card, pick your dish, done."),
       ("Finished by you", "Cooked fresh in your own oven in minutes — exactly the way the chef designed it."),
     ])}
   </div>
@@ -525,11 +527,24 @@ def home():
 
 {restaurants_section(base)}
 
+<section class="bd-section" style="padding-block: var(--bd-space-6);">
+  <div class="bd-container" style="text-align:center;">
+    <p class="bd-lede bd-reveal" style="margin:0 auto; max-width:56ch;">Hosting something? <strong>Catering from our restaurant partners — we'll make the introduction.</strong> <a href="contact">Get in touch →</a></p>
+  </div>
+</section>
+
 {feedback_section(base)}
 
-{vending_section(base)}
+{amenity_section(base)}
 
 {compare_table(base)}
+
+<section class="bd-section bd-guarantee">
+  <div class="bd-container" style="text-align:center;">
+    <p class="bd-eyebrow bd-reveal">The guarantee</p>
+    <h2 class="bd-headline bd-reveal" style="max-width:22ch; margin:0 auto;">If it's not as good as it is in the restaurant, it's <em style="font-style:normal; color:var(--bd-orange);">free</em>.</h2>
+  </div>
+</section>
 
 {calculator_section(base)}
 
@@ -551,14 +566,7 @@ def home():
   </div>
 </section>
 
-<section class="bd-section bd-section--cream">
-  <div class="bd-container" style="text-align:center;">
-    <p class="bd-pullquote bd-reveal" style="margin: 0 auto;">
-      "The best restaurants are built on passion, creativity, and quality. If a company can translate that into a frozen meal without losing its soul, it will be a game-changer."
-      <span class="bd-pullquote__attr">— Chef Thomas Keller</span>
-    </p>
-  </div>
-</section>
+<!-- Chef pullquote — spot held for a real quote from Duncan or Brett. -->
 """)
 
 # ---------- Browse meals ----------
@@ -567,7 +575,7 @@ def meals_page():
     base = ""
     savoury = [d for d in ACTIVE_DISHES if d["category"] == "Savoury"]
     sweet   = [d for d in ACTIVE_DISHES if d["category"] == "Sweet"]
-    return page("Browse meals", f"""
+    return page("Browse the menu", f"""
 <header class="bd-section">
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">The menu</p>
@@ -951,7 +959,7 @@ def for_properties_page():
   <div class="bd-container">
     <p class="bd-eyebrow bd-reveal">For property managers, asset managers, condo boards</p>
     <h1 class="bd-hero-headline bd-reveal" style="font-size:clamp(48px,7vw,112px);">A premium<br>food amenity.<br>No kitchen.</h1>
-    <p class="bd-hero-lede bd-reveal">Restaurant meals in your lobby, 24/7. We install, we operate, you earn. No capital cost. No staff lift. No admin.</p>
+    <p class="bd-hero-lede bd-reveal">Restaurant dishes in your building, 24/7. We install, we operate, you earn. No capital cost. No staff lift. No admin.</p>
     <a class="bd-btn bd-btn--primary bd-reveal" href="#talk">Talk to us</a>
   </div>
 </header>
@@ -1063,7 +1071,7 @@ def for_restaurants_page():
 def faq_page():
     qs = [
         ("Is BestDish actually as good as the restaurant?",
-         "It's made in the restaurant by the same chefs using the same ingredients, then frozen at peak quality. For most dishes the result is genuinely indistinguishable. The chef's note on each dish page tells you what to expect."),
+         "It's made in the restaurant by the same chefs using the same ingredients, then frozen at peak quality. For most dishes the result is genuinely indistinguishable. And we stand behind it: if it's not as good as it is in the restaurant, it's free."),
         ("How does the freezer work?",
          "Tap your card, the door unlocks, take the dish you want, close the door. Charge is calculated automatically based on what you took. No app required — but there is one if you want to track orders or get notified when your favourites are back in stock."),
         ("How long do meals keep?",
@@ -1130,7 +1138,7 @@ def join_page():
       </div>
       <form class="bd-form bd-join-form bd-reveal" style="color: {_bc};" action="{JOIN_ENDPOINT}" method="POST">
         <input type="hidden" name="_subject" value="New First Meal Free signup — bestdish">
-        <input type="hidden" name="source" value="first-meal-free">
+        <input type="hidden" name="source" value="website-first-meal-free">
         <div class="bd-field"><label for="j-name">First name</label><input id="j-name" name="name" type="text" autocomplete="given-name" style="border-bottom-color: {_bc}; color: {_bc};"></div>
         <div class="bd-field"><label for="j-phone">Phone <span style="color:var(--bd-orange);">*</span></label><input id="j-phone" name="phone" type="tel" required autocomplete="tel" style="border-bottom-color: {_bc}; color: {_bc};"><small class="bd-field__hint">We link this to your free meal — and text you when it's active.</small></div>
         <div class="bd-field"><label for="j-email">Email <span style="color:var(--bd-orange);">*</span></label><input id="j-email" name="email" type="email" required autocomplete="email" style="border-bottom-color: {_bc}; color: {_bc};"></div>

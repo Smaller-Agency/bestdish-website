@@ -30,7 +30,7 @@
   const calc = document.getElementById('bd-calc');
   if (calc) {
     const PRICE = 24, WEEKS = 52;
-    let meals = 4, price = 36;
+    let meals = 4, price = 45;
     const mealsEl = document.getElementById('bd-calc-meals');
     const priceEl = document.getElementById('bd-calc-price');
     const resultEl = document.getElementById('bd-calc-result');

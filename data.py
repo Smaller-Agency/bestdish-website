@@ -405,14 +405,14 @@ BUILDINGS = [
 # Clean URLs — GitHub Pages serves `foo.html` at `/foo`, so these match the live
 # bestdish.ca paths for a domain cutover with no broken links.
 NAV = [
-    ("Browse meals",  "/browse-meals"),
+    ("Browse dishes", "/browse-meals"),
     ("How it works",  "/how-it-works"),
     ("Chefs",         "/chefs"),
     ("First meal free", "/join"),
 ]
 
 FOOTER_NAV = [
-    ("Browse meals",  "/browse-meals"),
+    ("Browse dishes", "/browse-meals"),
     ("How it works",  "/how-it-works"),
     ("Chefs",         "/chefs"),
     ("Buildings",     "/buildings"),
