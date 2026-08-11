@@ -1046,9 +1046,9 @@ def for_restaurants_page():
     <p class="bd-eyebrow bd-reveal">Why it works</p>
     <div class="bd-steps-grid">
       <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">01</div><h3 class="bd-step-big__title">Idle hours,<br>real revenue.</h3><p class="bd-step-big__body">Your kitchen sits empty for most of the day. We use those hours to produce one dish, in batches, on a schedule that doesn't disturb service.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">02</div><h3 class="bd-step-big__title">Royalties +<br>execution fees.</h3><p class="bd-step-big__body">You earn on every unit sold — royalty for the IP, execution fee for the prep. Transparent unit economics. Monthly statements.</p></div>
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">02</div><h3 class="bd-step-big__title">Commercial terms.<br>Agreed upfront.</h3><p class="bd-step-big__body">We agree the production economics before the first batch. You are paid under those terms. BestDish carries the inventory and sell-through risk.</p></div>
       <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">03</div><h3 class="bd-step-big__title">Your brand,<br>in premium buildings.</h3><p class="bd-step-big__body">Every package carries your name, your chef, your story. Buildings become a new top-of-funnel for the dining room.</p></div>
-      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">04</div><h3 class="bd-step-big__title">No delivery apps.<br>No grocery.</h3><p class="bd-step-big__body">Your dishes are exclusive to BestDish. They don't appear on Uber Eats. They don't appear in Loblaws. The integrity of your dining room is protected.</p></div>
+      <div class="bd-step-big bd-reveal"><div class="bd-step-big__num">04</div><h3 class="bd-step-big__title">A distinct<br>BestDish edition.</h3><p class="bd-step-big__body">The BestDish edition of your dish is reserved for our building network during the agreement term. Your restaurant brand and core IP remain yours.</p></div>
     </div>
   </div>
 </section>

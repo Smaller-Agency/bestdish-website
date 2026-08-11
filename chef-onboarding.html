@@ -210,20 +210,19 @@ p{margin:0 0 1em}
     <p class="bd-eyebrow">What happens next</p>
     <h2 style="font-size:clamp(28px,4vw,46px); max-width:20ch; margin-bottom:40px">From this form to your first batch.</h2>
     <div class="bd-grid bd-grid--3">
-      <div class="bd-step"><div class="bd-step__num">01</div><h3>Tasting &amp; economics</h3><p>We've visited your kitchen, tasted the dish, and agreed on royalties plus execution fees. Done before you reach this form.</p></div>
+      <div class="bd-step"><div class="bd-step__num">01</div><h3>Tasting &amp; terms</h3><p>We've visited your kitchen, tasted the dish, and agreed on the commercial terms for production. Done before you reach this form.</p></div>
       <div class="bd-step"><div class="bd-step__num">02</div><h3>This intake</h3><p>You give us the dish story, ingredients, nutrition, sourcing, photos, and approvals. One submission per dish.</p></div>
       <div class="bd-step"><div class="bd-step__num">03</div><h3>Packaging &amp; page</h3><p>We design your sleeve, your meal landing page, and the copy. You review and approve every word and every label.</p></div>
       <div class="bd-step"><div class="bd-step__num">04</div><h3>Batch one</h3><p>You produce up to 150 meals in your kitchen, on a schedule that doesn't touch service. We flash-freeze at peak.</p></div>
-      <div class="bd-step"><div class="bd-step__num">05</div><h3>Into the building</h3><p>Your dish goes live in the freezer. Residents vote, repeat, and your name sits on every package.</p></div>
-      <div class="bd-step"><div class="bd-step__num">06</div><h3>Statements &amp; reorders</h3><p>Transparent monthly statements. We reorder at 70% sell-through. Strong dishes stay; weak ones rotate.</p></div>
+      <div class="bd-step"><div class="bd-step__num">05</div><h3>Into the building</h3><p>Your dish goes live in the freezer. Residents decide through purchases and repeat orders, and your name sits on every package.</p></div>
+      <div class="bd-step"><div class="bd-step__num">06</div><h3>Performance &amp; reorders</h3><p>Batch one is a real market test. A dish becomes eligible for reorder at 70% sell-through within 21 days. Strong dishes stay; weaker dishes rotate.</p></div>
     </div>
 
     <div class="bd-proof bd-proof-sec" style="margin-top:56px">
-      <div><div class="n">Royalty<br>+ fee</div><div class="l">You earn on every unit</div></div>
+      <div><div class="n">Agreed<br>terms</div><div class="l">Set before production</div></div>
       <div><div class="n">$20–35</div><div class="l">Resident shelf price</div></div>
-      <div><div class="n">5%</div><div class="l">Of sales to the building</div></div>
-      <div><div class="n">40/40/20</div><div class="l">Surplus to farms / chefs / properties</div></div>
-      <div><div class="n">Exclusive</div><div class="l">Never on delivery apps or grocery</div></div>
+      <div><div class="n">BestDish<br>carries</div><div class="l">Inventory and sell-through risk</div></div>
+      <div><div class="n">Reserved</div><div class="l">For our building network during the agreement term</div></div>
     </div>
   </div>
 </section>
@@ -236,7 +235,7 @@ p{margin:0 0 1em}
     <div class="bd-grid bd-grid--3" style="color:var(--bd-cherry)">
       <div class="bd-step" style="border-color:rgba(80,0,8,.18)"><div class="bd-step__num">A</div><h3 style="color:var(--bd-cherry)">Dish details</h3><p style="color:#6a3338">The story, the full ingredient list in descending order, allergens, and per-serving nutrition. A lab analysis if you have one.</p></div>
       <div class="bd-step" style="border-color:rgba(80,0,8,.18)"><div class="bd-step__num">B</div><h3 style="color:var(--bd-cherry)">Photos &amp; logos</h3><p style="color:#6a3338">A hero shot of the dish, your restaurant logo (vector preferred), and a chef headshot. High resolution.</p></div>
-      <div class="bd-step" style="border-color:rgba(80,0,8,.18)"><div class="bd-step__num">C</div><h3 style="color:var(--bd-cherry)">Business details</h3><p style="color:#6a3338">Your legal entity name, production kitchen address, and the signatory authorized to approve packaging and labels.</p></div>
+      <div class="bd-step" style="border-color:rgba(80,0,8,.18)"><div class="bd-step__num">C</div><h3 style="color:var(--bd-cherry)">Business details</h3><p style="color:#6a3338">Your legal entity name, production kitchen address, and authorized signatory. We collect a current certificate of insurance once, before production.</p></div>
     </div>
   </div>
 </section>
@@ -274,13 +273,13 @@ p{margin:0 0 1em}
     <!-- 2. Addresses -->
     <fieldset class="bd-fs">
       <div class="bd-fs__head"><span class="bd-fs__num">02</span><legend>Production kitchen &amp; legal entity</legend></div>
-      <p class="bd-fs__note">The production address is where meals are made and flash-frozen — it sets our cold-chain pickup and food-safety records. The legal entity is who we pay royalties and execution fees to.</p>
+      <p class="bd-fs__note">The production address is where meals are made and flash-frozen — it sets our cold-chain pickup and food-safety records. The legal entity is who we contract with and pay under the agreed commercial terms.</p>
       <div class="bd-grid-form">
         <div class="bd-field full"><label>Production kitchen address <span class="bd-req">*</span></label><input name="kitchen_address" data-req placeholder="Street, unit"></div>
         <div class="bd-field"><label>City</label><input name="kitchen_city"></div>
         <div class="bd-field"><label>Province / Postal code</label><input name="kitchen_postal"></div>
         <div class="bd-field"><label>Legal business name <span class="bd-req">*</span></label><input name="legal_name" data-req></div>
-        <div class="bd-field"><label>GST/HST number</label><input name="gst" placeholder="For royalty payments"></div>
+        <div class="bd-field"><label>GST/HST number</label><input name="gst" placeholder="For payments"></div>
         <div class="bd-field full"><label>Billing / remittance address</label><input name="billing_address" placeholder="If different from kitchen"></div>
         <div class="bd-field"><label>Food premises / CFIA registration #</label><input name="cfia_reg"><span class="hint">If you hold one.</span></div>
         <div class="bd-field"><label>Best days/hours for batch production</label><input name="batch_hours" placeholder="e.g. Mon–Tue, before 11am"></div>
@@ -327,7 +326,7 @@ p{margin:0 0 1em}
       </div>
       <div class="bd-grid-form" style="margin-top:18px">
         <div class="bd-field full"><label>“May contain” / cross-contamination notes</label><input name="may_contain" placeholder="Shared equipment or facility risks"></div>
-        <div class="bd-field full"><label>Dietary flags</label><input name="dietary" placeholder="e.g. Vegetarian, halal, contains alcohol, gluten-free"></div>
+        <div class="bd-field full"><label>Dietary or certification claims</label><input name="dietary" placeholder="e.g. Vegetarian, halal, contains alcohol, gluten-free"><span class="hint">No vegan, gluten-free, halal, or similar claim appears on packaging until the recipe and supporting documentation are verified.</span></div>
       </div>
     </fieldset>
 
@@ -410,8 +409,10 @@ p{margin:0 0 1em}
       <div class="bd-sign">
         <h3>Confirm and sign</h3>
         <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:24px">
-          <label class="bd-check"><input type="checkbox" name="ack" value="exclusivity" data-req> I understand this dish is <b>exclusive to BestDish</b> under a 12-month building-level agreement, auto-renewing while KPIs are met. It will not be sold on delivery apps or in grocery.</label>
+          <label class="bd-check"><input type="checkbox" name="ack" value="exclusivity" data-req> I understand that the <b>BestDish edition of this dish</b> is reserved for BestDish's building network during the agreement term.</label>
+          <label class="bd-check"><input type="checkbox" name="ack" value="provenance" data-req> I confirm that this dish is prepared in-house by our team at the production kitchen address provided.</label>
           <label class="bd-check"><input type="checkbox" name="ack" value="accuracy" data-req> The ingredient, allergen, and nutrition information above is accurate to the best of my knowledge and may be used on a CFIA-compliant label.</label>
+          <label class="bd-check"><input type="checkbox" name="ack" value="claims" data-req> I understand that dietary and certification claims — including vegan, gluten-free, and halal — will not appear on packaging until the recipe and supporting documentation are verified.</label>
           <label class="bd-check"><input type="checkbox" name="ack" value="foodsafety" data-req> Our kitchen follows safe food-handling practices and we will support BestDish HACCP, cold-chain, and recall procedures.</label>
           <label class="bd-check"><input type="checkbox" name="ack" value="approval"> I will have the chance to review and approve all packaging and landing-page copy before launch.</label>
           <label class="bd-check"><input type="checkbox" name="ack" value="data"> I understand BestDish retains ownership of platform and sales data, and my restaurant brand and IP remain mine.</label>
