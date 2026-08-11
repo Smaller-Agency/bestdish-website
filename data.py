@@ -77,6 +77,7 @@ RESTAURANTS = {
         "logo": "DeathInVenice.png",
     },
     "bunners": {
+        "active": False,
         "name": "Bunner's Bakeshop",
         "address": "3054 Dundas St W",
         "city": "Toronto, ON",
