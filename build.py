@@ -198,7 +198,7 @@ def footer(base=""):
     </ul></div>
     <div class="bd-footer__col"><h4>Visit</h4><ul>
       <li>507 King St E<br>Toronto, ON, M5A 1M3</li>
-      <li><a href="mailto:hello@bestdish.ca">hello@bestdish.ca</a></li>
+      <li><a href="mailto:michael@bestdish.ca">michael@bestdish.ca</a></li>
       <li><a href="tel:+14168246626">(416) 824-6626</a></li>
     </ul></div>
   </div>
@@ -954,7 +954,7 @@ def buildings_page():
     <p class="bd-eyebrow bd-reveal">Don't see your building?</p>
     <h2 class="bd-headline bd-reveal" style="max-width:22ch; margin-inline:auto;">Tell us where you live.</h2>
     <p style="max-width:54ch; margin: var(--bd-space-4) auto var(--bd-space-6);" class="bd-reveal">We'll reach out to your property manager. The more requests we have at an address, the faster we can install.</p>
-    <a class="bd-btn bd-btn--primary bd-reveal" href="mailto:hello@bestdish.ca?subject=Bring%20BestDish%20to%20my%20building">Request your building</a>
+    <a class="bd-btn bd-btn--primary bd-reveal" href="mailto:michael@bestdish.ca?subject=Bring%20BestDish%20to%20my%20building">Request your building</a>
   </div>
 </section>
 """)
@@ -1089,7 +1089,7 @@ def faq_page():
         ("Is it cheaper than delivery?",
          "Almost always. No delivery fee, no tip, no tax — those three usually add 40%+ to the listed price. BestDish dishes are CAD $20–35 all-in."),
         ("How do I bring it to my building?",
-         "Ask your property manager to email hello@bestdish.ca, or fill out the form on the Find a building page. We can install within 4 weeks of a signed pilot agreement."),
+         "Ask your property manager to email michael@bestdish.ca, or fill out the form on the Find a building page. We can install within 4 weeks of a signed pilot agreement."),
         ("Is my data private?",
          "Yes. We're PIPEDA-compliant. We use your purchase history to keep your favourites in stock and personalize the menu. We never sell it."),
     ]
@@ -1184,7 +1184,7 @@ def contact_page():
     <div class="bd-info-grid" style="margin-top: var(--bd-space-7);">
       <div class="bd-reveal">
         <p class="bd-eyebrow">Say hello</p>
-        <p style="font-size: var(--bd-size-xl); margin:0 0 var(--bd-space-2);"><a href="mailto:hello@bestdish.ca">hello@bestdish.ca</a></p>
+        <p style="font-size: var(--bd-size-xl); margin:0 0 var(--bd-space-2);"><a href="mailto:michael@bestdish.ca">michael@bestdish.ca</a></p>
         <p style="font-size: var(--bd-size-xl); margin:0;"><a href="tel:+14168246626">(416) 824-6626</a></p>
       </div>
       <div class="bd-reveal">

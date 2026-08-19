@@ -179,7 +179,7 @@
       if (!joinForm.reportValidity()) return;
       // Endpoint not wired up yet — don't pretend it sent.
       if (!action || action.indexOf('REPLACE') !== -1 || action.indexOf('http') !== 0) {
-        if (status) { status.textContent = 'Signup isn’t connected yet — email hello@bestdish.ca and we’ll set you up.'; status.classList.add('is-err'); }
+        if (status) { status.textContent = 'Signup isn’t connected yet — email michael@bestdish.ca and we’ll set you up.'; status.classList.add('is-err'); }
         return;
       }
       const label = btn ? btn.textContent : '';
@@ -194,7 +194,7 @@
         if (btn) btn.textContent = 'Sent ✓';
         if (status) status.textContent = 'Done — your free dish will be linked to your number within 24 hours. Watch your email for the go-ahead.';
       } catch (err) {
-        if (status) { status.textContent = 'Something went wrong. Email hello@bestdish.ca and we’ll sort it out.'; status.classList.add('is-err'); }
+        if (status) { status.textContent = 'Something went wrong. Email michael@bestdish.ca and we’ll sort it out.'; status.classList.add('is-err'); }
         if (btn) { btn.disabled = false; btn.textContent = label; }
       }
     });
