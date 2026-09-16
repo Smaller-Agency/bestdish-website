@@ -49,6 +49,11 @@ DISH_ACCENT = {
     "chana-masala":          "orange",
     "double-trouble-pizza":  "blueberry",
     "sausage-rolls":         "orange",
+    "lazy-daisy":            "orange",
+    "empanadas":             "orange",
+    "shrimp-pork-chive-wontons": "blueberry",
+    "tondou-ramen":          "orange",
+    "butter-spice-slab":     "shrimp",
 }
 
 def accent(slug):
@@ -85,6 +90,11 @@ PRICES = {
     "nutella-tiramisu":      "14.50",
     "gelato":                "13.50",
     "brownie-bites":         "14.00",
+    "lazy-daisy":            "10.50",
+    "empanadas":             "12.00",
+    "shrimp-pork-chive-wontons": "18.50",
+    "tondou-ramen":          "16.00",
+    "butter-spice-slab":     "16.50",
 }
 
 def price(slug):

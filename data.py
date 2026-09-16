@@ -85,6 +85,51 @@ RESTAURANTS = {
         "chef": "Bunner's Bakeshop",
         "logo": "bunners.png",
     },
+    "lazy-daisys": {
+        "name": "Lazy Daisy's Cafe",
+        "address": "1515 Gerrard St E",
+        "city": "Toronto, ON",
+        "postal": "M4L 2A4",
+        "blurb": "An east-end brunch institution on the Gerrard India Bazaar, Lazy Daisy's Cafe has served all-day comfort cooking since 2011.",
+        "chef": "Lazy Daisy's Cafe",
+        "logo": "lazy-daisys.png",
+    },
+    "gaucho-pie": {
+        "name": "Gaucho Pie Co.",
+        "address": "346 Westmoreland Ave N, Unit 105",
+        "city": "Toronto, ON",
+        "postal": "M6H 3A7",
+        "blurb": "A family-run Bloordale bakery turning out traditional Argentine empanadas — hand-folded and baked fresh.",
+        "chef": "Gaucho Pie Co.",
+        "logo": "gaucho-pie.png",
+    },
+    "daily-dumpling": {
+        "name": "The Daily Dumpling Wonton Co.",
+        "address": "792 College St",
+        "city": "Toronto, ON",
+        "postal": "M6G 1C6",
+        "blurb": "Founded in 2018, The Daily Dumpling Wonton Co. makes handmade Shanghainese wontons from family recipes on College Street.",
+        "chef": "Serina Shi & Nigel Schwartz",
+        "logo": "daily-dumpling.png",
+    },
+    "tondou": {
+        "name": "Tondou Ramen",
+        "address": "596 College St",
+        "city": "Toronto, ON",
+        "postal": "M6G 1B4",
+        "blurb": "Toronto's Okinawan ramen house, named for a historic Ryukyu trading port — long-simmered broths and Okinawa soba in Little Italy.",
+        "chef": "Tondou Ramen",
+        "logo": "tondou.png",
+    },
+    "butter-and-spice": {
+        "name": "Butter and Spice",
+        "address": "1418 Dundas St W",
+        "city": "Toronto, ON",
+        "postal": "M6J 1Y5",
+        "blurb": "A Little Portugal bakeshop from pastry chef Marchelle McKenzie, known for fudgy brownies in inventive flavours and custom cakes.",
+        "chef": "Marchelle McKenzie",
+        "logo": "butter-and-spice.png",
+    },
 }
 
 # Map coordinates (geocoded from the verified addresses) + neighbourhood.
@@ -99,6 +144,11 @@ _RESTAURANT_GEO = {
     "piano-piano":      {"lat": 43.649041, "lng": -79.374650, "hood": "St. Lawrence"},
     "death-in-venice":  {"lat": 43.649650, "lng": -79.426750, "hood": "Little Portugal"},
     "bunners":          {"lat": 43.665560, "lng": -79.466950, "hood": "The Junction"},
+    "lazy-daisys":      {"lat": 43.672677, "lng": -79.319570, "hood": "Leslieville"},
+    "gaucho-pie":       {"lat": 43.671034, "lng": -79.434816, "hood": "Bloordale"},
+    "daily-dumpling":   {"lat": 43.654814, "lng": -79.421236, "hood": "Little Italy"},
+    "tondou":           {"lat": 43.655303, "lng": -79.414064, "hood": "Little Italy"},
+    "butter-and-spice": {"lat": 43.649710, "lng": -79.429306, "hood": "Little Portugal"},
 }
 for _slug, _geo in _RESTAURANT_GEO.items():
     RESTAURANTS[_slug].update(_geo)
@@ -430,6 +480,66 @@ DISHES = [
         "heat": [
             ("Oven", "Preheat to 375°F. Place on a baking sheet and heat 15–18 minutes until the pastry is crisp and golden. Let rest 2 minutes before serving."),
             ("Microwave", "Not recommended — the pastry needs the oven to crisp."),
+        ],
+    },
+    {
+        "slug": "lazy-daisy",
+        "name": "Lazy Daisy",
+        "category": "Savoury",
+        "restaurant": "lazy-daisys",
+        "tagline": "Lazy Daisy's signature breakfast biscuit — a fresh-baked buttermilk biscuit stacked with folded egg, melted cheese and smoked bacon.",
+        "chef_signature": "Lazy Daisy's Cafe",
+        "image": "lazy-daisy.jpg",
+        "heat": [
+            ("Heat", "Cook from frozen until piping hot throughout. Detailed heating instructions are printed on the package."),
+        ],
+    },
+    {
+        "slug": "empanadas",
+        "name": "Empanadas",
+        "category": "Savoury",
+        "restaurant": "gaucho-pie",
+        "tagline": "Hand-folded Argentine empanadas, baked golden — a Bloordale family recipe.",
+        "chef_signature": "Gaucho Pie Co.",
+        "image": "empanadas.jpg",
+        "heat": [
+            ("Heat", "Bake from frozen until golden and piping hot throughout. Detailed heating instructions are printed on the package."),
+        ],
+    },
+    {
+        "slug": "shrimp-pork-chive-wontons",
+        "name": "Shrimp, Pork & Chive Wontons",
+        "category": "Savoury",
+        "restaurant": "daily-dumpling",
+        "tagline": "Handmade Shanghainese wontons — shrimp, pork and chive, folded fresh from a family recipe.",
+        "chef_signature": "Serina Shi & Nigel Schwartz",
+        "image": "shrimp-pork-chive-wontons.jpg",
+        "heat": [
+            ("Stovetop", "Drop frozen into gently simmering water and cook until they float and are piping hot throughout. See the package for details."),
+        ],
+    },
+    {
+        "slug": "tondou-ramen",
+        "name": "Tondou Ramen",
+        "category": "Savoury",
+        "restaurant": "tondou",
+        "tagline": "A bowl of Okinawan ramen — long-simmered broth and springy noodles, from Toronto's Okinawa soba house.",
+        "chef_signature": "Tondou Ramen",
+        "image": "tondou-ramen.jpg",
+        "heat": [
+            ("Heat", "Heat the broth to a simmer and warm the noodles through. Detailed heating instructions are printed on the package."),
+        ],
+    },
+    {
+        "slug": "butter-spice-slab",
+        "name": "Butter & Spice Slab",
+        "category": "Sweet",
+        "restaurant": "butter-and-spice",
+        "tagline": "A fudgy brownie slab from pastry chef Marchelle McKenzie — dense, rich and inventive.",
+        "chef_signature": "Marchelle McKenzie",
+        "image": "butter-spice-slab.jpg",
+        "heat": [
+            ("Serve", "Thaw at room temperature, or warm briefly for a gooey centre. See the package for details."),
         ],
     },
 ]
