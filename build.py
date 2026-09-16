@@ -46,6 +46,9 @@ DISH_ACCENT = {
     "chocolate-chip-cookies":"blueberry",
     "gelato":                "shrimp",
     "brownie-bites":         "shrimp",
+    "chana-masala":          "orange",
+    "double-trouble-pizza":  "blueberry",
+    "sausage-rolls":         "orange",
 }
 
 def accent(slug):
@@ -67,6 +70,29 @@ DISH_URL = {
 
 def dish_url(slug):
     return DISH_URL.get(slug, slug)
+
+# Per-dish price (September 2026 menu). Rendered on cards + dish pages.
+PRICES = {
+    "100-layer-lasagna":     "28.00",
+    "butter-chicken":        "23.75",
+    "le-grand-fromage":      "22.50",
+    "double-trouble-pizza":  "22.50",
+    "cheeseburger-pot-pie":  "26.50",
+    "cheesemaster-mac":      "19.75",
+    "chana-masala":          "18.00",
+    "sausage-rolls":         "16.00",
+    "chocolate-chip-cookies":"17.50",
+    "nutella-tiramisu":      "14.50",
+    "gelato":                "13.50",
+    "brownie-bites":         "14.00",
+}
+
+def price(slug):
+    p = PRICES.get(slug)
+    return f"${p}" if p else ""
+
+def dietary_chips(d):
+    return "".join(f'<span class="bd-diet">{e(t)}</span>' for t in (d.get("dietary") or []))
 
 def pat(colorway, base=""):
     """Inline style var pointing at a damask colourway tile."""
@@ -409,6 +435,8 @@ def dish_card(d, base="", big=False):
   <span class="bd-dish-card__chip">{e(d['category'])}</span>
   <div class="bd-dish-card__overlay">
     <h3 class="bd-dish-card__name">{e(d['name'])}</h3>
+    {f'<span class="bd-dish-card__price">{price(d["slug"])}</span>' if price(d["slug"]) else ''}
+    {f'<div class="bd-dish-card__diet">{dietary_chips(d)}</div>' if d.get("dietary") else ''}
     <span class="bd-dish-card__cta">View dish →</span>
   </div>
 </a>"""
@@ -706,7 +734,9 @@ def dish_page(d):
         <a class="bd-dish-hero__restaurant" href="{base}chefs.html#{d['restaurant']}">{e(r["name"])}</a>
         <h1 class="bd-dish-hero__name">{e(d["name"])}</h1>
         <p class="bd-dish-hero__tagline">{e(d["tagline"])}</p>
+        {f'<div class="bd-dish-hero__diet">{dietary_chips(d)}</div>' if d.get("dietary") else ''}
         <div class="bd-dish-meta">
+          {f'<div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Price</p><p class="bd-dish-meta__value">{price(d["slug"])}</p></div>' if price(d["slug"]) else ''}
           <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Chef</p><p class="bd-dish-meta__value">{e(d["chef_signature"])}</p></div>
           {f'<div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Serving</p><p class="bd-dish-meta__value">{e(d["serving"])}</p></div>' if d.get("serving") else ""}
           {f'<div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Calories</p><p class="bd-dish-meta__value">{e(d["nutrition"]["Calories"])}</p></div>' if d.get("nutrition") else ""}
