@@ -420,10 +420,10 @@ DISHES = [
     },
     {
         "slug": "double-trouble-pizza",
-        "name": "Double Trouble Pizza",
+        "name": "Pepperoni Pizza",
         "category": "Savoury",
         "restaurant": "slowhand",
-        "tagline": "Slowhand's Detroit-style pan pizza, doubled up — a thick, airy sourdough base with crisp, cheese-laced edges built to hold through reheating.",
+        "tagline": "Slowhand's Detroit-style pepperoni pizza — a thick, airy sourdough base, cupped pepperoni and crisp, cheese-laced edges built to hold through reheating.",
         "chef_note": "Slowhand Pizza was born from an obsession with Detroit-style pizza, sourdough fermentation, and the pursuit of the perfect crispy edge.",
         "chef_signature": "Brett Feeley & Dan Ewing",
         "image": "double-trouble-pizza.jpg",
@@ -498,10 +498,10 @@ DISHES = [
     },
     {
         "slug": "butter-spice-slab",
-        "name": "Butter & Spice Slab",
+        "name": "OG Brownie",
         "category": "Sweet",
         "restaurant": "butter-and-spice",
-        "tagline": "A fudgy brownie slab from pastry chef Marchelle McKenzie — dense, rich and inventive.",
+        "tagline": "Butter and Spice’s original — a dense, fudgy brownie from pastry chef Marchelle McKenzie.",
         "chef_signature": "Marchelle McKenzie",
         "image": "butter-spice-slab.jpg",
         "heat": [

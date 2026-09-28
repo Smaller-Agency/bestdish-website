@@ -89,7 +89,7 @@ PRICES = {
     "gelato":                "13.50",
     "brownie-bites":         "14.00",
     "lazy-daisy":            "10.50",
-    "empanadas":             "12.00",
+    "empanadas":             "15.75",
     "shrimp-pork-chive-wontons": "18.50",
     "tondou-ramen":          "16.00",
     "butter-spice-slab":     "16.50",
