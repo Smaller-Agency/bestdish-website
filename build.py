@@ -38,11 +38,11 @@ def img_exists(rel):
 # ---------- Dish colourways (drawn from the packaging sleeves) ----------
 DISH_ACCENT = {
     "100-layer-lasagna":     "blueberry",
-    "butter-chicken":        "pistachios",
-    "cheesemaster-mac":      "honeydew",
+    "butter-chicken":        "orange",
+    "cheesemaster-mac":      "shrimp",
     "cheeseburger-pot-pie":  "orange",
-    "le-grand-fromage":      "pistachios",
-    "nutella-tiramisu":      "honeydew",
+    "le-grand-fromage":      "blueberry",
+    "nutella-tiramisu":      "shrimp",
     "chocolate-chip-cookies":"blueberry",
     "gelato":                "shrimp",
     "brownie-bites":         "shrimp",
@@ -100,6 +100,15 @@ PRICES = {
 def price(slug):
     p = PRICES.get(slug)
     return f"${p}" if p else ""
+
+# Time in the oven / on the stove (from each dish's heating instructions). Ready-to-serve dishes say so.
+COOK_TIME = {
+    "cheesemaster-mac": "25–30 min", "100-layer-lasagna": "30–35 min", "cheeseburger-pot-pie": "25–30 min",
+    "butter-chicken": "20–25 min", "le-grand-fromage": "10–12 min", "double-trouble-pizza": "10–12 min",
+    "chana-masala": "~10 min", "sausage-rolls": "15–18 min", "empanadas": "15 min", "chocolate-chip-cookies": "15–18 min",
+    "nutella-tiramisu": "No cooking", "gelato": "No cooking", "brownie-bites": "No cooking", "butter-spice-slab": "No cooking",
+}
+def cook_time(slug): return COOK_TIME.get(slug, "")
 
 def dietary_chips(d):
     return "".join(f'<span class="bd-diet">{e(t)}</span>' for t in (d.get("dietary") or []))
@@ -439,13 +448,17 @@ def dish_card(d, base="", big=False):
                  f'--pack-bg:color-mix(in srgb, var(--bd-{cw}) 17%, var(--bd-gravy));">'
                  f'<img class="bd-dish-card__badge" src="{base}assets/logos/bd-orange.png" alt="">'
                  f'<span class="bd-dish-card__frozen">Flash-frozen</span></div>')
+    price_line = ""
+    if price(d["slug"]):
+        tm = f'<span class="bd-dish-card__time"> · {e(cook_time(d["slug"]))}</span>' if cook_time(d["slug"]) else ""
+        price_line = f'<span class="bd-dish-card__price">{price(d["slug"])}{tm}</span>'
     return f"""<a class="bd-dish-card bd-reveal" href="{base}{dish_url(d['slug'])}">
   {media}
   <span class="bd-dish-card__tab">{e(r['name'])}</span>
   <span class="bd-dish-card__chip">{e(d['category'])}</span>
   <div class="bd-dish-card__overlay">
     <h3 class="bd-dish-card__name">{e(d['name'])}</h3>
-    {f'<span class="bd-dish-card__price">{price(d["slug"])}</span>' if price(d["slug"]) else ''}
+    {price_line}
     {f'<div class="bd-dish-card__diet">{dietary_chips(d)}</div>' if d.get("dietary") else ''}
     <span class="bd-dish-card__cta">View dish →</span>
   </div>
@@ -518,7 +531,7 @@ def home():
       <div class="bd-stat bd-reveal">{bd_icon('plate', 'bd-stat__icon')}<p class="bd-stat__n">{len(ACTIVE_RESTAURANTS)}</p><p class="bd-stat__l">Iconic Toronto restaurants on the menu.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('clock', 'bd-stat__icon')}<p class="bd-stat__n">24/7</p><p class="bd-stat__l">In your building. No hours, no waiting.</p></div>
       <div class="bd-stat bd-reveal">{bd_icon('dollar', 'bd-stat__icon')}<p class="bd-stat__n">$0</p><p class="bd-stat__l">Delivery fees, tips, or tax. Ever.</p></div>
-      <div class="bd-stat bd-reveal">{bd_icon('bolt', 'bd-stat__icon')}<p class="bd-stat__n">~10<span style="font-size:.5em;">min</span></p><p class="bd-stat__l">From the freezer to your plate.</p></div>
+      <div class="bd-stat bd-reveal">{bd_icon('bolt', 'bd-stat__icon')}<p class="bd-stat__n">10–45<span style="font-size:.5em;">min</span></p><p class="bd-stat__l">Oven time varies by dish — it's on every card.</p></div>
     </div>
   </div>
 </section>
@@ -747,6 +760,7 @@ def dish_page(d):
         {f'<div class="bd-dish-hero__diet">{dietary_chips(d)}</div>' if d.get("dietary") else ''}
         <div class="bd-dish-meta">
           {f'<div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Price</p><p class="bd-dish-meta__value">{price(d["slug"])}</p></div>' if price(d["slug"]) else ''}
+          {f'<div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Cook time</p><p class="bd-dish-meta__value">{e(cook_time(d["slug"]))}</p></div>' if cook_time(d["slug"]) else ''}
           <div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Chef</p><p class="bd-dish-meta__value">{e(d["chef_signature"])}</p></div>
           {f'<div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Serving</p><p class="bd-dish-meta__value">{e(d["serving"])}</p></div>' if d.get("serving") else ""}
           {f'<div class="bd-dish-meta__cell"><p class="bd-dish-meta__label">Calories</p><p class="bd-dish-meta__value">{e(d["nutrition"]["Calories"])}</p></div>' if d.get("nutrition") else ""}
