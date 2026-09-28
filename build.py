@@ -46,7 +46,6 @@ DISH_ACCENT = {
     "chocolate-chip-cookies":"blueberry",
     "gelato":                "shrimp",
     "brownie-bites":         "shrimp",
-    "chana-masala":          "orange",
     "double-trouble-pizza":  "blueberry",
     "sausage-rolls":         "orange",
     "lazy-daisy":            "orange",
@@ -84,7 +83,6 @@ PRICES = {
     "double-trouble-pizza":  "22.50",
     "cheeseburger-pot-pie":  "26.50",
     "cheesemaster-mac":      "19.75",
-    "chana-masala":          "18.00",
     "sausage-rolls":         "16.00",
     "chocolate-chip-cookies":"17.50",
     "nutella-tiramisu":      "14.50",
@@ -105,7 +103,6 @@ def price(slug):
 COOK_TIME = {
     "cheesemaster-mac": "25–30 min", "100-layer-lasagna": "30–35 min", "cheeseburger-pot-pie": "25–30 min",
     "butter-chicken": "20–25 min", "le-grand-fromage": "10–12 min", "double-trouble-pizza": "10–12 min",
-    "chana-masala": "~10 min", "sausage-rolls": "15–18 min", "empanadas": "15 min", "chocolate-chip-cookies": "15–18 min",
     "nutella-tiramisu": "No cooking", "gelato": "No cooking", "brownie-bites": "No cooking", "butter-spice-slab": "No cooking",
 }
 def cook_time(slug): return COOK_TIME.get(slug, "")
