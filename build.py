@@ -51,7 +51,7 @@ DISH_ACCENT = {
     "lazy-daisy":            "orange",
     "empanadas":             "orange",
     "shrimp-pork-chive-wontons": "blueberry",
-    "tondou-ramen":          "orange",
+    "hakata-tonkotsu-ramen":          "orange",
     "butter-spice-slab":     "shrimp",
 }
 
@@ -91,7 +91,7 @@ PRICES = {
     "lazy-daisy":            "10.50",
     "empanadas":             "15.75",
     "shrimp-pork-chive-wontons": "18.50",
-    "tondou-ramen":          "16.00",
+    "hakata-tonkotsu-ramen":          "16.00",
     "butter-spice-slab":     "16.50",
 }
 

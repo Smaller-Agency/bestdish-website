@@ -112,14 +112,14 @@ RESTAURANTS = {
         "chef": "Serina Shi & Nigel Schwartz",
         "logo": "daily-dumpling.png",
     },
-    "tondou": {
-        "name": "Tondou Ramen",
-        "address": "596 College St",
+    "ramen-raijin": {
+        "name": "Ramen Raijin",
+        "address": "24 Wellesley St W (Rear)",
         "city": "Toronto, ON",
-        "postal": "M6G 1B4",
-        "blurb": "Toronto's Okinawan ramen house, named for a historic Ryukyu trading port — long-simmered broths and Okinawa soba in Little Italy.",
-        "chef": "Tondou Ramen",
-        "logo": "tondou.png",
+        "postal": "M4Y 0G7",
+        "blurb": "Ramen Raijin has been simmering Hakata-style tonkotsu in downtown Toronto for over a decade — pork-bone broth made the long way, now frozen at its peak.",
+        "chef": "Ramen Raijin",
+        "logo": "ramen-raijin.png",
     },
     "butter-and-spice": {
         "name": "Butter and Spice",
@@ -147,7 +147,7 @@ _RESTAURANT_GEO = {
     "lazy-daisys":      {"lat": 43.672677, "lng": -79.319570, "hood": "Leslieville"},
     "gaucho-pie":       {"lat": 43.671034, "lng": -79.434816, "hood": "Bloordale"},
     "daily-dumpling":   {"lat": 43.654814, "lng": -79.421236, "hood": "Little Italy"},
-    "tondou":           {"lat": 43.655303, "lng": -79.414064, "hood": "Little Italy"},
+    "ramen-raijin":     {"lat": 43.664724, "lng": -79.386005, "hood": "Church-Wellesley"},
     "butter-and-spice": {"lat": 43.649710, "lng": -79.429306, "hood": "Little Portugal"},
 }
 for _slug, _geo in _RESTAURANT_GEO.items():
@@ -485,15 +485,20 @@ DISHES = [
         ],
     },
     {
-        "slug": "tondou-ramen",
-        "name": "Tondou Ramen",
+        "slug": "hakata-tonkotsu-ramen",
+        "name": "Hakata Tonkotsu Ramen",
         "category": "Savoury",
-        "restaurant": "tondou",
-        "tagline": "A bowl of Okinawan ramen — long-simmered broth and springy noodles, from Toronto's Okinawa soba house.",
-        "chef_signature": "Tondou Ramen",
-        "image": "tondou-ramen.jpg",
+        "restaurant": "ramen-raijin",
+        "tagline": "Raijin's Hakata-style tonkotsu — creamy pork-bone broth, thick futo-men noodles, pork chashu, kikurage, green onion and pickled ginger.",
+        "chef_signature": "Ramen Raijin",
+        "image": "hakata-tonkotsu-ramen.jpg",
+        "weight": "590 g",
+        "ingredients": "Noodles: Wheat flour, Water, Egg white powder, Wheat gluten, Sodium carbonate, Potassium carbonate, Salt, Corn starch. Soup: Pork, Water, Chicken, Kelp, Cabbage, Onion, Carrot, Bonito, Mackerel, Anchovy, Bonito soup stock (salt, monosodium glutamate, lactose, sugar, dried bonito tuna, disodium inosinate, bonito tuna extract, xylose, maltose, dextrose), Garlic, Ginger, White soy sauce, Salt, Monosodium glutamate, Cooking sake, Sweet cooking rice wine. Garnish: Pork (pork, salt, modified corn starch, hydrolyzed soy protein, fermented soy sauce powder (soy, wheat, maltodextrin, salt), caramel (sulphites), monosodium glutamate, soy lecithin, dehydrated garlic, spices), Kikurage mushroom, Green onion, Pickled ginger (ginger, water, salt, acetic acid, citric acid, potassium sorbate, FD&C Red #40 & #3), Sesame.",
+        "contains": "Fish, Sesame, Wheat, Egg, Soybean, Milk, Sulphites.",
+        "may_contain": "See package.",
         "heat": [
-            ("Heat", "Heat the broth to a simmer and warm the noodles through. Detailed heating instructions are printed on the package."),
+            ("Stovetop", "Remove all packaging and place the frozen ramen in a small pot. Heat on medium until the broth is simmering and the noodles loosen, stirring gently. Pour into a bowl and serve. Full instructions are on the package."),
+            ("Microwave", "Not recommended."),
         ],
     },
     {
