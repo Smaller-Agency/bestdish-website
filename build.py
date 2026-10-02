@@ -867,6 +867,7 @@ CHEF_PHOTOS = {
     "Duncan Simpson":        "duncan-simpson.jpg",
     "The Nunes Family":      "the-nunes-family.jpg",
     "Kaya Ogruce":           "kaya-ogruce.jpg",
+    "Marchelle McKenzie":    "marchelle-mckenzie.jpg",
 }
 
 def chefs_page():
