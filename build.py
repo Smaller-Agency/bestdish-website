@@ -1133,7 +1133,7 @@ def faq_page():
         ("Is BestDish actually as good as the restaurant?",
          "It's made in the restaurant by the same chefs using the same ingredients, then frozen at peak quality. For most dishes the result is genuinely indistinguishable. And we stand behind it: if it's not as good as it is in the restaurant, it's free."),
         ("How does the freezer work?",
-         "Tap your card, the door unlocks, take the dish you want, close the door. Charge is calculated automatically based on what you took. No app required — but there is one if you want to track orders or get notified when your favourites are back in stock."),
+         "Tap your card, the door unlocks, take the dish you want, close the door. Charge is calculated automatically based on what you took. No app required."),
         ("How long do meals keep?",
          "Up to 21 days frozen from production. Every package carries the production batch and expiry. We rotate stock weekly and never restock past 70% sell-through on a SKU."),
         ("What if I take something and it's bad?",
