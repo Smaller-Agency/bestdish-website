@@ -108,7 +108,7 @@ RESTAURANTS = {
         "address": "792 College St",
         "city": "Toronto, ON",
         "postal": "M6G 1C6",
-        "blurb": "Founded in 2018, The Daily Dumpling Wonton Co. makes handmade Shanghainese wontons from family recipes on College Street.",
+        "blurb": "Founded in 2018, The Daily Dumpling Wonton Co. makes handmade Shanghainese dumplings from family recipes on College Street.",
         "chef": "Serina Shi & Nigel Schwartz",
         "logo": "daily-dumpling.png",
     },
@@ -450,7 +450,7 @@ DISHES = [
     },
     {
         "slug": "lazy-daisy",
-        "name": "Lazy Daisy",
+        "name": "Rise & Shine Breakfast Sandwich",
         "category": "Savoury",
         "restaurant": "lazy-daisys",
         "tagline": "Lazy Daisy's signature breakfast biscuit — a fresh-baked buttermilk biscuit stacked with folded egg, melted cheese and smoked bacon.",
@@ -474,10 +474,10 @@ DISHES = [
     },
     {
         "slug": "shrimp-pork-chive-wontons",
-        "name": "Shrimp, Pork & Chive Wontons",
+        "name": "Shrimp, Pork & Chive Dumplings",
         "category": "Savoury",
         "restaurant": "daily-dumpling",
-        "tagline": "Handmade Shanghainese wontons — shrimp, pork and chive, folded fresh from a family recipe.",
+        "tagline": "Handmade Shanghainese dumplings — shrimp, pork and chive, folded fresh from a family recipe.",
         "chef_signature": "Serina Shi & Nigel Schwartz",
         "image": "shrimp-pork-chive-wontons.jpg",
         "heat": [
